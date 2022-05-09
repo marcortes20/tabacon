@@ -320,6 +320,7 @@ public class Menu extends javax.swing.JFrame {
            rooms.setVisible(true);
            
        } catch (PropertyVetoException ex) {
+           
            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
        }
     }//GEN-LAST:event_sub_menu_roomActionPerformed
