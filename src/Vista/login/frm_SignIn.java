@@ -207,6 +207,8 @@ public class frm_SignIn extends javax.swing.JFrame {
                 this.setVisible(false);
                 
                 menu.setVisible(true);
+                
+                System.out.println("holi");
 
             } else {
 
