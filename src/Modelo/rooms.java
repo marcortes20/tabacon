@@ -7,7 +7,7 @@ package Modelo;
 
 
 
-public class room {
+public class rooms {
     private int room_id;
     private String description;
     private String image;
@@ -18,10 +18,10 @@ public class room {
     private boolean room_status;
     private boolean reserved;
 
-    public room() {
+    public rooms() {
     }
 
-    public room(int room_id, String description, String image, int maximun_adults, int maximun_kids, double price_per_day_adults, double price_per_day_kids, boolean room_status, boolean reserved) {
+    public rooms(int room_id, String description, String image, int maximun_adults, int maximun_kids, double price_per_day_adults, double price_per_day_kids, boolean room_status, boolean reserved) {
         this.room_id = room_id;
         this.description = description;
         this.image = image;

@@ -5,9 +5,24 @@
 package Controlador;
 
 
-public class management_rooms  {
+import Modelo.conexiones.Conexion;
+import Modelo.rooms;
+
+
+public class management_rooms  extends Conexion{
+    
+    private javax.swing.JButton btnGuardarFoto;
+    private jcFoto.jcFoto fotoCliente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField txtIdentificacion;
+    private rooms room;
     
     
+    public management_rooms() {
+    }
+    
+
+
     
     
 }
