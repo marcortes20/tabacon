@@ -208,8 +208,6 @@ public class frm_SignIn extends javax.swing.JFrame {
                 
                 menu.setVisible(true);
                 
-                System.out.println("holi");
-
             } else {
 
                 contador = contador + 1;
