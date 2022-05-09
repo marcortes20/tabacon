@@ -13,7 +13,7 @@ public class staff {
     private String company;
     private String workstation;
     private int phone_number;
-  
+
 
     public staff() {
     }
@@ -118,24 +118,5 @@ public class staff {
         return "user{" + "id=" + id + ", name=" + name + ", last_name=" + last_name + ", userName=" + userName + ", email=" + email + ", password=" + password + ", address=" + address + ", company=" + company + ", workstation=" + workstation + ", phone_number=" + phone_number + '}';
     }
 
-   
 
-
-
-
-   
-    
-    
-
- 
-    
-    
-
-   
-    
-
-  
-    
-    
-    
 }
