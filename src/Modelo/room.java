@@ -10,7 +10,7 @@ package Modelo;
 public class room {
     private int room_id;
     private String description;
-    //Buscar como guardar la imagen
+    private String image;
     private int maximun_adults;
     private int maximun_kids;
     private double price_per_day_adults;
@@ -21,9 +21,10 @@ public class room {
     public room() {
     }
 
-    public room(int room_id, String description, int maximun_adults, int maximun_kids, double price_per_day_adults, double price_per_day_kids, boolean room_status, boolean reserved) {
+    public room(int room_id, String description, String image, int maximun_adults, int maximun_kids, double price_per_day_adults, double price_per_day_kids, boolean room_status, boolean reserved) {
         this.room_id = room_id;
         this.description = description;
+        this.image = image;
         this.maximun_adults = maximun_adults;
         this.maximun_kids = maximun_kids;
         this.price_per_day_adults = price_per_day_adults;
@@ -46,6 +47,14 @@ public class room {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getMaximun_adults() {

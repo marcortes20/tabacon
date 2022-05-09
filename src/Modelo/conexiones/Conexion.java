@@ -1,7 +1,13 @@
 package Modelo.conexiones;
 
+import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Conexion {
@@ -40,6 +46,57 @@ public class Conexion {
         }
     }//=========================================================================
     //Desconecta la conexion con Oracle y el usuario establecidos anteriormente
+    
+    
+    
+//    public void generarArchivoExcel(String sql) {
+//        try {
+//            HSSFWorkbook wb = new HSSFWorkbook();
+//            HSSFSheet sheet = wb.createSheet("hoja1");
+//            HSSFRow row = sheet.createRow(0);
+//
+//            conectarBD();
+//            rs = seleccionar(sql);
+//            ResultSetMetaData Datos = rs.getMetaData();
+//            row = sheet.createRow(0);
+//            for (int i = 0; i < Datos.getColumnCount(); i++) {
+//                row.createCell(i).setCellValue(Datos.getColumnName(i + 1).toUpperCase());
+//            }
+//
+//            int fil = 1;
+//            while (rs.next()) {
+//                row = sheet.createRow(fil++);
+//                for (int col = 0; col < Datos.getColumnCount(); col++) {
+//                    try {
+//                        row.createCell(col).setCellValue(rs.getObject(col + 1).toString());
+//                    } catch (Exception e) {
+//                        row.createCell(col).setCellValue("");
+//                    }
+//                }
+//            }
+//            JFileChooser fc = new JFileChooser();
+//
+//            fc.setSelectedFile(new File("Lista.xls"));
+//            int returnVal = fc.showSaveDialog(null);
+//
+//            if (returnVal == JFileChooser.APPROVE_OPTION) {
+//                File file = fc.getSelectedFile();
+//                try (FileOutputStream fileOut = new FileOutputStream(file.getPath())) {
+//                    wb.write(fileOut);
+//                }
+//
+//                //Ejecutar archivo de excel
+////                String dir=file.getPath();
+////                Runtime.getRuntime().exec("cmd /c start " +dir);
+//                JOptionPane.showMessageDialog(null, "Archivo " + fc.getSelectedFile().getName() + " guarado exitosamente");
+//
+//            }
+//        } catch (SQLException | HeadlessException | IOException e) {
+//            javax.swing.JOptionPane.showMessageDialog(null, "Error al exportar la consulta: " + e);
+//            desconectarBD();
+//        }
+//        desconectarBD();
+//    }
 
     public synchronized void desconectarBD() {
 
