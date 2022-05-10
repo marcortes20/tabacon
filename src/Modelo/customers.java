@@ -7,17 +7,22 @@ public class customers {
     private int customer_id;
     private String name;
     private String last_name;
+    private String address;
+    private String company;
     private String email;
     private int phone_number;
 
-    public customers(int customer_id, String name, String last_name, String email, int phone_number) {
+    public customers(int customer_id, String name, String last_name, String address, String company, String email, int phone_number) {
         this.customer_id = customer_id;
         this.name = name;
         this.last_name = last_name;
+        this.address = address;
+        this.company = company;
         this.email = email;
         this.phone_number = phone_number;
     }
 
+    
     public int getCustomer_id() {
         return customer_id;
     }
@@ -58,10 +63,25 @@ public class customers {
         this.phone_number = phone_number;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     @Override
     public String toString() {
-        return "customers{" + "customer_id=" + customer_id + ", name=" + name + ", last_name=" + last_name + ", email=" + email + ", phone_number=" + phone_number + '}';
+        return "customers{" + "customer_id=" + customer_id + ", name=" + name + ", last_name=" + last_name + ", address=" + address + ", company=" + company + ", email=" + email + ", phone_number=" + phone_number + '}';
     }
-    
     
 }

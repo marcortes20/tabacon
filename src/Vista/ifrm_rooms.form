@@ -61,12 +61,20 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="room_photo" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txt_maximum_adults" max="32767" attributes="0"/>
-                                  <Component id="txt_maximum_kids" pref="230" max="32767" attributes="0"/>
-                                  <Component id="txt_adults_price" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_kids_price" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txt_adults_price" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                      <Component id="jTextField1" min="-2" pref="23" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="txt_kids_price" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                      <Component id="jTextField2" min="-2" pref="23" max="-2" attributes="0"/>
+                                  </Group>
                                   <Component id="check_reserved" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxUser_type" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbxUser_type" alignment="0" pref="230" max="32767" attributes="0"/>
+                                  <Component id="spiner_adutls" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="spiner_kids" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -101,23 +109,25 @@
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txt_maximum_adults" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jLabel58" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="spiner_adutls" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel59" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="txt_maximum_kids" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="spiner_kids" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel60" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="txt_adults_price" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel62" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="txt_kids_price" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="jTextField2" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -139,7 +149,7 @@
                           <Component id="btn_SignUp" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
                           <Component id="btn_save_room" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="75" max="32767" attributes="0"/>
+                      <EmptySpace pref="70" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -201,23 +211,13 @@
                 <Property name="text" type="java.lang.String" value="Reserved:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_maximum_adults">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial Unicode MS" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="txt_room_id">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial Unicode MS" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
             </Component>
@@ -227,7 +227,7 @@
                   <Font name="Arial Unicode MS" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
             </Component>
@@ -237,7 +237,7 @@
                   <Font name="Arial Unicode MS" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
             </Component>
@@ -255,7 +255,7 @@
                       <Font name="Arial Unicode MS" size="14" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="0" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="rows" type="int" value="5"/>
                   </Properties>
@@ -288,16 +288,6 @@
                 <Property name="text" type="java.lang.String" value="Maximum. kids:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_maximum_kids">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial Unicode MS" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JCheckBox" name="check_reserved">
             </Component>
             <Component class="javax.swing.JComboBox" name="cbxUser_type">
@@ -306,10 +296,9 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
+                  <StringArray count="2">
                     <StringItem index="0" value="Active."/>
-                    <StringItem index="1" value="Not active"/>
-                    <StringItem index="2" value=" "/>
+                    <StringItem index="1" value="Not active."/>
                   </StringArray>
                 </Property>
                 <Property name="selectedItem" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -368,6 +357,40 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="spiner_adutls">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial Unicode MS" size="14" style="0"/>
+                </Property>
+                <Property name="mixingCutoutShape" type="java.awt.Shape" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="default"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="spiner_kids">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial Unicode MS" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="ff" red="33" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="$"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField2">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial Unicode MS" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="ff" red="33" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="$"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -555,7 +578,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="table_rooms">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="8" rowCount="4">

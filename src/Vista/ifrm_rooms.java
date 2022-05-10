@@ -10,6 +10,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import Modelo.rooms;
+import Controlador.management_rooms;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,14 +23,17 @@ import java.nio.channels.FileChannel;
  */
 public class ifrm_rooms extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ifrm_rooms
-     */
+    private management_rooms mana_rooms = new management_rooms();
+
+    private rooms room;
+
     public ifrm_rooms() throws PropertyVetoException {
         initComponents();
+        room_list();
         this.setMaximum(true);
-        room_photo.setName("prueba");
-        
+        set_spiner(spiner_kids);
+        set_spiner(spiner_adutls);
+
     }
 
     /**
@@ -45,7 +54,6 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         jLabel61 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
-        txt_maximum_adults = new javax.swing.JTextField();
         txt_room_id = new javax.swing.JTextField();
         txt_kids_price = new javax.swing.JTextField();
         txt_adults_price = new javax.swing.JTextField();
@@ -54,11 +62,14 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         room_photo = new jcFoto.jcFoto();
         jLabel64 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
-        txt_maximum_kids = new javax.swing.JTextField();
         check_reserved = new javax.swing.JCheckBox();
         cbxUser_type = new javax.swing.JComboBox<>();
         btn_SignUp = new javax.swing.JButton();
         btn_save_room = new javax.swing.JButton();
+        spiner_adutls = new javax.swing.JSpinner();
+        spiner_kids = new javax.swing.JSpinner();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         btn_guardar = new javax.swing.JButton();
@@ -74,7 +85,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         lb_total = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_rooms = new javax.swing.JTable();
 
         win_rooms.setSize(new java.awt.Dimension(898, 809));
         win_rooms.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,21 +114,18 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         jLabel63.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel63.setText("Reserved:");
 
-        txt_maximum_adults.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-        txt_maximum_adults.setForeground(new java.awt.Color(255, 255, 255));
-
         txt_room_id.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-        txt_room_id.setForeground(new java.awt.Color(255, 255, 255));
+        txt_room_id.setForeground(new java.awt.Color(0, 0, 0));
 
         txt_kids_price.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-        txt_kids_price.setForeground(new java.awt.Color(255, 255, 255));
+        txt_kids_price.setForeground(new java.awt.Color(0, 0, 0));
 
         txt_adults_price.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-        txt_adults_price.setForeground(new java.awt.Color(255, 255, 255));
+        txt_adults_price.setForeground(new java.awt.Color(0, 0, 0));
 
         txt_description.setColumns(20);
         txt_description.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-        txt_description.setForeground(new java.awt.Color(255, 255, 255));
+        txt_description.setForeground(new java.awt.Color(0, 0, 0));
         txt_description.setRows(5);
         jScrollPane8.setViewportView(txt_description);
 
@@ -129,11 +137,8 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         jLabel59.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel59.setText("Maximum. kids:");
 
-        txt_maximum_kids.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-        txt_maximum_kids.setForeground(new java.awt.Color(255, 255, 255));
-
         cbxUser_type.setBackground(new java.awt.Color(0, 0, 0));
-        cbxUser_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active.", "Not active", " " }));
+        cbxUser_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active.", "Not active." }));
         cbxUser_type.setSelectedItem(null);
 
         btn_SignUp.setBackground(new java.awt.Color(153, 153, 0));
@@ -159,6 +164,16 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
                 btn_save_roomActionPerformed(evt);
             }
         });
+
+        spiner_adutls.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+
+        jTextField1.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(51, 255, 0));
+        jTextField1.setText("$");
+
+        jTextField2.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(51, 255, 0));
+        jTextField2.setText("$");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -189,12 +204,18 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(room_photo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_maximum_adults)
-                            .addComponent(txt_maximum_kids, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                            .addComponent(txt_adults_price)
-                            .addComponent(txt_kids_price)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(txt_adults_price)
+                                .addGap(0, 0, 0)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(txt_kids_price)
+                                .addGap(0, 0, 0)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(check_reserved)
-                            .addComponent(cbxUser_type, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbxUser_type, 0, 230, Short.MAX_VALUE)
+                            .addComponent(spiner_adutls)
+                            .addComponent(spiner_kids))))
                 .addGap(551, 551, 551))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -219,20 +240,22 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
                     .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_maximum_adults, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spiner_adutls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_maximum_kids, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(spiner_kids, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_adults_price, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_adults_price, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_kids_price, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_kids_price, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +272,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_save_room, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         room_photo.getAccessibleContext().setAccessibleDescription("");
@@ -340,7 +363,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
             .addComponent(lb_total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_rooms.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -351,7 +374,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
                 "Room id", "Description", "Image", "Max. Customers", "Adult price", "kid price", "State", "Reserved"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table_rooms);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -376,29 +399,129 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btn_cerrarActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        win_rooms.setTitle("Save");
-        
+        win_rooms.setTitle("Save room");
+
         win_rooms.setLocationRelativeTo(null);
-        
+
         win_rooms.setVisible(true);
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
-        win_rooms.setTitle("Edirt");
-    }//GEN-LAST:event_btn_editarActionPerformed
+        win_rooms.setLocationRelativeTo(null);
 
+        win_rooms.setVisible(true);
+        
+         int fila = table_rooms.getSelectedRow();
+
+        if (fila != -1) {
+
+            win_rooms.setTitle("Edit room");
+
+            txt_room_id.setEditable(false);
+            
+            room = new rooms();
+            
+            room.setRoom_id(Integer.parseInt(table_rooms.getValueAt(fila, 0).toString()));
+
+            mana_rooms.search_room(room);
+
+            txt_room_id.setText(String.valueOf(room.getRoom_id()));
+
+            txt_room_id.setEditable(false);
+
+            txt_description.setText(room.getDescription());
+
+            spiner_adutls.setValue(String.valueOf(room.getMaximun_adults()));
+
+            spiner_kids.setValue(String.valueOf(room.getMaximun_kids()));
+            
+            
+            
+            win_rooms.setVisible(true);
+
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Seleciona la categoria a editar", "Editar", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btn_editarActionPerformed
+    
     private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
 
-      
+
     }//GEN-LAST:event_btn_SignUpActionPerformed
 
     private void btn_save_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_save_roomActionPerformed
-        // TODO add your handling code here:
+
+        if (validate_data().isEmpty()) {
+
+            room = new rooms();
+
+            room.setRoom_id(Integer.parseInt(txt_room_id.getText()));
+
+            room.setDescription(txt_description.getText());
+
+            room.setMaximun_adults((int) spiner_adutls.getValue());
+
+            room.setMaximun_kids((int) spiner_kids.getValue());
+
+            room.setPrice_per_day_adults(Double.parseDouble(txt_adults_price.getText()));
+
+            room.setPrice_per_day_kids(Double.parseDouble(txt_kids_price.getText()));
+
+            if (cbxUser_type.getSelectedIndex() == 0) {
+
+                room.setRoom_status(true);
+
+            } else {
+
+                room.setRoom_status(true);
+            }
+
+            if (check_reserved.isSelected()) {
+
+                room.setReserved(true);
+
+            } else {
+
+                room.setReserved(false);
+
+            }
+
+            save_photo(txt_room_id.getText(), room);
+
+            if (win_rooms.getTitle().equals("Save room")) {
+
+                if (mana_rooms.room_register(room)) {
+
+                    JOptionPane.showMessageDialog(win_rooms, "Room was registered ", "Successfully!", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    room_list();
+
+                } else {
+
+                    JOptionPane.showMessageDialog(win_rooms, "Error:", "Room hasn't registered!", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+
+            if (win_rooms.getTitle().equals("Edit room")) {
+                
+                
+                
+                
+
+            }
+        } else {      
+         JOptionPane.showMessageDialog(win_rooms, "EMPTY FIELDS:" + validate_data(), "You must fill in all fields!", JOptionPane.ERROR_MESSAGE);      
+        }
     }//GEN-LAST:event_btn_save_roomActionPerformed
+
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -430,57 +553,117 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lb_total;
     private jcFoto.jcFoto room_photo;
+    private javax.swing.JSpinner spiner_adutls;
+    private javax.swing.JSpinner spiner_kids;
+    private javax.swing.JTable table_rooms;
     private javax.swing.JTextField txt_adults_price;
     private javax.swing.JTextArea txt_description;
     private javax.swing.JTextField txt_kids_price;
-    private javax.swing.JTextField txt_maximum_adults;
-    private javax.swing.JTextField txt_maximum_kids;
     private javax.swing.JTextField txt_room_id;
     private javax.swing.JDialog win_rooms;
     // End of variables declaration//GEN-END:variables
 
-public String validate_data(){
-    
-    String empty_fields = "";
-    
-    
-    
-    return empty_fields;
-    
-}
+    public String validate_data() {
 
+        String empty_fields = "";
 
-      private boolean save_photo(String room_id) {
-        
+        if (txt_room_id.getText().isEmpty()) {
+
+            txt_room_id.requestFocus();
+
+            empty_fields += "\nRoom id.";
+
+        }
+
+        if (txt_description.getText().trim().isEmpty()) {
+
+            txt_description.requestFocus();
+
+            empty_fields += "\nDescription";
+        }
+
+        if (spiner_adutls.getValue() == "0") {
+
+            spiner_adutls.requestFocus();
+
+            empty_fields += "\nMaximum. adults:";
+
+        }
+
+        if (spiner_kids.getValue() == "0") {
+
+            spiner_kids.requestFocus();
+
+            empty_fields += "\nMaximum. kids:";
+
+        }
+
+        if (txt_adults_price.getText().trim().isEmpty()) {
+
+            txt_adults_price.requestFocus();
+
+            empty_fields += "\nPrice per adult:";
+        }
+
+        if (txt_kids_price.getText().trim().isEmpty()) {
+
+            txt_kids_price.requestFocus();
+
+            empty_fields += "\nPrice per kids:";
+        }
+
+        if (cbxUser_type.getSelectedItem() == null) {
+
+            cbxUser_type.requestFocus();
+
+            empty_fields += "\nStatus";
+        }
+
+        if (room_photo.getPathFoto() == null) {
+
+            room_photo.requestFocus();
+
+            empty_fields += "\n Room image";
+
+        }
+
+        return empty_fields;
+
+    }
+
+    private boolean save_photo(String room_id, rooms room) {
+
         int dotPos = room_photo.getPathFoto().lastIndexOf(".");
-        
-        
+
         String extension = room_photo.getPathFoto().substring(dotPos);
-        
+
         String dir = System.getProperty("user.dir") + "/src/rooms_img/" + room_id + extension;
-        
+
+        room.setImage(room_id + extension);
+
         File entrada = new File(room_photo.getPathFoto());
-        
+
         File salida = new File(dir);
-        
+
         boolean resp = copyFile(entrada, salida) ? true : false;
-        
+
         return resp;
     }
 
     public boolean copyFile(File entrada, File salida) {
         try {
-            
+
             FileChannel out;
-            
-            try (FileChannel in = (new FileInputStream(entrada)).getChannel()) {
-                
+
+            try ( FileChannel in = (new FileInputStream(entrada)).getChannel()) {
+
                 out = (new FileOutputStream(salida)).getChannel();
-                
+
                 in.transferTo(0, entrada.length(), out);
             }
             out.close();
@@ -490,5 +673,35 @@ public String validate_data(){
         }
     }
 
+    public void set_spiner(JSpinner spiner) {
+
+        @SuppressWarnings("deprecation")
+
+        SpinnerNumberModel model = new SpinnerNumberModel(
+                new Integer(1), // Dato visualizado al inicio en el spinner
+                new Integer(0), // Límite inferior
+                new Integer(10), // Límite superior
+                new Integer(1) // incremento-decremento
+        );
+
+        spiner.setModel(model);
+
+    }
+    
+        private void room_list() {
+
+        mana_rooms.conectarBD();
+
+        ResultSet rs = mana_rooms.rooms_list();
+
+        if (rs != null) {
+
+            table_rooms.setModel(mana_rooms.cargarEnTabla(rs));
+
+            lb_total.setText("Total: " + table_rooms.getRowCount());
+
+        }
+        mana_rooms.desconectarBD();
+    }
 
 }
