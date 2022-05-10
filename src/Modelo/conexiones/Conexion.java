@@ -251,6 +251,8 @@ public class Conexion {
 
                 // Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
                 for (int i = 0; i < numeroColumnas; i++) {
+                    
+                    
                     fila[i] = rs.getObject(i + 1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
                 }
                 // Se añade al modelo la fila completa.

@@ -26,6 +26,9 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     private management_rooms mana_rooms = new management_rooms();
 
     private rooms room;
+    
+    static File photo;
+    
 
     public ifrm_rooms() throws PropertyVetoException {
         initComponents();
@@ -33,6 +36,17 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         this.setMaximum(true);
         set_spiner(spiner_kids);
         set_spiner(spiner_adutls);
+        
+//        String dir = System.getProperty("user.dir") + "/src/rooms_img/5.jpg";
+//        File foto = new File(dir);
+//        System.out.println(foto.isFile());
+        
+//        File foto = new File("/Users/mcortes19/NetBeansProjects/tabacon_Hotel /src/rooms_img/56.jpg");
+//        foto.canExecute();
+//        System.out.println(foto.isFile());
+//        System.out.println(foto.getAbsolutePath());
+//        foto.delete();
+       
 
     }
 
@@ -413,8 +427,6 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
         win_rooms.setLocationRelativeTo(null);
 
-        win_rooms.setVisible(true);
-        
          int fila = table_rooms.getSelectedRow();
 
         if (fila != -1) {
@@ -435,11 +447,36 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
             txt_description.setText(room.getDescription());
 
-            spiner_adutls.setValue(String.valueOf(room.getMaximun_adults()));
-
-            spiner_kids.setValue(String.valueOf(room.getMaximun_kids()));
+            spiner_adutls.setValue((room.getMaximun_adults()));
             
+            spiner_kids.setValue((room.getMaximun_kids()));
             
+            txt_adults_price.setText(String.valueOf(room.getPrice_per_day_adults()));
+            
+            txt_kids_price.setText(String.valueOf(room.getPrice_per_day_kids()));
+            
+            if (room.isRoom_status()) {
+                
+                cbxUser_type.setSelectedIndex(0);
+                
+            }else{
+                
+                 cbxUser_type.setSelectedIndex(1);
+                
+            }
+            
+            if (room.isReserved()) {
+                
+                check_reserved.setSelected(true);
+                
+            }else{
+                
+                check_reserved.setSelected(false);
+            }
+            
+            String dir = System.getProperty("user.dir") + "/src/rooms_img/" + room.getImage();
+            
+            photo = new File(dir);
             
             win_rooms.setVisible(true);
 
@@ -451,7 +488,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_editarActionPerformed
     
     private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
-
+        win_rooms.dispose();
 
     }//GEN-LAST:event_btn_SignUpActionPerformed
 
@@ -500,6 +537,8 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
                     JOptionPane.showMessageDialog(win_rooms, "Room was registered ", "Successfully!", JOptionPane.INFORMATION_MESSAGE);
                     
+                    win_rooms.dispose();
+                    
                     room_list();
 
                 } else {
@@ -511,9 +550,14 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
             if (win_rooms.getTitle().equals("Edit room")) {
                 
-                
-                
-                
+                if (mana_rooms.edit_room(room)) {
+                    
+                     JOptionPane.showMessageDialog(win_rooms, "Room was registered ", "Successfully!", JOptionPane.INFORMATION_MESSAGE);
+                     
+                     win_rooms.dispose();
+                     
+                     room_list();
+                }
 
             }
         } else {      
@@ -649,6 +693,8 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         File entrada = new File(room_photo.getPathFoto());
 
         File salida = new File(dir);
+        
+        photo.delete();
 
         boolean resp = copyFile(entrada, salida) ? true : false;
 
@@ -692,7 +738,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
         mana_rooms.conectarBD();
 
-        ResultSet rs = mana_rooms.rooms_list();
+        ResultSet rs = mana_rooms.rooms_list(room);
 
         if (rs != null) {
 

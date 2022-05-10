@@ -86,6 +86,9 @@ public class management_rooms  extends Conexion{
                 room.setPrice_per_day_kids(rs.getDouble(5));
                 room.setRoom_status(rs.getBoolean(6));
                 room.setReserved(rs.getBoolean(7));
+                room.setImage(rs.getString(8));
+                
+                
             }
         
              desconectarBD();
@@ -103,7 +106,7 @@ public class management_rooms  extends Conexion{
         
     }
     
-     public ResultSet rooms_list(){
+     public ResultSet rooms_list(rooms room){
         
         try {
             String call = "{CALL ps_list_rooms}";
@@ -123,12 +126,58 @@ public class management_rooms  extends Conexion{
             return rs;
         
     }
+      
+    public boolean edit_room(rooms room){
         
+        
+         boolean registered = false;
+        
+          try {
+
+            conectarBD();
+
+            String call = "{CALL ps_edit_room(?,?,?,?,?,?,?,?,?)}";
+            
+            
+
+            obj_Procedimiento = conexion.prepareCall(call);
+
+            obj_Procedimiento.setInt(1, room.getRoom_id());
+
+            obj_Procedimiento.setString(2, room.getDescription());
+
+            obj_Procedimiento.setString(3, room.getImage());
+
+            obj_Procedimiento.setInt(4, room.getMaximun_adults());
+
+            obj_Procedimiento.setInt(5, room.getMaximun_kids());
+            
+            
+            obj_Procedimiento.setDouble(6, room.getPrice_per_day_adults());
+            
+            obj_Procedimiento.setDouble(7, room.getPrice_per_day_kids());
+            
+            obj_Procedimiento.setBoolean(8, room.isRoom_status());
+
+            obj_Procedimiento.setBoolean(9, room.isReserved());
+            
+            registered = obj_Procedimiento.executeUpdate() == 1;
+
+            desconectarBD();
+
+        } catch (Exception e) {
+
+            desconectarBD();
+
+            System.out.println(e);
+        }
+        
+        return registered;
         
     }
     
 
-
+}
     
     
 
