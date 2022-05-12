@@ -37,17 +37,6 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         set_spiner(spiner_kids);
         set_spiner(spiner_adutls);
         
-//        String dir = System.getProperty("user.dir") + "/src/rooms_img/5.jpg";
-//        File foto = new File(dir);
-//        System.out.println(foto.isFile());
-        
-//        File foto = new File("/Users/mcortes19/NetBeansProjects/tabacon_Hotel /src/rooms_img/56.jpg");
-//        foto.canExecute();
-//        System.out.println(foto.isFile());
-//        System.out.println(foto.getAbsolutePath());
-//        foto.delete();
-       
-
     }
 
     /**
