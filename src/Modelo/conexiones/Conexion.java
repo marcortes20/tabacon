@@ -19,7 +19,7 @@ public class Conexion {
     protected static int servidor;
     static protected Connection conexion;//Para hacer la conexión
     protected CallableStatement obj_Procedimiento;//Utilizar los procedure
-    protected  PreparedStatement ps;
+    protected PreparedStatement ps;
     protected Statement stmt;//Hacer sentencias SQL
     protected ResultSet rs;//Guardar los resultados de las sentencias SQL
     //MÉTODOS PÚBLICOS DE LA CLASE CONEXCIONBD
@@ -49,16 +49,16 @@ public class Conexion {
         }
     }//=========================================================================
     //Desconecta la conexion con Oracle y el usuario establecidos anteriormente
-    
-    
-public void generarArchivoExcel(String sql) {
+
+    public void generate_exel(String sql) {
         try {
             HSSFWorkbook wb = new HSSFWorkbook();
             HSSFSheet sheet = wb.createSheet("hoja1");
             HSSFRow row = sheet.createRow(0);
 
-            conectarBD();
             rs = seleccionar(sql);
+            conectarBD();
+
             ResultSetMetaData Datos = rs.getMetaData();
             row = sheet.createRow(0);
             for (int i = 0; i < Datos.getColumnCount(); i++) {
@@ -73,6 +73,7 @@ public void generarArchivoExcel(String sql) {
                         row.createCell(col).setCellValue(rs.getObject(col + 1).toString());
                     } catch (Exception e) {
                         row.createCell(col).setCellValue("");
+
                     }
                 }
             }
@@ -83,13 +84,45 @@ public void generarArchivoExcel(String sql) {
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                try (FileOutputStream fileOut = new FileOutputStream(file.getPath())) {
+                try ( FileOutputStream fileOut = new FileOutputStream(file.getPath())) {
                     wb.write(fileOut);
                 }
 
-                //Ejecutar archivo de excel
-//                String dir=file.getPath();
-//                Runtime.getRuntime().exec("cmd /c start " +dir);
+                String operative_sistem = System.getProperty("os.name");
+                
+                System.out.println(operative_sistem);
+
+                String dir = file.getPath();
+                
+               
+
+                try {
+
+                    
+                    //VALIDAR EL SISTEMA OPERATIVO PARA PODER ABIRIR EXEL DESDE CONSOLA
+                    
+                    if (operative_sistem.contains("Windows")) {
+
+                        Runtime.getRuntime().exec("cmd /c start " + dir);
+
+                    } else if (operative_sistem.contains("Mac")) {
+                        
+//                        Runtime.getRuntime().exec("cd " + dir);
+//                        
+//                        Runtime.getRuntime().exec("chmod 775 Lista.xls");
+
+                        System.out.println("estamos qui");
+                        
+                        Runtime.getRuntime().exec("open " + dir);
+
+                    }
+
+                } catch (IOException e) {
+
+                    System.out.println("EXCEPTION: " + e.getMessage());
+
+                }
+
                 JOptionPane.showMessageDialog(null, "Archivo " + fc.getSelectedFile().getName() + " guarado exitosamente");
 
             }
@@ -99,7 +132,6 @@ public void generarArchivoExcel(String sql) {
         }
         desconectarBD();
     }
-
 
     public synchronized void desconectarBD() {
 
@@ -134,76 +166,73 @@ public void generarArchivoExcel(String sql) {
             } catch (SQLException e) {
             } // nothing we can do
         }
-        
+
     }
     //=========================================================================
     //MÉTODO ESPECIAL QUE PERMITE IMPRIMIR LOS RESULTADOS ESTABLECIDOS EN LAS 
 
     public synchronized ResultSet seleccionar(String sql) {
+
         try {
-           
-            
+            conectarBD();
+
             stmt = conexion.createStatement();
-            
+
             rs = stmt.executeQuery(sql);
-            
+
         } catch (SQLException ex) {
-            
-            System.out.println(ex);
+
+            desconectarBD();
+
+            System.out.println(ex + "aqui");
         }
+
         return rs;
     }//=========================================================================
     //Método que ejecuta cualquier sentencia de actualización(update, delete, 
     //insert) pasada por parametro.
-    
+
     //=====================================================================
     // metodo creado para hacer una consulta sin conocer cual va a ser la clausula del dato a
+    public synchronized ResultSet select(String sql, ArrayList items_statement) {
 
-        
-        public synchronized ResultSet select(String sql, ArrayList items_statement) {
-                 
-              
         try {
-           
+
             ps = conexion.prepareStatement(sql);
-            
-          for (int i = 0; i < items_statement.size(); i++) {
-            
-           ps.setString(i + 1, items_statement.get(i).toString());
-        
-        }
-            
+
+            for (int i = 0; i < items_statement.size(); i++) {
+
+                ps.setString(i + 1, items_statement.get(i).toString());
+
+            }
+
             rs = ps.executeQuery();
-            
+
         } catch (SQLException ex) {
-            
+
             System.out.println(ex);
         }
         return rs;
     }
-    
-
 
     public ResultSet selectProcedure(String nombre, ArrayList items_call) throws SQLException { // implementar metodos
-        
+
         String call = "{CALL " + nombre + "}";
-        
+
         obj_Procedimiento = getConexion().prepareCall(call);
-        
+
         for (int i = 0; i < items_call.size(); i++) {
-            
-        obj_Procedimiento.setString(i + 1, items_call.get(i).toString());
-        
-       
+
+            obj_Procedimiento.setString(i + 1, items_call.get(i).toString());
+
         }
-        
-        
-        
+
         rs = obj_Procedimiento.executeQuery();
-        
+
         return rs;
 
     }
+
     public synchronized void ejecutar(String sql) throws SQLException {
         try {
             stmt = conexion.createStatement();
@@ -239,7 +268,7 @@ public void generarArchivoExcel(String sql) {
             modelo = new javax.swing.table.DefaultTableModel(
                     new Object[][]{},
                     etiquetas) {
-                        
+
                 boolean[] canEdit = new boolean[numeroColumnas];
 
                 @Override
@@ -254,8 +283,7 @@ public void generarArchivoExcel(String sql) {
 
                 // Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
                 for (int i = 0; i < numeroColumnas; i++) {
-                    
-                    
+
                     fila[i] = rs.getObject(i + 1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
                 }
                 // Se añade al modelo la fila completa.

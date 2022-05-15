@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.management_Menu;
 import Modelo.staff;
 import Vista.login.frm_SignIn;
 import java.awt.Desktop;
@@ -19,6 +20,8 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public class Menu extends javax.swing.JFrame {
+    
+    management_Menu management = new management_Menu();
 
    private staff User = new staff();
 
@@ -228,6 +231,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.add(jSeparator1);
 
         jMenuItem6.setText("Cascadind windows");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
         jMenu3.add(jSeparator8);
 
@@ -393,6 +401,10 @@ public class Menu extends javax.swing.JFrame {
     private void sub_pop_log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sub_pop_log_outActionPerformed
         open_signIn();
     }//GEN-LAST:event_sub_pop_log_outActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+      
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments

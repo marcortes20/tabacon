@@ -16,5 +16,17 @@ public class management_Menu  extends Conexion {
     public static void main(String[] args) {
         
     }
+
+    public management_Menu() {
+    }
+    
+    Conexion con = new Conexion();
+    
+    
+    public void exel(){
+        String sql = "SELECT * FROM  staff";
+   
+       
+    }
     
 }
