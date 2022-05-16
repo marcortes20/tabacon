@@ -310,8 +310,7 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton2)))
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(desk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(desk))
         );
 
         pack();
