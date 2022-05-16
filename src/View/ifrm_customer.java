@@ -80,6 +80,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
         jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btn_guardar.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/document-add_114467.png"))); // NOI18N
         btn_guardar.setText("Save");
         btn_guardar.setFocusable(false);
         btn_guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -88,6 +89,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator1);
 
         btn_editar.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/document-edit_114472.png"))); // NOI18N
         btn_editar.setText("Edit");
         btn_editar.setFocusable(false);
         btn_editar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -96,6 +98,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator4);
 
         btn_eliminar.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1486504830-delete-dustbin-empty-recycle-recycling-remove-trash_81361.png"))); // NOI18N
         btn_eliminar.setText("Delete");
         btn_eliminar.setFocusable(false);
         btn_eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -104,6 +107,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator5);
 
         btn_imprimir.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer_78349.png"))); // NOI18N
         btn_imprimir.setText("Print");
         btn_imprimir.setFocusable(false);
         btn_imprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -112,6 +116,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator3);
 
         btn_cerrar.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salida.png"))); // NOI18N
         btn_cerrar.setText("Close");
         btn_cerrar.setFocusable(false);
         btn_cerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -166,9 +171,9 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

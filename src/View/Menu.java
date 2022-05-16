@@ -127,7 +127,7 @@ public class Menu extends javax.swing.JFrame {
         );
         deskLayout.setVerticalGroup(
             deskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 443, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
         lb_user.setBackground(new java.awt.Color(0, 0, 0));
@@ -169,10 +169,11 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(148, 34));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(148, 45));
 
         sub_menu_reserve.setBackground(new java.awt.Color(0, 0, 0));
         sub_menu_reserve.setForeground(new java.awt.Color(0, 0, 0));
+        sub_menu_reserve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/opcion.png"))); // NOI18N
         sub_menu_reserve.setText("Archieve");
         sub_menu_reserve.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         sub_menu_reserve.add(jSeparator2);
@@ -231,6 +232,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu3.setBackground(new java.awt.Color(0, 0, 0));
         jMenu3.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/console_86327.png"))); // NOI18N
         jMenu3.setText("Window");
         jMenu3.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         jMenu3.add(jSeparator1);
@@ -268,6 +270,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu4.setBackground(new java.awt.Color(0, 0, 0));
         jMenu4.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/question.png"))); // NOI18N
         jMenu4.setText("Help");
         jMenu4.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
 
@@ -277,7 +280,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu4.add(jSeparator11);
 
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/about_3697.png"))); // NOI18N
-        jMenuItem11.setText("About hotel");
+        jMenuItem11.setText("About of...");
         jMenu4.add(jMenuItem11);
 
         jMenuBar1.add(jMenu4);
@@ -295,7 +298,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
                 .addComponent(lb_user, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -307,7 +310,8 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton2)))
-                .addComponent(desk))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(desk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
