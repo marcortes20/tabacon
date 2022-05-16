@@ -208,6 +208,10 @@ public class management_rooms  extends Conexion{
         return deleted;
     }
     
+    public void generate_xml(){
+        String sql = "SELECT room_id, description, maximum_adults, maximun_kids,price_per_day_adults,price_per_day_kids,room_status,reserved FROM rooms";
+    }
+    
 
 }
     

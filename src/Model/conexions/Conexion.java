@@ -111,7 +111,6 @@ public class Conexion {
 //                        
 //                        Runtime.getRuntime().exec("chmod 775 Lista.xls");
 
-                        System.out.println("estamos qui");
                         
                         Runtime.getRuntime().exec("open " + dir);
 
