@@ -74,6 +74,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Customers");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1495573745-jd06_84493.png"))); // NOI18N
 
         jToolBar1.setRollover(true);
         jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

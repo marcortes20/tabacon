@@ -77,6 +77,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Reserve");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reservado.png"))); // NOI18N
 
         jToolBar1.setRollover(true);
         jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

@@ -178,6 +178,7 @@ public class Menu extends javax.swing.JFrame {
         sub_menu_reserve.add(jSeparator2);
         sub_menu_reserve.add(jSeparator3);
 
+        sub_menu_room.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/red_double-room_icon-icons.com_59508.png"))); // NOI18N
         sub_menu_room.setText("Rooms");
         sub_menu_room.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +188,7 @@ public class Menu extends javax.swing.JFrame {
         sub_menu_reserve.add(sub_menu_room);
         sub_menu_reserve.add(jSeparator4);
 
+        sub_menu_customer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1495573745-jd06_84493.png"))); // NOI18N
         sub_menu_customer.setText("Customers");
         sub_menu_customer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +198,7 @@ public class Menu extends javax.swing.JFrame {
         sub_menu_reserve.add(sub_menu_customer);
         sub_menu_reserve.add(jSeparator5);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reservado.png"))); // NOI18N
         jMenuItem2.setText("Reserve");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,6 +208,7 @@ public class Menu extends javax.swing.JFrame {
         sub_menu_reserve.add(jMenuItem2);
         sub_menu_reserve.add(jSeparator6);
 
+        sub_menu_report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reporte-de-negocios.png"))); // NOI18N
         sub_menu_report.setText("Invoicing report");
         sub_menu_report.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +218,7 @@ public class Menu extends javax.swing.JFrame {
         sub_menu_reserve.add(sub_menu_report);
         sub_menu_reserve.add(jSeparator7);
 
+        sub_menu_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salida.png"))); // NOI18N
         sub_menu_exit.setText("Exit");
         sub_menu_exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,6 +235,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         jMenu3.add(jSeparator1);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/browser-21_icon-icons.com_62177.png"))); // NOI18N
         jMenuItem6.setText("Cascadind windows");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,16 +245,20 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.add(jMenuItem6);
         jMenu3.add(jSeparator8);
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconfinder-sitecloning-4263532_117842.png"))); // NOI18N
         jMenuItem7.setText("Parallel windows");
         jMenu3.add(jMenuItem7);
         jMenu3.add(jSeparator9);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/window_deleted_10155.png"))); // NOI18N
         jMenu2.setText("Close");
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3499783-adult-browser-window-content-internet-online-website-xxx_107626.png"))); // NOI18N
         jMenuItem8.setText("Current window");
         jMenu2.add(jMenuItem8);
         jMenu2.add(jSeparator10);
 
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3499793-browser-window-cloning-site-website_107633(1).png"))); // NOI18N
         jMenuItem9.setText("All windows");
         jMenu2.add(jMenuItem9);
 
@@ -261,10 +271,12 @@ public class Menu extends javax.swing.JFrame {
         jMenu4.setText("Help");
         jMenu4.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
 
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file_type_pdf_icon_130274.png"))); // NOI18N
         jMenuItem10.setText("Content");
         jMenu4.add(jMenuItem10);
         jMenu4.add(jSeparator11);
 
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/about_3697.png"))); // NOI18N
         jMenuItem11.setText("About hotel");
         jMenu4.add(jMenuItem11);
 

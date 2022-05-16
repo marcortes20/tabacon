@@ -77,6 +77,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="sub_menu_room">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/red_double-room_icon-icons.com_59508.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Rooms"/>
               </Properties>
               <Events>
@@ -87,6 +90,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="sub_menu_customer">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/1495573745-jd06_84493.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Customers"/>
               </Properties>
               <Events>
@@ -97,6 +103,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/reservado.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Reserve"/>
               </Properties>
               <Events>
@@ -107,6 +116,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="sub_menu_report">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/reporte-de-negocios.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Invoicing report"/>
               </Properties>
               <Events>
@@ -117,6 +129,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="sub_menu_exit">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/salida.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Exit"/>
               </Properties>
               <Events>
@@ -143,6 +158,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/browser-21_icon-icons.com_62177.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cascadind windows"/>
               </Properties>
               <Events>
@@ -153,6 +171,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/iconfinder-sitecloning-4263532_117842.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Parallel windows"/>
               </Properties>
             </MenuItem>
@@ -160,11 +181,17 @@
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenu2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/window_deleted_10155.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Close"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/3499783-adult-browser-window-content-internet-online-website-xxx_107626.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Current window"/>
                   </Properties>
                 </MenuItem>
@@ -172,6 +199,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/3499793-browser-window-cloning-site-website_107633(1).png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="All windows"/>
                   </Properties>
                 </MenuItem>
@@ -195,6 +225,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/file_type_pdf_icon_130274.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Content"/>
               </Properties>
             </MenuItem>
@@ -202,6 +235,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/about_3697.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="About hotel"/>
               </Properties>
             </MenuItem>
