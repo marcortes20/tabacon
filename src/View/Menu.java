@@ -68,6 +68,8 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         sub_menu_reserve = new javax.swing.JMenu();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -80,7 +82,9 @@ public class Menu extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
         sub_menu_report = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
-        sub_menu_exit = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator14 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -167,6 +171,28 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/twitter(1).png"))); // NOI18N
+        jButton3.setBorder(null);
+        jButton3.setOpaque(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/youtube(1).png"))); // NOI18N
+        jButton4.setBorder(null);
+        jButton4.setOpaque(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         jMenuBar1.setPreferredSize(new java.awt.Dimension(148, 45));
@@ -219,14 +245,19 @@ public class Menu extends javax.swing.JFrame {
         sub_menu_reserve.add(sub_menu_report);
         sub_menu_reserve.add(jSeparator7);
 
-        sub_menu_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salida.png"))); // NOI18N
-        sub_menu_exit.setText("Exit");
-        sub_menu_exit.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/world-grid.png"))); // NOI18N
+        jMenuItem1.setText("Book online");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sub_menu_exitActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        sub_menu_reserve.add(sub_menu_exit);
+        sub_menu_reserve.add(jMenuItem1);
+        sub_menu_reserve.add(jSeparator14);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salida.png"))); // NOI18N
+        jMenuItem3.setText("Exit");
+        sub_menu_reserve.add(jMenuItem3);
 
         jMenuBar1.add(sub_menu_reserve);
 
@@ -262,6 +293,11 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3499793-browser-window-cloning-site-website_107633(1).png"))); // NOI18N
         jMenuItem9.setText("All windows");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem9);
 
         jMenu3.add(jMenu2);
@@ -298,7 +334,11 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                 .addComponent(lb_user, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -309,7 +349,9 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton1)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2)
+                        .addComponent(jButton3)
+                        .addComponent(jButton4)))
                 .addComponent(desk))
         );
 
@@ -388,10 +430,6 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void sub_menu_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sub_menu_exitActionPerformed
-    System.exit(0);
-    }//GEN-LAST:event_sub_menu_exitActionPerformed
-
     private void sub_menu_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sub_menu_reportActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sub_menu_reportActionPerformed
@@ -420,6 +458,74 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
       
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+       
+        desk.getAllFrames();
+        
+       
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+ URL url = null;
+
+        try {
+
+            url = new URL("https://twitter.com/TabaconResort");
+
+            try {
+                Desktop.getDesktop().browse(url.toURI());
+
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+
+            }
+        } catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        }        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // 
+        
+           URL url = null;
+
+        try {
+
+            url = new URL("https://www.youtube.com/user/TabaconResort");
+
+            try {
+                Desktop.getDesktop().browse(url.toURI());
+
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+
+            }
+        } catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+           URL url = null;
+
+        try {
+
+            url = new URL("https://www.tabacon.com/");
+
+            try {
+                Desktop.getDesktop().browse(url.toURI());
+
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+
+            }
+        } catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        }
+                                            
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -460,14 +566,18 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desk;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
@@ -477,6 +587,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator13;
+    private javax.swing.JPopupMenu.Separator jSeparator14;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
@@ -488,7 +599,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel lb_user;
     private javax.swing.JPopupMenu pop_menu_user;
     private javax.swing.JMenuItem sub_menu_customer;
-    private javax.swing.JMenuItem sub_menu_exit;
     private javax.swing.JMenuItem sub_menu_report;
     private javax.swing.JMenu sub_menu_reserve;
     private javax.swing.JMenuItem sub_menu_room;
