@@ -53,9 +53,6 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         win_rooms = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         room_photo = new jcFoto.jcFoto();
-        jLabel64 = new javax.swing.JLabel();
-        btn_save_room = new javax.swing.JButton();
-        btn_SignUp = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel56 = new javax.swing.JLabel();
         jLabel57 = new javax.swing.JLabel();
@@ -76,6 +73,8 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         spiner_kids = new javax.swing.JSpinner();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        btn_save_room = new javax.swing.JButton();
+        btn_SignUp = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         btn_guardar = new javax.swing.JButton();
@@ -95,83 +94,37 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         jToolBar2 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
 
+        win_rooms.setMaximumSize(new java.awt.Dimension(420, 420));
         win_rooms.setMinimumSize(new java.awt.Dimension(454, 419));
         win_rooms.setUndecorated(true);
-        win_rooms.setSize(new java.awt.Dimension(558, 482));
+        win_rooms.setPreferredSize(new java.awt.Dimension(564, 652));
+        win_rooms.setSize(new java.awt.Dimension(564, 649));
         win_rooms.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51,80));
 
         room_photo.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-
-        jLabel64.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel64.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        jLabel64.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel64.setText("Image:");
-
-        btn_save_room.setBackground(new java.awt.Color(153, 153, 0));
-        btn_save_room.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        btn_save_room.setForeground(new java.awt.Color(255, 255, 255));
-        btn_save_room.setText("Save");
-        btn_save_room.setActionCommand("Sign up");
-        btn_save_room.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_save_room.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_save_roomActionPerformed(evt);
-            }
-        });
-
-        btn_SignUp.setBackground(new java.awt.Color(153, 153, 0));
-        btn_SignUp.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        btn_SignUp.setForeground(new java.awt.Color(255, 255, 255));
-        btn_SignUp.setText("Cancel");
-        btn_SignUp.setActionCommand("Sign up");
-        btn_SignUp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_SignUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SignUpActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel64)
-                                .addGap(67, 67, 67))
-                            .addComponent(room_photo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btn_save_room, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_SignUp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(room_photo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel64)
-                .addGap(18, 18, 18)
-                .addComponent(room_photo, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(btn_save_room, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(room_photo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(433, Short.MAX_VALUE))
         );
 
         room_photo.getAccessibleContext().setAccessibleDescription("");
 
-        win_rooms.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 480));
+        win_rooms.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 120, 600));
 
-        jPanel10.setBackground(new java.awt.Color(0, 0, 0,80));
+        jPanel10.setBackground(new java.awt.Color(153, 153, 153,80));
         jPanel10.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel56.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
@@ -227,22 +180,46 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         jTextField2.setForeground(new java.awt.Color(51, 255, 0));
         jTextField2.setText("$");
 
+        btn_save_room.setBackground(new java.awt.Color(153, 153, 0));
+        btn_save_room.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btn_save_room.setForeground(new java.awt.Color(255, 255, 255));
+        btn_save_room.setText("Save");
+        btn_save_room.setActionCommand("Sign up");
+        btn_save_room.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_save_room.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_save_roomActionPerformed(evt);
+            }
+        });
+
+        btn_SignUp.setBackground(new java.awt.Color(153, 153, 0));
+        btn_SignUp.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btn_SignUp.setForeground(new java.awt.Color(255, 255, 255));
+        btn_SignUp.setText("Cancel");
+        btn_SignUp.setActionCommand("Sign up");
+        btn_SignUp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_SignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SignUpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel57)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_room_id, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel58)
                             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +244,12 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
                             .addComponent(spiner_adutls)
                             .addComponent(spiner_kids))))
                 .addGap(551, 551, 551))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btn_save_room, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,13 +292,17 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(check_reserved))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(btn_save_room)
+                .addGap(18, 18, 18)
+                .addComponent(btn_SignUp)
+                .addGap(39, 39, 39))
         );
 
-        win_rooms.getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 430, 480));
+        win_rooms.getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 360, 600));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/room_background.jpg"))); // NOI18N
-        win_rooms.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 480));
+        win_rooms.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 0, 690, 650));
 
         setClosable(true);
         setIconifiable(true);
@@ -668,8 +655,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     String sql = "SELECT room_id, description, maximum_adults, maximun_kids,price_per_day_adults,price_per_day_kids,room_status,reserved FROM rooms";
-        mana_rooms.generate_exel(sql);
+     mana_rooms.generate_xml();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -694,7 +680,6 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;

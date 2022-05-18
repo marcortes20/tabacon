@@ -50,10 +50,10 @@ public class Conexion {
     }//=========================================================================
     //Desconecta la conexion con Oracle y el usuario establecidos anteriormente
 
-    public void generate_exel(String sql) {
+    public void generate_exel(String sql, String file_xls) {
         try {
             HSSFWorkbook wb = new HSSFWorkbook();
-            HSSFSheet sheet = wb.createSheet("hoja1");
+            HSSFSheet sheet = wb.createSheet("Sheet1");
             HSSFRow row = sheet.createRow(0);
 
             rs = seleccionar(sql);
@@ -79,7 +79,7 @@ public class Conexion {
             }
             JFileChooser fc = new JFileChooser();
 
-            fc.setSelectedFile(new File("Lista.xls"));
+            fc.setSelectedFile(new File(file_xls));
             int returnVal = fc.showSaveDialog(null);
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -216,7 +216,7 @@ public class Conexion {
 
     public ResultSet selectProcedure(String nombre, ArrayList items_call) throws SQLException { // implementar metodos
 
-        String call = "{CALL " + nombre + "}";
+        String call = "{CALL " + nombre +"}";
 
         obj_Procedimiento = getConexion().prepareCall(call);
 
@@ -231,6 +231,9 @@ public class Conexion {
         return rs;
 
     }
+    
+
+    
 
     public synchronized void ejecutar(String sql) throws SQLException {
         try {

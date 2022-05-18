@@ -22,6 +22,11 @@ public class customers {
         this.phone_number = phone_number;
     }
 
+    public customers() {
+    }
+    
+    
+
     
     public int getCustomer_id() {
         return customer_id;

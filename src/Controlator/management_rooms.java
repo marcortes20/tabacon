@@ -50,6 +50,8 @@ public class management_rooms  extends Conexion{
             obj_Procedimiento.setBoolean(9, room.isReserved());
             
             registered = obj_Procedimiento.executeUpdate() == 1;
+            
+              
 
             desconectarBD();
 
@@ -209,7 +211,12 @@ public class management_rooms  extends Conexion{
     }
     
     public void generate_xml(){
+        
+        String file_name = "Rooms_list.xls";
+        
         String sql = "SELECT room_id, description, maximum_adults, maximun_kids,price_per_day_adults,price_per_day_kids,room_status,reserved FROM rooms";
+        
+        generate_exel(sql, file_name);
     }
     
 

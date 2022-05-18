@@ -8,9 +8,7 @@ import java.sql.*;
 import java.lang.Exception;
 import java.util.ArrayList;
 import Model.roles_per_user;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 
 public class management_Login extends Conexion {
