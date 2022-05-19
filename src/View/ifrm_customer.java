@@ -9,7 +9,6 @@ import Model.customers;
 import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author mcortes19
@@ -18,14 +17,13 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
 
     management_customers management = new management_customers();
     customers customer;
-    
+
     public ifrm_customer() throws PropertyVetoException {
         initComponents();
         this.setMaximum(true);
-        
+
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -378,26 +376,26 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btn_cerrarActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-       win_customer.setTitle("Save customer");
-        
-       win_customer.setLocationRelativeTo(null);
-       
-       txt_customer_id.setEditable(true);
-       
-       clean_fields();
-        
-       win_customer.setVisible(true);
-        
-     
+        win_customer.setTitle("Save customer");
+
+        win_customer.setLocationRelativeTo(null);
+
+        txt_customer_id.setEditable(true);
+
+        clean_fields();
+
+        win_customer.setVisible(true);
+
+
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-       generate_exel();
+
+        generate_exel();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -406,9 +404,9 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
-        
-         win_customer.setLocationRelativeTo(null);
-         
+
+        win_customer.setLocationRelativeTo(null);
+
         txt_customer_id.setEditable(false);
 
         int fila = table_customer.getSelectedRow();
@@ -418,37 +416,37 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
             win_customer.setTitle("Edit customer");
 
             customer = new customers();
-            
+
             customer.setCustomer_id(Integer.parseInt(table_customer.getValueAt(fila, 0).toString()));
-           
+
             management.searchCustomer(customer);
-            
+
             txt_customer_id.setText(String.valueOf(customer.getCustomer_id()));
-            
+
             txt_name.setText(customer.getName());
-            
+
             txt_last_name.setText(customer.getLast_name());
-            
+
             txt_adress.setText(customer.getAddress());
-            
+
             txt_company.setText(customer.getCompany());
-            
+
             txt_email.setText(customer.getEmail());
-            
+
             txt_phone_number.setText(String.valueOf(customer.getPhone_number()));
-            
+
             win_customer.setVisible(true);
-            
+
         } else {
 
             JOptionPane.showMessageDialog(this, "Select customer to edit", "Edit", JOptionPane.ERROR_MESSAGE);
         }
 
-        
+
     }//GEN-LAST:event_btn_editarActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        
+
         if (validate_data().isEmpty()) {
 
             customer = new customers();
@@ -464,7 +462,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
             customer.setCompany(txt_company.getText());
 
             customer.setEmail(txt_email.getText());
-            
+
             customer.setPhone_number(Integer.parseInt(txt_phone_number.getText()));
 
             if (win_customer.getTitle().equals("Save customer")) {
@@ -472,9 +470,9 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
                 if (management.registerCustomer(customer)) {
 
                     JOptionPane.showMessageDialog(win_customer, "customer was registered ", "Successfully!", JOptionPane.INFORMATION_MESSAGE);
-                    
+
                     win_customer.dispose();
-                    
+
                     load_table();
 
                 } else {
@@ -485,30 +483,28 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
             }
 
             if (win_customer.getTitle().equals("Edit customer")) {
-                
-                    
+
                 if (management.editCustomer(customer)) {
-                    
-                     JOptionPane.showMessageDialog(win_customer, "Customer was edited ", "Successfully!", JOptionPane.INFORMATION_MESSAGE);
-                     
-                     win_customer.dispose();
-                     
-                     load_table();
+
+                    JOptionPane.showMessageDialog(win_customer, "Customer was edited ", "Successfully!", JOptionPane.INFORMATION_MESSAGE);
+
+                    win_customer.dispose();
+
+                    load_table();
                 }
 
             }
-        } else {  
-            
-         JOptionPane.showMessageDialog(win_customer, "EMPTY FIELDS:" + validate_data(), "You must fill in all fields!", JOptionPane.ERROR_MESSAGE);      
-        
+        } else {
+
+            JOptionPane.showMessageDialog(win_customer, "EMPTY FIELDS:" + validate_data(), "You must fill in all fields!", JOptionPane.ERROR_MESSAGE);
+
         }
-        
+
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-       
-           int fila = table_customer.getSelectedRow();
-        
+
+        int fila = table_customer.getSelectedRow();
 
         if (fila != -1) {
 
@@ -522,9 +518,9 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
                 if (management.deleteCustomer(customer_id)) {
 
                     JOptionPane.showMessageDialog(rootPane, "Customer has been removed", "Delete", JOptionPane.INFORMATION_MESSAGE);
-                    
+
                     load_table();
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Error to delete customer", "Delete", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -534,7 +530,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
             }
 
         }
-        
+
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
     private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
@@ -581,37 +577,35 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
     private javax.swing.JDialog win_customer;
     // End of variables declaration//GEN-END:variables
 
-    
-    public void generate_exel(){
-    management.generate_xml();
-}
-    
-    public void load_table(){
-        
-    management.load_table(table_customer, lb_total);
-        
+    public void generate_exel() {
+        management.generate_xml();
     }
-    
-    public void clean_fields(){
-        
+
+    public void load_table() {
+
+        management.load_table(table_customer, lb_total);
+
+    }
+
+    public void clean_fields() {
+
         txt_customer_id.setText("");
-        
+
         txt_name.setText("");
-        
+
         txt_last_name.setText("");
-        
+
         txt_adress.setText("");
-        
+
         txt_company.setText("");
-        
+
         txt_email.setText("");
-        
+
         txt_email.setText("");
     }
-    
-    
-    public String validate_data(){
-        
+
+    public String validate_data() {
+
         String empty_fields = "";
 
         if (txt_customer_id.getText().isEmpty()) {
@@ -620,16 +614,31 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
 
             empty_fields += "\nCustomer id.";
 
+        } else if (management.validate_int_format(txt_customer_id.getText())) {
+
+            JOptionPane.showMessageDialog(win_customer, "'ID' should only have numbers!", "Critical error:", JOptionPane.ERROR_MESSAGE);
+
+            txt_customer_id.setText("");
+
+            empty_fields += "\ncustomer ID:";
+
+        } else if (management.validate_customer_id(Integer.parseInt(txt_customer_id.getText()))) {
+
+            JOptionPane.showMessageDialog(win_customer, "this customer id is already exist! try again:", "Error!", JOptionPane.ERROR_MESSAGE);
+
+            txt_customer_id.setText("");
+
+            empty_fields += "\ncustomer ID:";
+
         }
 
         if (txt_name.getText().trim().isEmpty()) {
 
             txt_name.requestFocus();
 
-            empty_fields += "\nName";
+            empty_fields += "\nName:";
         }
 
-       
         if (txt_last_name.getText().trim().isEmpty()) {
 
             txt_last_name.requestFocus();
@@ -649,19 +658,22 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
 
             empty_fields += "\nEmail:";
         }
-        
+
         if (txt_phone_number.getText().trim().isEmpty()) {
 
             txt_phone_number.requestFocus();
 
             empty_fields += "\nPhone number:";
+        } else if (management.validate_int_format(txt_phone_number.getText())) {
+
+            JOptionPane.showMessageDialog(win_customer, "'Phone number' should only have numbers!", "Critical error:", JOptionPane.ERROR_MESSAGE);
+
+            txt_phone_number.setText("");
+
+            empty_fields += "\nPhone number:";
+
         }
-
-        
-
         return empty_fields;
-        
+
     }
-
-
 }

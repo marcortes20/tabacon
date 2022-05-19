@@ -219,6 +219,42 @@ public class management_rooms  extends Conexion{
         generate_exel(sql, file_name);
     }
     
+    public boolean validate_int_format(String text) {
+
+        boolean is_number = true;
+
+        try {
+
+         int test = Integer.parseInt(text);
+
+        } catch (NumberFormatException e) {
+
+            is_number = false;
+
+        }
+
+        return is_number;
+
+    }
+    
+    public boolean validate_double_format(String text) {
+
+        boolean is_number = true;
+
+        try {
+
+         double test = Double.parseDouble(text);
+
+        } catch (NumberFormatException e) {
+
+        is_number = false;
+
+        }
+
+        return is_number;
+
+    }
+    
 
 }
     

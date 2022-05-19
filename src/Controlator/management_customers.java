@@ -137,6 +137,59 @@ public class management_customers extends Conexion {
         }
         return rpta;
     }
+    
+    public boolean validate_customer_id(int customer_id){
+        
+       boolean registered = false;
+
+        try {
+
+            conectarBD();
+
+            String call_name = "ps_customer_validate(?)";
+            
+            items_Call.add(customer_id);
+
+            rs = selectProcedure(call_name, items_Call);
+            
+            items_Call.clear();
+
+            if (rs.next()) {
+                
+                registered = true;
+                
+                desconectarBD();
+            }
+
+            desconectarBD();
+
+        } catch (Exception e) {
+
+            desconectarBD();
+
+            System.out.println(e);
+        }
+
+        return registered;
+    }
+    
+        public boolean validate_int_format(String text) {
+
+        boolean is_number = true;
+
+        try {
+
+         int test = Integer.parseInt(text);
+
+        } catch (NumberFormatException e) {
+
+            is_number = false;
+
+        }
+
+        return is_number;
+
+    }
 
     public customers searchCustomer(customers customer) {
 
