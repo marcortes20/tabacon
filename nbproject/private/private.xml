@@ -5,8 +5,10 @@
         <group>
             <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Model/conexions/Conexion.java</file>
             <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Controlator/management_Login.java</file>
+            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/View/ifrm_reserve.java</file>
             <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/View/ifrm_customer.java</file>
             <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Controlator/management_customers.java</file>
+            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/View/login/frm_SignUp.java</file>
             <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Controlator/management_rooms.java</file>
         </group>
     </open-files>

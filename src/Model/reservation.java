@@ -11,8 +11,9 @@ public class reservation {
     
     private int reservation_id;
     private int room_id;
+    private int staff_id;
+    private int customer_id;
     private int discount_id;
-    private int user_id;
     private String way_to_pay;
     private int adults_number;
     private int kids_number;
@@ -24,11 +25,12 @@ public class reservation {
     public reservation() {
     }
 
-    public reservation(int reservation_id, int room_id, int discount_id, int user_id, String way_to_pay, int adults_number, int kids_number, Date current_date, Date entry_date, Date departure_date, int reserved_days) {
+    public reservation(int reservation_id, int room_id, int staff_id, int customer_id, int discount_id, String way_to_pay, int adults_number, int kids_number, Date current_date, Date entry_date, Date departure_date, int reserved_days) {
         this.reservation_id = reservation_id;
         this.room_id = room_id;
+        this.staff_id = staff_id;
+        this.customer_id = customer_id;
         this.discount_id = discount_id;
-        this.user_id = user_id;
         this.way_to_pay = way_to_pay;
         this.adults_number = adults_number;
         this.kids_number = kids_number;
@@ -54,20 +56,28 @@ public class reservation {
         this.room_id = room_id;
     }
 
+    public int getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(int staff_id) {
+        this.staff_id = staff_id;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
     public int getDiscount_id() {
         return discount_id;
     }
 
     public void setDiscount_id(int discount_id) {
         this.discount_id = discount_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public String getWay_to_pay() {
@@ -128,10 +138,9 @@ public class reservation {
 
     @Override
     public String toString() {
-        return "reservation{" + "reservation_id=" + reservation_id + ", room_id=" + room_id + ", discount_id=" + discount_id + ", user_id=" + user_id + ", way_to_pay=" + way_to_pay + ", adults_number=" + adults_number + ", kids_number=" + kids_number + ", current_date=" + current_date + ", entry_date=" + entry_date + ", departure_date=" + departure_date + ", reserved_days=" + reserved_days + '}';
+        return "reservation{" + "reservation_id=" + reservation_id + ", room_id=" + room_id + ", staff_id=" + staff_id + ", customer_id=" + customer_id + ", discount_id=" + discount_id + ", way_to_pay=" + way_to_pay + ", adults_number=" + adults_number + ", kids_number=" + kids_number + ", current_date=" + current_date + ", entry_date=" + entry_date + ", departure_date=" + departure_date + ", reserved_days=" + reserved_days + '}';
     }
-    
-    
+
     
     
 }
