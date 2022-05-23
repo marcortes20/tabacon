@@ -614,7 +614,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
 
             empty_fields += "\nCustomer id.";
 
-        } else if (management.validate_int_format(txt_customer_id.getText())) {
+        } else if (!management.validate_int_format(txt_customer_id.getText())) {
 
             JOptionPane.showMessageDialog(win_customer, "'ID' should only have numbers!", "Critical error:", JOptionPane.ERROR_MESSAGE);
 
@@ -664,7 +664,7 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
             txt_phone_number.requestFocus();
 
             empty_fields += "\nPhone number:";
-        } else if (management.validate_int_format(txt_phone_number.getText())) {
+        } else if (!management.validate_int_format(txt_phone_number.getText())) {
 
             JOptionPane.showMessageDialog(win_customer, "'Phone number' should only have numbers!", "Critical error:", JOptionPane.ERROR_MESSAGE);
 

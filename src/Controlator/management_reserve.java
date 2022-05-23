@@ -1,14 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlator;
 
 import Model.conexions.Conexion;
 import Model.rooms;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
@@ -20,6 +21,9 @@ public class management_reserve extends Conexion {
 
     public void fill_combo_customer(JComboBox<String> combo) {
 
+        @SuppressWarnings("unchecked")
+        DefaultComboBoxModel<String> combo_model = new DefaultComboBoxModel();
+
         String sql = "SELECT customer_id FROM customers";
 
         conectarBD();
@@ -30,8 +34,7 @@ public class management_reserve extends Conexion {
 
             while (rs.next()) {
 
-                combo.addItem((rs.getString("customer_id")));
-
+                combo_model.addElement(rs.getString("customer_id"));
             }
 
             desconectarBD();
@@ -41,11 +44,16 @@ public class management_reserve extends Conexion {
             desconectarBD();
         }
 
+        combo.setModel(combo_model);
+
     }
 
     public void fill_combo_rooms(JComboBox<String> combo) {
 
-        String sql = "SELECT room_id FROM rooms WHERE reserved = false AND room_status = false";
+        @SuppressWarnings("unchecked")
+        DefaultComboBoxModel<String> combo_model = new DefaultComboBoxModel();
+
+        String sql = "SELECT room_id FROM rooms WHERE reserved = false AND room_status = true";
 
         conectarBD();
 
@@ -55,7 +63,7 @@ public class management_reserve extends Conexion {
 
             while (rs.next()) {
 
-                combo.addItem((rs.getString("room_id")));
+                combo_model.addElement(rs.getString("room_id"));
 
             }
 
@@ -65,7 +73,7 @@ public class management_reserve extends Conexion {
 
             desconectarBD();
         }
-
+        combo.setModel(combo_model);
     }
 
     public String search_customer_name(String customer_id) {
@@ -95,7 +103,7 @@ public class management_reserve extends Conexion {
     }
 
     public rooms search_room(int room_id) {
-        
+
         rooms room = new rooms();
         try {
             conectarBD();
@@ -110,7 +118,6 @@ public class management_reserve extends Conexion {
 
             if (rs.next()) {
 
-               
                 room.setMaximun_adults(rs.getInt(1));
                 room.setMaximun_kids(rs.getInt(2));
                 room.setPrice_per_day_adults(rs.getDouble(3));
@@ -132,6 +139,18 @@ public class management_reserve extends Conexion {
             System.out.println(e);
         }
         return room;
+
+    }
+
+    public void resize_image_room(String room_path, JLabel lb_image_room) throws IOException {
+
+        BufferedImage bufferedImage = ImageIO.read(new File("/Users/mcortes19/Desktop/m.png"));
+
+        Image image = bufferedImage.getScaledInstance(lb_image_room.getWidth(), lb_image_room.getHeight(), Image.SCALE_DEFAULT);
+
+        ImageIcon icon = new ImageIcon(image);
+
+        lb_image_room.setIcon(icon);
 
     }
 }

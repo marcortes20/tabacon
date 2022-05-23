@@ -9,8 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,12 +27,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     public ifrm_reserve(int staff_id) throws PropertyVetoException {
         initComponents();
         this.setMaximum(true);
-        fill_customers_id();
-        fill_room_id();
         worker_id = staff_id;
-        image_panel.setVisible(false);
-        information_image_panel.setVisible(false);
-        
     }
 
     /**
@@ -74,9 +72,14 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         spiner_adults_number1 = new javax.swing.JSpinner();
         lb_customer_name = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        image_panel = new javax.swing.JPanel();
         information_image_panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        lb_room_image = new javax.swing.JLabel();
+        image_background = new javax.swing.JLabel();
         jToolBar2 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
@@ -103,6 +106,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 win_reserveWindowActivated(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                win_reserveWindowOpened(evt);
+            }
         });
         win_reserve.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -119,7 +125,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             .addGap(0, 840, Short.MAX_VALUE)
         );
 
-        win_reserve.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 20, 840));
+        win_reserve.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 20, 840));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102,80));
 
@@ -260,18 +266,20 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                         .addGap(49, 49, 49)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 6, Short.MAX_VALUE)
-                                .addComponent(jLabel73)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(date_departure, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel72)
                                 .addGap(18, 18, 18)
                                 .addComponent(spiner_adults_number1))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel64)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 6, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel73)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(date_departure, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel64)
+                                        .addGap(19, 19, 19)
+                                        .addComponent(txt_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(50, 50, 50))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
@@ -343,14 +351,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spiner_kids_number, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(date_entry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(date_entry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(date_departure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -377,40 +382,67 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15))
         );
 
-        win_reserve.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 420, 840));
-
-        image_panel.setBackground(new java.awt.Color(255, 255, 255,80));
-
-        javax.swing.GroupLayout image_panelLayout = new javax.swing.GroupLayout(image_panel);
-        image_panel.setLayout(image_panelLayout);
-        image_panelLayout.setHorizontalGroup(
-            image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
-        );
-        image_panelLayout.setVerticalGroup(
-            image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        win_reserve.getContentPane().add(image_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 270, 190));
+        win_reserve.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 420, 840));
 
         information_image_panel.setBackground(new java.awt.Color(255, 255, 255,80));
+
+        jLabel1.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        jLabel1.setText("Room number #");
+
+        jLabel60.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        jLabel60.setText("Maximun adults");
+
+        jLabel61.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        jLabel61.setText("Maximun kids");
+
+        jLabel62.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        jLabel62.setText("Price per adult");
+
+        jLabel63.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        jLabel63.setText("Price per kid");
 
         javax.swing.GroupLayout information_image_panelLayout = new javax.swing.GroupLayout(information_image_panel);
         information_image_panel.setLayout(information_image_panelLayout);
         information_image_panelLayout.setHorizontalGroup(
             information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+            .addGroup(information_image_panelLayout.createSequentialGroup()
+                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(information_image_panelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel61))
+                    .addGroup(information_image_panelLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, information_image_panelLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel63)
+                    .addComponent(jLabel60)
+                    .addComponent(jLabel62))
+                .addGap(165, 165, 165))
         );
         information_image_panelLayout.setVerticalGroup(
             information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGroup(information_image_panelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
-        win_reserve.getContentPane().add(information_image_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, -1, 650));
+        win_reserve.getContentPane().add(information_image_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 280, 470));
+        win_reserve.getContentPane().add(lb_room_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 280, 360));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/room.jpg"))); // NOI18N
-        win_reserve.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 860));
+        image_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/room.jpg"))); // NOI18N
+        win_reserve.getContentPane().add(image_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 860));
 
         setClosable(true);
         setIconifiable(true);
@@ -647,37 +679,57 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
     private void win_reserveWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_win_reserveWindowActivated
         initialize_default_fields();
-      
-        
-    }//GEN-LAST:event_win_reserveWindowActivated
-    
-    private void cbo_customer_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_customer_idItemStateChanged
-          if(evt.getStateChange() == ItemEvent.SELECTED) {
 
-              String id = cbo_customer_id.getSelectedItem().toString();
-              
-              lb_customer_name.setText(management.search_customer_name(id));
+
+    }//GEN-LAST:event_win_reserveWindowActivated
+
+    private void cbo_customer_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_customer_idItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            String id = cbo_customer_id.getSelectedItem().toString();
+
+            lb_customer_name.setText(management.search_customer_name(id));
         }
-      
+
     }//GEN-LAST:event_cbo_customer_idItemStateChanged
 
     private void cbo_customer_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_customer_idActionPerformed
-     
+
     }//GEN-LAST:event_cbo_customer_idActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        image_panel.setVisible(true);
+
+        try {
+            management.resize_image_room(" ", lb_room_image);
+
+        } catch (IOException ex) {
+
+            Logger.getLogger(ifrm_reserve.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lb_room_image.setVisible(true);
+        
         information_image_panel.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cbo_room_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_room_idItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED) {
 
-             
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
         }
     }//GEN-LAST:event_cbo_room_idItemStateChanged
 
- 
+    private void win_reserveWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_win_reserveWindowOpened
+        initialize_default_fields();
+        fill_customers_id();
+        fill_room_id();
+        lb_room_image.setVisible(false);
+        information_image_panel.setVisible(false);
+        spiner_adults_number.setEnabled(false);
+        spiner_kids_number.setEnabled(false);
+        txt_subtotal.setEditable(false);
+        txt_total.setEditable(false);
+    }//GEN-LAST:event_win_reserveWindowOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Cancel;
@@ -695,12 +747,16 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbo_way_to_pay;
     private com.toedter.calendar.JDateChooser date_departure;
     private com.toedter.calendar.JDateChooser date_entry;
-    private javax.swing.JPanel image_panel;
+    private javax.swing.JLabel image_background;
     private javax.swing.JPanel information_image_panel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel59;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
@@ -727,6 +783,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lb_customer_name;
+    private javax.swing.JLabel lb_room_image;
     private javax.swing.JLabel lb_total;
     private javax.swing.JSpinner spiner_adults_number;
     private javax.swing.JSpinner spiner_adults_number1;
@@ -752,18 +809,17 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         txt_staff_id.setEditable(false);
 
     }
-    
-    public void fill_customers_id(){
-       
-        
+
+    public void fill_customers_id() {
+
         management.fill_combo_customer(cbo_customer_id);
-        
+
         cbo_customer_id.setSelectedItem(null);
     }
-    
-    public void fill_room_id(){
+
+    public void fill_room_id() {
         management.fill_combo_rooms(cbo_room_id);
-        
+
         cbo_room_id.setSelectedItem(null);
     }
 }

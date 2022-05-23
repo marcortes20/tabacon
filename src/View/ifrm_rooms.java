@@ -91,14 +91,15 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         jToolBar2 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
 
-        win_rooms.setMaximumSize(new java.awt.Dimension(420, 420));
         win_rooms.setMinimumSize(new java.awt.Dimension(454, 419));
         win_rooms.setUndecorated(true);
-        win_rooms.setPreferredSize(new java.awt.Dimension(564, 652));
         win_rooms.setSize(new java.awt.Dimension(564, 649));
         win_rooms.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 win_roomsWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                win_roomsWindowOpened(evt);
             }
         });
         win_rooms.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -666,9 +667,13 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void win_roomsWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_win_roomsWindowActivated
+     
+    }//GEN-LAST:event_win_roomsWindowActivated
+
+    private void win_roomsWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_win_roomsWindowOpened
         set_spiner(spiner_kids);
         set_spiner(spiner_adutls);
-    }//GEN-LAST:event_win_roomsWindowActivated
+    }//GEN-LAST:event_win_roomsWindowOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
