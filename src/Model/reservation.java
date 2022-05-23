@@ -17,15 +17,15 @@ public class reservation {
     private String way_to_pay;
     private int adults_number;
     private int kids_number;
-    private Date current_date;
-    private Date entry_date;
-    private Date departure_date;
+    private String current_date;
+    private String entry_date;
+    private String departure_date;
     private int reserved_days;
 
     public reservation() {
     }
 
-    public reservation(int reservation_id, int room_id, int staff_id, int customer_id, int discount_id, String way_to_pay, int adults_number, int kids_number, Date current_date, Date entry_date, Date departure_date, int reserved_days) {
+    public reservation(int reservation_id, int room_id, int staff_id, int customer_id, int discount_id, String way_to_pay, int adults_number, int kids_number, String current_date, String entry_date, String departure_date, int reserved_days) {
         this.reservation_id = reservation_id;
         this.room_id = room_id;
         this.staff_id = staff_id;
@@ -104,27 +104,27 @@ public class reservation {
         this.kids_number = kids_number;
     }
 
-    public Date getCurrent_date() {
+    public String getCurrent_date() {
         return current_date;
     }
 
-    public void setCurrent_date(Date current_date) {
+    public void setCurrent_date(String current_date) {
         this.current_date = current_date;
     }
 
-    public Date getEntry_date() {
+    public String getEntry_date() {
         return entry_date;
     }
 
-    public void setEntry_date(Date entry_date) {
+    public void setEntry_date(String entry_date) {
         this.entry_date = entry_date;
     }
 
-    public Date getDeparture_date() {
+    public String getDeparture_date() {
         return departure_date;
     }
 
-    public void setDeparture_date(Date departure_date) {
+    public void setDeparture_date(String departure_date) {
         this.departure_date = departure_date;
     }
 
@@ -141,6 +141,4 @@ public class reservation {
         return "reservation{" + "reservation_id=" + reservation_id + ", room_id=" + room_id + ", staff_id=" + staff_id + ", customer_id=" + customer_id + ", discount_id=" + discount_id + ", way_to_pay=" + way_to_pay + ", adults_number=" + adults_number + ", kids_number=" + kids_number + ", current_date=" + current_date + ", entry_date=" + entry_date + ", departure_date=" + departure_date + ", reserved_days=" + reserved_days + '}';
     }
 
-    
-    
 }

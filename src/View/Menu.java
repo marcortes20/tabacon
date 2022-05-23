@@ -24,6 +24,8 @@ public class Menu extends javax.swing.JFrame {
     management_Menu management = new management_Menu();
 
    private staff User = new staff();
+   
+   
 
     public Menu(staff user_loged) {
         
@@ -437,7 +439,7 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
        try {
            
-           ifrm_reserve reserve = new ifrm_reserve();
+           ifrm_reserve reserve = new ifrm_reserve(User.getId());
            
            desk.add(reserve);
            

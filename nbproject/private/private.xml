@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Model/conexions/Conexion.java</file>
-            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Controlator/management_Login.java</file>
+            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/View/login/frm_SignIn.java</file>
             <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/View/ifrm_reserve.java</file>
-            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/View/ifrm_customer.java</file>
-            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Controlator/management_customers.java</file>
-            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/View/login/frm_SignUp.java</file>
+            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Controlator/management_reserve.java</file>
+            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Model/reservation.java</file>
+            <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/View/ifrm_rooms.java</file>
             <file>file:/Users/mcortes19/NetBeansProjects/tabacon_Hotel%20/src/Controlator/management_rooms.java</file>
         </group>
     </open-files>

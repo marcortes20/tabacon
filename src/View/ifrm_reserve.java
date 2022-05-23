@@ -4,7 +4,13 @@
  */
 package View;
 
+import Controlator.management_reserve;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.beans.PropertyVetoException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -12,12 +18,18 @@ import java.beans.PropertyVetoException;
  */
 public class ifrm_reserve extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ifrm_rooms
-     */
-    public ifrm_reserve() throws PropertyVetoException {
+    private int worker_id;
+    management_reserve management = new management_reserve();
+
+    public ifrm_reserve(int staff_id) throws PropertyVetoException {
         initComponents();
         this.setMaximum(true);
+        fill_customers_id();
+        fill_room_id();
+        worker_id = staff_id;
+        image_panel.setVisible(false);
+        information_image_panel.setVisible(false);
+        
     }
 
     /**
@@ -49,17 +61,21 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jLabel74 = new javax.swing.JLabel();
         jLabel75 = new javax.swing.JLabel();
         txt_total = new javax.swing.JTextField();
-        cbo_staff_id = new javax.swing.JComboBox<>();
         cbo_room_id = new javax.swing.JComboBox<>();
-        spinner_reserved_days = new javax.swing.JComboBox<>();
         cbo_customer_id = new javax.swing.JComboBox<>();
         spiner_kids_number = new javax.swing.JSpinner();
         spiner_adults_number = new javax.swing.JSpinner();
         date_departure = new com.toedter.calendar.JDateChooser();
         cbo_discount = new javax.swing.JComboBox<>();
         date_entry = new com.toedter.calendar.JDateChooser();
-        cbo_way_to_pay1 = new javax.swing.JComboBox<>();
+        cbo_way_to_pay = new javax.swing.JComboBox<>();
+        txt_staff_id = new javax.swing.JTextField();
         txt_current_date = new javax.swing.JTextField();
+        spiner_adults_number1 = new javax.swing.JSpinner();
+        lb_customer_name = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        image_panel = new javax.swing.JPanel();
+        information_image_panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jToolBar2 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
@@ -83,6 +99,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
 
         win_reserve.setSize(new java.awt.Dimension(894, 865));
+        win_reserve.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                win_reserveWindowActivated(evt);
+            }
+        });
         win_reserve.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0,80));
@@ -171,20 +192,47 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         txt_total.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         txt_total.setForeground(new java.awt.Color(0, 0, 0));
 
-        cbo_staff_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbo_room_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----------------------------" }));
+        cbo_room_id.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_room_idItemStateChanged(evt);
+            }
+        });
 
-        cbo_room_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbo_customer_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----------------------------" }));
+        cbo_customer_id.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_customer_idItemStateChanged(evt);
+            }
+        });
+        cbo_customer_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_customer_idActionPerformed(evt);
+            }
+        });
 
-        spinner_reserved_days.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbo_way_to_pay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Debit card.", "Credit card.", "Cash.", "electronic wallets.", "virtual payments." }));
+        cbo_way_to_pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_way_to_payActionPerformed(evt);
+            }
+        });
 
-        cbo_customer_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbo_discount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbo_way_to_pay1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txt_staff_id.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+        txt_staff_id.setForeground(new java.awt.Color(0, 0, 0));
 
         txt_current_date.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         txt_current_date.setForeground(new java.awt.Color(0, 0, 0));
+
+        lb_customer_name.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        lb_customer_name.setForeground(new java.awt.Color(255, 255, 255));
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -192,28 +240,6 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel68)
-                            .addComponent(jLabel71)
-                            .addComponent(jLabel70)
-                            .addComponent(jLabel66)
-                            .addComponent(jLabel59)
-                            .addComponent(jLabel65)
-                            .addComponent(jLabel67)
-                            .addComponent(jLabel69))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbo_staff_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbo_room_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbo_customer_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(spiner_kids_number)
-                            .addComponent(spiner_adults_number)
-                            .addComponent(date_entry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txt_current_date, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,45 +260,81 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                         .addGap(49, 49, 49)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 6, Short.MAX_VALUE)
                                 .addComponent(jLabel73)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(date_departure, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel72)
                                 .addGap(18, 18, 18)
-                                .addComponent(spinner_reserved_days, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(spiner_adults_number1))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel64)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(50, 50, 50))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(162, 162, 162)
-                    .addComponent(cbo_way_to_pay1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(50, Short.MAX_VALUE)))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel68)
+                    .addComponent(jLabel71)
+                    .addComponent(jLabel70)
+                    .addComponent(jLabel66)
+                    .addComponent(jLabel59)
+                    .addComponent(jLabel65)
+                    .addComponent(jLabel67)
+                    .addComponent(jLabel69))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(cbo_way_to_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbo_room_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbo_customer_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(spiner_kids_number)
+                            .addComponent(spiner_adults_number)
+                            .addComponent(date_entry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(50, 50, 50))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lb_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txt_staff_id, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                                .addComponent(txt_current_date, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(123, 123, 123))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addComponent(jButton2)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_current_date, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbo_staff_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                    .addComponent(txt_staff_id, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbo_customer_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(cbo_customer_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbo_room_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbo_way_to_pay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,8 +357,8 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel72, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinner_reserved_days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(spiner_adults_number1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -308,19 +370,44 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(btn_Save)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Cancel)
-                .addGap(28, 28, 28))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(288, 288, 288)
-                    .addComponent(cbo_way_to_pay1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(527, Short.MAX_VALUE)))
+                .addGap(15, 15, 15))
         );
 
         win_reserve.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 420, 840));
+
+        image_panel.setBackground(new java.awt.Color(255, 255, 255,80));
+
+        javax.swing.GroupLayout image_panelLayout = new javax.swing.GroupLayout(image_panel);
+        image_panel.setLayout(image_panelLayout);
+        image_panelLayout.setHorizontalGroup(
+            image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 270, Short.MAX_VALUE)
+        );
+        image_panelLayout.setVerticalGroup(
+            image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+
+        win_reserve.getContentPane().add(image_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 270, 190));
+
+        information_image_panel.setBackground(new java.awt.Color(255, 255, 255,80));
+
+        javax.swing.GroupLayout information_image_panelLayout = new javax.swing.GroupLayout(information_image_panel);
+        information_image_panel.setLayout(information_image_panelLayout);
+        information_image_panelLayout.setHorizontalGroup(
+            information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 270, Short.MAX_VALUE)
+        );
+        information_image_panelLayout.setVerticalGroup(
+            information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+
+        win_reserve.getContentPane().add(information_image_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, -1, 650));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/room.jpg"))); // NOI18N
         win_reserve.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 860));
@@ -468,11 +555,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1152, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1215, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -480,12 +567,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE))
-                    .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -494,7 +580,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btn_cerrarActionPerformed
 
     private void btn_cerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar1ActionPerformed
@@ -506,13 +592,13 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_cerrar2ActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-      
-           win_reserve.setLocationRelativeTo(null);
+
+        win_reserve.setLocationRelativeTo(null);
         win_reserve.setVisible(true);
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
@@ -552,9 +638,46 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_SaveActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
-//        open_signIn();
+        win_reserve.dispose();
     }//GEN-LAST:event_CancelActionPerformed
 
+    private void cbo_way_to_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_way_to_payActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbo_way_to_payActionPerformed
+
+    private void win_reserveWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_win_reserveWindowActivated
+        initialize_default_fields();
+      
+        
+    }//GEN-LAST:event_win_reserveWindowActivated
+    
+    private void cbo_customer_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_customer_idItemStateChanged
+          if(evt.getStateChange() == ItemEvent.SELECTED) {
+
+              String id = cbo_customer_id.getSelectedItem().toString();
+              
+              lb_customer_name.setText(management.search_customer_name(id));
+        }
+      
+    }//GEN-LAST:event_cbo_customer_idItemStateChanged
+
+    private void cbo_customer_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_customer_idActionPerformed
+     
+    }//GEN-LAST:event_cbo_customer_idActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        image_panel.setVisible(true);
+        information_image_panel.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbo_room_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_room_idItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED) {
+
+             
+        }
+    }//GEN-LAST:event_cbo_room_idItemStateChanged
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Cancel;
@@ -569,11 +692,13 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbo_customer_id;
     private javax.swing.JComboBox<String> cbo_discount;
     private javax.swing.JComboBox<String> cbo_room_id;
-    private javax.swing.JComboBox<String> cbo_staff_id;
-    private javax.swing.JComboBox<String> cbo_way_to_pay1;
+    private javax.swing.JComboBox<String> cbo_way_to_pay;
     private com.toedter.calendar.JDateChooser date_departure;
     private com.toedter.calendar.JDateChooser date_entry;
+    private javax.swing.JPanel image_panel;
+    private javax.swing.JPanel information_image_panel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel64;
@@ -601,13 +726,44 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel lb_customer_name;
     private javax.swing.JLabel lb_total;
     private javax.swing.JSpinner spiner_adults_number;
+    private javax.swing.JSpinner spiner_adults_number1;
     private javax.swing.JSpinner spiner_kids_number;
-    private javax.swing.JComboBox<String> spinner_reserved_days;
     private javax.swing.JTextField txt_current_date;
+    private javax.swing.JTextField txt_staff_id;
     private javax.swing.JTextField txt_subtotal;
     private javax.swing.JTextField txt_total;
     private javax.swing.JDialog win_reserve;
     // End of variables declaration//GEN-END:variables
+
+    public void initialize_default_fields() {
+        Date date_of_today = new Date();
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        txt_current_date.setText(format.format(date_of_today));
+
+        txt_current_date.setEditable(false);
+
+        txt_staff_id.setText(String.valueOf(worker_id));
+
+        txt_staff_id.setEditable(false);
+
+    }
+    
+    public void fill_customers_id(){
+       
+        
+        management.fill_combo_customer(cbo_customer_id);
+        
+        cbo_customer_id.setSelectedItem(null);
+    }
+    
+    public void fill_room_id(){
+        management.fill_combo_rooms(cbo_room_id);
+        
+        cbo_room_id.setSelectedItem(null);
+    }
 }

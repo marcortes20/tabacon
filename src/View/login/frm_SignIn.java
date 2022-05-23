@@ -66,6 +66,7 @@ public class frm_SignIn extends javax.swing.JFrame {
         panel_Loging.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         txt_userName.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+        txt_userName.setText("admin");
         txt_userName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_userNameActionPerformed(evt);
@@ -120,6 +121,7 @@ public class frm_SignIn extends javax.swing.JFrame {
         lb_intentosFallidos.setForeground(new java.awt.Color(0, 0, 0));
 
         Password_field.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+        Password_field.setText("1234");
 
         javax.swing.GroupLayout panel_LogingLayout = new javax.swing.GroupLayout(panel_Loging);
         panel_Loging.setLayout(panel_LogingLayout);

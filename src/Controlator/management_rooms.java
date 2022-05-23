@@ -255,6 +255,42 @@ public class management_rooms  extends Conexion{
 
     }
     
+    public String search_room_img(int room_id){
+        
+        String img = null;
+        
+          try {
+            conectarBD();
+
+            String call = "{CALL ps_search_room_img(?)}";
+            
+            obj_Procedimiento = conexion.prepareCall(call);
+            
+             obj_Procedimiento.setInt(1, room_id);
+             
+             rs = obj_Procedimiento.executeQuery();
+             
+             if (rs.next()) {
+                
+             img = rs.getString(1);
+                
+            }
+        
+             desconectarBD();
+             
+        }  catch (SQLException ex) {
+            desconectarBD();
+            System.out.println(ex);
+            
+        } catch (Exception e) {
+            desconectarBD();
+            System.out.println(e);
+        }
+        
+        return img;
+        
+    }
+    
 
 }
     

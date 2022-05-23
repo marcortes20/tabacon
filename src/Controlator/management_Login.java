@@ -206,7 +206,7 @@ public class management_Login extends Conexion {
         
          String password = new String(passArray);
              
-             User.setPassword(password);
+       User.setPassword(password);
         
     }
     
@@ -220,7 +220,7 @@ public class management_Login extends Conexion {
 
             conectarBD();
 
-            String sql = "SELECT user_id FROM users WHERE username = ?";
+            String sql = "SELECT staff_id FROM staff WHERE username = ?";
             
             items_statement.add(username);
             
@@ -264,18 +264,21 @@ public class management_Login extends Conexion {
             items_Call.clear();
 
             if (rs.next()) {
+              
+              User.setId(rs.getInt(1));
                 
-              User.setName(rs.getString(1));
+              User.setName(rs.getString(2));
               
-              User.setLast_name(rs.getString(2));
+              User.setLast_name(rs.getString(3));
               
-              User.setEmail(rs.getString(3));
+              User.setEmail(rs.getString(4));
               
-              User.setAddress(rs.getString(4));
+              User.setAddress(rs.getString(5));
               
-              User.setCompany(rs.getString(5));
+              User.setCompany(rs.getString(6));
               
-              User.setPhone_number(rs.getInt(6));
+              User.setPhone_number(rs.getInt(7));
+              
                 
             }
 

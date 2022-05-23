@@ -29,14 +29,12 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
     private rooms room;
 
-    static File photo;
+    private File photo;
 
     public ifrm_rooms() throws PropertyVetoException {
         initComponents();
         room_list();
         this.setMaximum(true);
-        set_spiner(spiner_kids);
-        set_spiner(spiner_adutls);
 
     }
 
@@ -98,6 +96,11 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         win_rooms.setUndecorated(true);
         win_rooms.setPreferredSize(new java.awt.Dimension(564, 652));
         win_rooms.setSize(new java.awt.Dimension(564, 649));
+        win_rooms.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                win_roomsWindowActivated(evt);
+            }
+        });
         win_rooms.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51,80));
@@ -566,7 +569,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
             } else {
 
-                room.setRoom_status(true);
+                room.setRoom_status(false);
             }
 
             if (check_reserved.isSelected()) {
@@ -602,7 +605,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
                 if (mana_rooms.edit_room(room)) {
 
-                    photo.delete(); // es una variable estatica que guarda la ruta de la imagen viaja de una habitacion que al ser modificada por una nueva se elimina la anterior
+                   // photo.delete(); // es una variable estatica que guarda la ruta de la imagen viaja de una habitacion que al ser modificada por una nueva se elimina la anterior
                     // si las imagenes tienen la misma extenxion borra ambas...
 
                     JOptionPane.showMessageDialog(win_rooms, "Room was edited ", "Successfully!", JOptionPane.INFORMATION_MESSAGE);
@@ -619,7 +622,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_save_roomActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-        //VALIDAR EL ELIMINAR LA IMAGEN RELACIONADA AL REGISTRO
+        
 
         int fila = table_rooms.getSelectedRow();
 
@@ -631,6 +634,14 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
                     "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if (resp == JOptionPane.YES_OPTION) {
+                
+                String img_name = mana_rooms.search_room_img(room_id);
+                
+                String dir = System.getProperty("user.dir") + "/src/rooms_img/" + img_name;
+                
+                photo = new File(dir);
+                
+                photo.delete();
 
                 if (mana_rooms.delete_room(room_id)) {
 
@@ -653,6 +664,11 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         mana_rooms.generate_xml();
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void win_roomsWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_win_roomsWindowActivated
+        set_spiner(spiner_kids);
+        set_spiner(spiner_adutls);
+    }//GEN-LAST:event_win_roomsWindowActivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -711,7 +727,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
             empty_fields += "\nRoom id.";
 
-        } else if (mana_rooms.validate_int_format(txt_room_id.getText())) {
+        } else if (!mana_rooms.validate_int_format(txt_room_id.getText())) {
 
             JOptionPane.showMessageDialog(this, "'ID' should only have numbers!", "Critical error:", JOptionPane.ERROR_MESSAGE);
 
@@ -749,7 +765,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
             empty_fields += "\nPrice per adult:";
 
-        } else if (mana_rooms.validate_double_format(txt_adults_price.getText())) {
+        } else if (!mana_rooms.validate_double_format(txt_adults_price.getText())) {
 
             JOptionPane.showMessageDialog(win_rooms, "'Price per adult:' should only have numbers!", "Critical error:", JOptionPane.ERROR_MESSAGE);
 
@@ -764,7 +780,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 
             empty_fields += "\nPrice per kids:";
 
-        } else if (mana_rooms.validate_double_format(txt_kids_price.getText())) {
+        } else if (!mana_rooms.validate_double_format(txt_kids_price.getText())) {
 
             JOptionPane.showMessageDialog(win_rooms, "'Price per kis:' should only have numbers!", "Critical error:", JOptionPane.ERROR_MESSAGE);
 
@@ -812,6 +828,12 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
     }
 
     public boolean copyFile(File entrada, File salida) {
+        
+        if (win_rooms.getTitle().equals("Edit room")) {
+            
+            photo.delete();
+            
+        }
         try {
 
             FileChannel out;
