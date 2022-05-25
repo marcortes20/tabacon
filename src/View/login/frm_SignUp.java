@@ -411,7 +411,7 @@ public class frm_SignUp extends javax.swing.JFrame {
             
              empty_fields += "\nUser id.";
 
-        }
+        }//no repetir usre id
 
         if (txtName.getText().isEmpty()) {
 
@@ -427,7 +427,16 @@ public class frm_SignUp extends javax.swing.JFrame {
 
             empty_fields += "\nUsername.";
 
-        } else if (manaLogin.verificate_username(txtlast_name.getText())) {
+        }
+        
+
+        if (txtUsername.getText().isEmpty()) {
+
+            txtUsername.requestFocus();
+
+            empty_fields += "\nUsername.";
+
+        }else if (manaLogin.verificate_username(txtlast_name.getText())) {
 
             JOptionPane.showMessageDialog(this, "this username is already exist! try again:", "Error!", JOptionPane.ERROR_MESSAGE);
 
@@ -435,15 +444,6 @@ public class frm_SignUp extends javax.swing.JFrame {
 
             empty_fields += "\nUsername.";
 
-        }
-
-        if (txtUsername.getText().isEmpty()) {
-
-            txtUsername.requestFocus();
-
-            empty_fields += "\nEmail.";
-
-        }
 
         if (Password_field.getPassword().length == 0) {
 
@@ -469,8 +469,10 @@ public class frm_SignUp extends javax.swing.JFrame {
 
         }
 
-        return empty_fields;
     }
+        
+        return empty_fields;
+   }
 
     public void open_signIn() {
 

@@ -5,15 +5,22 @@
 package View;
 
 import Controlator.management_reserve;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import Model.rooms;
+
 import java.awt.event.ItemEvent;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -22,6 +29,7 @@ import java.util.logging.Logger;
 public class ifrm_reserve extends javax.swing.JInternalFrame {
 
     private int worker_id;
+    private static rooms room;
     management_reserve management = new management_reserve();
 
     public ifrm_reserve(int staff_id) throws PropertyVetoException {
@@ -44,6 +52,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         btn_Save = new javax.swing.JButton();
         Cancel = new javax.swing.JButton();
+        lb_customer_name = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
@@ -69,31 +78,35 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         cbo_way_to_pay = new javax.swing.JComboBox<>();
         txt_staff_id = new javax.swing.JTextField();
         txt_current_date = new javax.swing.JTextField();
-        spiner_adults_number1 = new javax.swing.JSpinner();
-        lb_customer_name = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        txt_reserved_days = new javax.swing.JTextField();
+        btn_calculate_price = new javax.swing.JButton();
+        btn_calculate_days = new javax.swing.JButton();
         information_image_panel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lb_room_number = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
         jLabel61 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
+        txt_maximun_adults = new javax.swing.JTextField();
+        txt_maximun_kids = new javax.swing.JTextField();
+        txt_price_kid = new javax.swing.JTextField();
+        txt_price_adult = new javax.swing.JTextField();
         lb_room_image = new javax.swing.JLabel();
         image_background = new javax.swing.JLabel();
         jToolBar2 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
-        btn_guardar = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        btn_editar = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
-        btn_eliminar = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        btn_imprimir = new javax.swing.JButton();
+        btn_print = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        btn_cerrar1 = new javax.swing.JButton();
+        btn_change_room = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
-        btn_cerrar2 = new javax.swing.JButton();
+        btn_Check_in = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btn_cerrar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -101,7 +114,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        win_reserve.setSize(new java.awt.Dimension(894, 865));
+        win_reserve.setMinimumSize(new java.awt.Dimension(942, 876));
+        win_reserve.setPreferredSize(new java.awt.Dimension(942, 876));
+        win_reserve.setSize(new java.awt.Dimension(942, 876));
         win_reserve.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 win_reserveWindowActivated(evt);
@@ -122,10 +137,10 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 840, Short.MAX_VALUE)
+            .addGap(0, 860, Short.MAX_VALUE)
         );
 
-        win_reserve.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 20, 840));
+        win_reserve.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 20, 860));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102,80));
 
@@ -153,8 +168,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             }
         });
 
+        lb_customer_name.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        lb_customer_name.setForeground(new java.awt.Color(153, 153, 0));
+
         jLabel64.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        jLabel64.setText("Sub-total:");
+        jLabel64.setText("Discount");
 
         jLabel59.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel59.setText("Room ID");
@@ -190,10 +208,10 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         txt_subtotal.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel74.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        jLabel74.setText("Discount:");
+        jLabel74.setText("Total:");
 
         jLabel75.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        jLabel75.setText("Total:");
+        jLabel75.setText("Sub-total:");
 
         txt_total.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         txt_total.setForeground(new java.awt.Color(0, 0, 0));
@@ -230,13 +248,30 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         txt_current_date.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         txt_current_date.setForeground(new java.awt.Color(0, 0, 0));
 
-        lb_customer_name.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        lb_customer_name.setForeground(new java.awt.Color(255, 255, 255));
+        txt_reserved_days.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        txt_reserved_days.setRequestFocusEnabled(false);
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_calculate_price.setBackground(new java.awt.Color(153, 153, 0));
+        btn_calculate_price.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btn_calculate_price.setForeground(new java.awt.Color(255, 255, 255));
+        btn_calculate_price.setText("Calculate");
+        btn_calculate_price.setActionCommand("Sign up");
+        btn_calculate_price.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_calculate_price.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_calculate_priceActionPerformed(evt);
+            }
+        });
+
+        btn_calculate_days.setBackground(new java.awt.Color(153, 153, 0));
+        btn_calculate_days.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btn_calculate_days.setForeground(new java.awt.Color(255, 255, 255));
+        btn_calculate_days.setText("Calculate");
+        btn_calculate_days.setActionCommand("Sign up");
+        btn_calculate_days.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_calculate_days.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_calculate_daysActionPerformed(evt);
             }
         });
 
@@ -244,45 +279,26 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel75)
-                                    .addComponent(jLabel74))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_total, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                    .addComponent(cbo_discount, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel72)
-                                .addGap(18, 18, 18)
-                                .addComponent(spiner_adults_number1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 6, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel73)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(date_departure, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel64)
-                                        .addGap(19, 19, 19)
-                                        .addComponent(txt_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(50, 50, 50))
+                    .addComponent(Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(99, 99, 99))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(80, 80, 80)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel74)
+                    .addComponent(jLabel75))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_subtotal)
+                    .addComponent(txt_total))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_calculate_price)
+                .addGap(45, 45, 45))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel68)
                     .addComponent(jLabel71)
@@ -291,37 +307,37 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                     .addComponent(jLabel59)
                     .addComponent(jLabel65)
                     .addComponent(jLabel67)
-                    .addComponent(jLabel69))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel69)
+                    .addComponent(jLabel73)
+                    .addComponent(jLabel72)
+                    .addComponent(jLabel64))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(cbo_way_to_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbo_room_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbo_customer_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(spiner_kids_number)
-                            .addComponent(spiner_adults_number)
-                            .addComponent(date_entry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(50, 50, 50))
+                    .addComponent(date_departure, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbo_way_to_pay, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(txt_reserved_days)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_calculate_days))
+                    .addComponent(spiner_adults_number, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(spiner_kids_number, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(date_entry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_staff_id, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                .addComponent(txt_current_date, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(123, 123, 123))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbo_room_id, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
+                                .addComponent(cbo_customer_id, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
+                                .addComponent(txt_staff_id, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_current_date, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lb_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addComponent(cbo_discount, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jButton2)
-                .addGap(14, 14, 14)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_current_date, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -333,9 +349,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbo_customer_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lb_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbo_room_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -362,32 +378,38 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel72, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spiner_adults_number1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(txt_reserved_days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_calculate_days))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel74, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbo_discount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel74, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btn_calculate_price, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(41, 41, 41)
                 .addComponent(btn_Save)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Cancel)
-                .addGap(15, 15, 15))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        win_reserve.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 420, 840));
+        win_reserve.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 420, 860));
 
         information_image_panel.setBackground(new java.awt.Color(255, 255, 255,80));
 
-        jLabel1.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-        jLabel1.setText("Room number #");
+        lb_room_number.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        lb_room_number.setText("Room number #");
 
         jLabel60.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel60.setText("Maximun adults");
@@ -401,48 +423,71 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jLabel63.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel63.setText("Price per kid");
 
+        txt_maximun_adults.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        txt_maximun_adults.setRequestFocusEnabled(false);
+
+        txt_maximun_kids.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        txt_maximun_kids.setRequestFocusEnabled(false);
+
+        txt_price_kid.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        txt_price_kid.setRequestFocusEnabled(false);
+
+        txt_price_adult.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        txt_price_adult.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout information_image_panelLayout = new javax.swing.GroupLayout(information_image_panel);
         information_image_panel.setLayout(information_image_panelLayout);
         information_image_panelLayout.setHorizontalGroup(
             information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(information_image_panelLayout.createSequentialGroup()
-                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(information_image_panelLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel61))
-                    .addGroup(information_image_panelLayout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel1)))
+                .addGap(57, 57, 57)
+                .addComponent(lb_room_number)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, information_image_panelLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel61)
                     .addComponent(jLabel63)
-                    .addComponent(jLabel60)
-                    .addComponent(jLabel62))
-                .addGap(165, 165, 165))
+                    .addComponent(jLabel62)
+                    .addComponent(jLabel60))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txt_price_kid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                        .addComponent(txt_price_adult, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txt_maximun_kids))
+                    .addComponent(txt_maximun_adults, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(266, 266, 266))
         );
         information_image_panelLayout.setVerticalGroup(
             information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(information_image_panelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(46, 46, 46)
-                .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addComponent(lb_room_number)
+                .addGap(63, 63, 63)
+                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_maximun_adults, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73)
+                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_maximun_kids, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
+                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_price_adult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(84, 84, 84)
+                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_price_kid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
-        win_reserve.getContentPane().add(information_image_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 280, 470));
-        win_reserve.getContentPane().add(lb_room_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 280, 360));
+        win_reserve.getContentPane().add(information_image_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 290, 540));
+        win_reserve.getContentPane().add(lb_room_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 290, 320));
 
         image_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/room.jpg"))); // NOI18N
-        win_reserve.getContentPane().add(image_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 860));
+        win_reserve.getContentPane().add(image_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 880));
 
         setClosable(true);
         setIconifiable(true);
@@ -470,73 +515,73 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jToolBar1.setRollover(true);
         jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btn_guardar.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
-        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/document-add_114467.png"))); // NOI18N
-        btn_guardar.setText("Save");
-        btn_guardar.setFocusable(false);
-        btn_guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_guardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+        btn_save.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/document-add_114467.png"))); // NOI18N
+        btn_save.setText("Save");
+        btn_save.setFocusable(false);
+        btn_save.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_save.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_guardarActionPerformed(evt);
+                btn_saveActionPerformed(evt);
             }
         });
-        jToolBar1.add(btn_guardar);
+        jToolBar1.add(btn_save);
         jToolBar1.add(jSeparator1);
 
-        btn_editar.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
-        btn_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/document-edit_114472.png"))); // NOI18N
-        btn_editar.setText("Edit");
-        btn_editar.setFocusable(false);
-        btn_editar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_editar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btn_editar);
+        btn_edit.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/document-edit_114472.png"))); // NOI18N
+        btn_edit.setText("Edit");
+        btn_edit.setFocusable(false);
+        btn_edit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_edit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btn_edit);
         jToolBar1.add(jSeparator4);
 
-        btn_eliminar.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
-        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1486504830-delete-dustbin-empty-recycle-recycling-remove-trash_81361.png"))); // NOI18N
-        btn_eliminar.setText("Delete");
-        btn_eliminar.setFocusable(false);
-        btn_eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btn_eliminar);
+        btn_delete.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1486504830-delete-dustbin-empty-recycle-recycling-remove-trash_81361.png"))); // NOI18N
+        btn_delete.setText("Delete");
+        btn_delete.setFocusable(false);
+        btn_delete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_delete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btn_delete);
         jToolBar1.add(jSeparator5);
 
-        btn_imprimir.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
-        btn_imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer_78349.png"))); // NOI18N
-        btn_imprimir.setText("Print");
-        btn_imprimir.setFocusable(false);
-        btn_imprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_imprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btn_imprimir);
+        btn_print.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer_78349.png"))); // NOI18N
+        btn_print.setText("Print");
+        btn_print.setFocusable(false);
+        btn_print.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_print.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btn_print);
         jToolBar1.add(jSeparator3);
 
-        btn_cerrar1.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
-        btn_cerrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exchange.png"))); // NOI18N
-        btn_cerrar1.setText("Change room");
-        btn_cerrar1.setFocusable(false);
-        btn_cerrar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_cerrar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btn_cerrar1.addActionListener(new java.awt.event.ActionListener() {
+        btn_change_room.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_change_room.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exchange.png"))); // NOI18N
+        btn_change_room.setText("Change room");
+        btn_change_room.setFocusable(false);
+        btn_change_room.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_change_room.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_change_room.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cerrar1ActionPerformed(evt);
+                btn_change_roomActionPerformed(evt);
             }
         });
-        jToolBar1.add(btn_cerrar1);
+        jToolBar1.add(btn_change_room);
         jToolBar1.add(jSeparator6);
 
-        btn_cerrar2.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
-        btn_cerrar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/invoice_106601.png"))); // NOI18N
-        btn_cerrar2.setText("Invoicing");
-        btn_cerrar2.setFocusable(false);
-        btn_cerrar2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_cerrar2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btn_cerrar2.addActionListener(new java.awt.event.ActionListener() {
+        btn_Check_in.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        btn_Check_in.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/invoice_106601.png"))); // NOI18N
+        btn_Check_in.setText("Check in");
+        btn_Check_in.setFocusable(false);
+        btn_Check_in.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_Check_in.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_Check_in.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cerrar2ActionPerformed(evt);
+                btn_Check_inActionPerformed(evt);
             }
         });
-        jToolBar1.add(btn_cerrar2);
+        jToolBar1.add(btn_Check_in);
         jToolBar1.add(jSeparator2);
 
         btn_cerrar.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
@@ -615,19 +660,19 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btn_cerrarActionPerformed
 
-    private void btn_cerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar1ActionPerformed
+    private void btn_change_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_change_roomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_cerrar1ActionPerformed
+    }//GEN-LAST:event_btn_change_roomActionPerformed
 
-    private void btn_cerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar2ActionPerformed
+    private void btn_Check_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Check_inActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_cerrar2ActionPerformed
+    }//GEN-LAST:event_btn_Check_inActionPerformed
 
-    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
 
         win_reserve.setLocationRelativeTo(null);
         win_reserve.setVisible(true);
-    }//GEN-LAST:event_btn_guardarActionPerformed
+    }//GEN-LAST:event_btn_saveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -686,9 +731,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private void cbo_customer_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_customer_idItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
 
-            String id = cbo_customer_id.getSelectedItem().toString();
+            String customer_id = cbo_customer_id.getSelectedItem().toString();
 
-            lb_customer_name.setText(management.search_customer_name(id));
+            lb_customer_name.setText(management.search_customer_name(customer_id));
         }
 
     }//GEN-LAST:event_cbo_customer_idItemStateChanged
@@ -697,23 +742,23 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_cbo_customer_idActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        try {
-            management.resize_image_room(" ", lb_room_image);
-
-        } catch (IOException ex) {
-
-            Logger.getLogger(ifrm_reserve.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        lb_room_image.setVisible(true);
-        
-        information_image_panel.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void cbo_room_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_room_idItemStateChanged
 
         if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            int room_id = Integer.parseInt(cbo_room_id.getSelectedItem().toString());
+
+            System.out.println(room_id);
+
+            room = management.search_room(room_id);
+
+            fill_room_panel_fields(room);
+
+            set_spiner(spiner_adults_number, room.getMaximun_adults());
+            set_spiner(spiner_kids_number, room.getMaximun_kids());
+
+            spiner_adults_number.setEnabled(true);
+            spiner_kids_number.setEnabled(true);
 
         }
     }//GEN-LAST:event_cbo_room_idItemStateChanged
@@ -722,25 +767,83 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         initialize_default_fields();
         fill_customers_id();
         fill_room_id();
+        fill_discound();
         lb_room_image.setVisible(false);
         information_image_panel.setVisible(false);
         spiner_adults_number.setEnabled(false);
         spiner_kids_number.setEnabled(false);
         txt_subtotal.setEditable(false);
         txt_total.setEditable(false);
+        txt_reserved_days.setEditable(false);
     }//GEN-LAST:event_win_reserveWindowOpened
+
+    private void btn_calculate_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calculate_priceActionPerformed
+
+        if (validate_data_price().isEmpty()) {
+
+            Double price_kid = Double.parseDouble(txt_price_kid.getText());
+            Double price_adult = Double.parseDouble(txt_price_adult.getText());
+            int days_reserved = Integer.parseInt(txt_reserved_days.getText());
+            String discount = (String) cbo_discount.getSelectedItem();
+
+            Double total_price_kids = (price_kid * days_reserved);
+            Double total_price_adults = (price_adult * days_reserved);
+            Double total_discount = (Double.parseDouble(discount.substring(0, discount.length() - 1)) / 100); // elimina el ultimo charr del descuanto   (%) y lo convierte a entero
+
+            Double sub_total_price = (total_price_adults + total_price_kids);
+
+            Double total_price = sub_total_price - (sub_total_price * total_discount);
+
+            txt_subtotal.setText(String.valueOf(sub_total_price));
+
+            txt_total.setText(String.valueOf(total_price));
+
+        } else {
+
+            JOptionPane.showMessageDialog(win_reserve, "To make this operation is necesary: " + validate_data_price(), "Missing fields", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_btn_calculate_priceActionPerformed
+
+    private void btn_calculate_daysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calculate_daysActionPerformed
+
+        if (date_departure.getDate() == null || date_entry.getDate() == null) {
+
+            JOptionPane.showMessageDialog(win_reserve, "You should fill all fields dates \nEntry date. \nDeparture date.", "Missing fields", JOptionPane.ERROR_MESSAGE);
+
+        } else if (date_entry.getDate().after(date_departure.getDate()) || (date_entry.getDate().equals(date_departure.getDate()))) {
+
+            JOptionPane.showMessageDialog(win_reserve, "Entry date should be before of departure date ", "Date error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+
+            LocalDateTime from = LocalDateTime.ofInstant(date_entry.getDate().toInstant(), ZoneId.systemDefault());
+            LocalDateTime to = LocalDateTime.ofInstant(date_departure.getDate().toInstant(), ZoneId.systemDefault());
+            // validar que las 2 fechas esten ingresadas
+            Duration d = Duration.between(from, to);
+
+            String reserved_days = String.valueOf(d.toDays());
+
+            txt_reserved_days.setText(reserved_days);
+
+        }
+
+    }//GEN-LAST:event_btn_calculate_daysActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Cancel;
+    private javax.swing.JButton btn_Check_in;
     public javax.swing.JButton btn_Save;
+    public javax.swing.JButton btn_calculate_days;
+    public javax.swing.JButton btn_calculate_price;
     private javax.swing.JButton btn_cerrar;
-    private javax.swing.JButton btn_cerrar1;
-    private javax.swing.JButton btn_cerrar2;
-    private javax.swing.JButton btn_editar;
-    private javax.swing.JButton btn_eliminar;
-    private javax.swing.JButton btn_guardar;
-    private javax.swing.JButton btn_imprimir;
+    private javax.swing.JButton btn_change_room;
+    private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_edit;
+    private javax.swing.JButton btn_print;
+    private javax.swing.JButton btn_save;
     private javax.swing.JComboBox<String> cbo_customer_id;
     private javax.swing.JComboBox<String> cbo_discount;
     private javax.swing.JComboBox<String> cbo_room_id;
@@ -750,8 +853,6 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JLabel image_background;
     private javax.swing.JPanel information_image_panel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
@@ -784,11 +885,16 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lb_customer_name;
     private javax.swing.JLabel lb_room_image;
+    private javax.swing.JLabel lb_room_number;
     private javax.swing.JLabel lb_total;
     private javax.swing.JSpinner spiner_adults_number;
-    private javax.swing.JSpinner spiner_adults_number1;
     private javax.swing.JSpinner spiner_kids_number;
     private javax.swing.JTextField txt_current_date;
+    private javax.swing.JTextField txt_maximun_adults;
+    private javax.swing.JTextField txt_maximun_kids;
+    private javax.swing.JTextField txt_price_adult;
+    private javax.swing.JTextField txt_price_kid;
+    private javax.swing.JTextField txt_reserved_days;
     private javax.swing.JTextField txt_staff_id;
     private javax.swing.JTextField txt_subtotal;
     private javax.swing.JTextField txt_total;
@@ -821,5 +927,81 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         management.fill_combo_rooms(cbo_room_id);
 
         cbo_room_id.setSelectedItem(null);
+    }
+
+    public void fill_discound() {
+        management.fill_combo_discount(cbo_discount);
+
+        cbo_discount.setSelectedItem(null);
+    }
+
+    public void fill_room_panel_fields(rooms temp_room) {
+
+        try {
+            String room_id = String.valueOf(temp_room.getRoom_id());
+            String maximun_adults = String.valueOf(temp_room.getMaximun_adults());
+            String maximun_kids = String.valueOf(temp_room.getMaximun_kids());
+            String price_adult = String.valueOf(temp_room.getPrice_per_day_adults());
+            String price_kids = String.valueOf(temp_room.getPrice_per_day_kids());
+            String dir = System.getProperty("user.dir") + "/src/rooms_img/" + temp_room.getImage();
+
+            lb_room_number.setText("Room number " + room_id);
+            txt_maximun_adults.setText(maximun_adults);
+            txt_maximun_kids.setText(maximun_kids);
+            txt_price_adult.setText(price_adult);
+            txt_price_kid.setText(price_kids);
+
+            management.resize_image_room(dir, lb_room_image);
+
+            lb_room_image.setVisible(true);
+            information_image_panel.setVisible(true);
+
+        } catch (IOException ex) {
+
+            Logger.getLogger(ifrm_reserve.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void set_spiner(JSpinner spiner, int maximun) {
+
+        @SuppressWarnings("deprecation")
+
+        SpinnerNumberModel model = new SpinnerNumberModel(
+                new Integer(1), // Dato visualizado al inicio en el spinner
+                new Integer(0), // Límite inferior
+                new Integer(maximun), // Límite superior
+                new Integer(1) // incremento-decremento
+        );
+
+        spiner.setModel(model);
+
+    }
+
+    public String validate_data_price() {
+        String empty_fields = "";
+
+        if (cbo_room_id.getSelectedItem() == null) {
+
+            cbo_room_id.requestFocus();
+
+            empty_fields += "\nRoom id.";
+        }
+
+        if (txt_reserved_days.getText().isEmpty()) {
+
+            btn_calculate_days.requestFocus();
+
+            empty_fields += "\nReserved days";
+        }
+
+        if (cbo_discount.getSelectedItem() == null) {
+
+            cbo_discount.requestFocus();
+
+            empty_fields += "\n Discount";
+
+        }
+
+        return empty_fields;
     }
 }
