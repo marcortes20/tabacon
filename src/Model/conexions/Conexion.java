@@ -89,29 +89,23 @@ public class Conexion {
                 }
 
                 String operative_sistem = System.getProperty("os.name");
-                
+
                 System.out.println(operative_sistem);
 
                 String dir = file.getPath();
-                
-               
 
                 try {
 
-                    
                     //VALIDAR EL SISTEMA OPERATIVO PARA PODER ABIRIR EXEL DESDE CONSOLA
-                    
                     if (operative_sistem.contains("Windows")) {
 
                         Runtime.getRuntime().exec("cmd /c start " + dir);
 
                     } else if (operative_sistem.contains("Mac")) {
-                        
+
 //                        Runtime.getRuntime().exec("cd " + dir);
 //                        
 //                        Runtime.getRuntime().exec("chmod 775 Lista.xls");
-
-                        
                         Runtime.getRuntime().exec("open " + dir);
 
                     }
@@ -216,7 +210,7 @@ public class Conexion {
 
     public ResultSet selectProcedure(String nombre, ArrayList items_call) throws SQLException { // implementar metodos
 
-        String call = "{CALL " + nombre +"}";
+        String call = "{CALL " + nombre + "}";
 
         obj_Procedimiento = getConexion().prepareCall(call);
 
@@ -231,17 +225,21 @@ public class Conexion {
         return rs;
 
     }
-    
 
-    
+    public synchronized boolean ejecutar(String sql) throws SQLException {
 
-    public synchronized void ejecutar(String sql) throws SQLException {
+        boolean updated = false;
+
         try {
             stmt = conexion.createStatement();
-            stmt.executeUpdate(sql);
+            
+            updated = stmt.executeUpdate(sql) == 1;
+            
         } catch (SQLException ex) {
+            
             throw ex;
         }
+        return updated;
     }//=========================================================================
 
     public Connection getConexion() {

@@ -5,6 +5,7 @@
 package View;
 
 import Controlator.management_reserve;
+import Model.reservation;
 import Model.rooms;
 
 import java.awt.event.ItemEvent;
@@ -36,6 +37,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         initComponents();
         this.setMaximum(true);
         worker_id = staff_id;
+        list_reservation();
     }
 
     /**
@@ -81,7 +83,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         txt_reserved_days = new javax.swing.JTextField();
         btn_calculate_price = new javax.swing.JButton();
         btn_calculate_days = new javax.swing.JButton();
-        information_image_panel = new javax.swing.JPanel();
+        panel_information_image = new javax.swing.JPanel();
         lb_room_number = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
         jLabel61 = new javax.swing.JLabel();
@@ -112,7 +114,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         lb_total = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_reserve = new javax.swing.JTable();
 
         win_reserve.setMinimumSize(new java.awt.Dimension(942, 876));
         win_reserve.setPreferredSize(new java.awt.Dimension(942, 876));
@@ -120,6 +122,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         win_reserve.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 win_reserveWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                win_reserveWindowClosed(evt);
             }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 win_reserveWindowOpened(evt);
@@ -168,8 +173,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             }
         });
 
+        lb_customer_name.setBackground(new java.awt.Color(0, 0, 0));
         lb_customer_name.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         lb_customer_name.setForeground(new java.awt.Color(153, 153, 0));
+        lb_customer_name.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lb_customer_name.setOpaque(true);
 
         jLabel64.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel64.setText("Discount");
@@ -406,7 +414,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
         win_reserve.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 420, 860));
 
-        information_image_panel.setBackground(new java.awt.Color(255, 255, 255,80));
+        panel_information_image.setBackground(new java.awt.Color(255, 255, 255,80));
 
         lb_room_number.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
         lb_room_number.setText("Room number #");
@@ -435,56 +443,56 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         txt_price_adult.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         txt_price_adult.setRequestFocusEnabled(false);
 
-        javax.swing.GroupLayout information_image_panelLayout = new javax.swing.GroupLayout(information_image_panel);
-        information_image_panel.setLayout(information_image_panelLayout);
-        information_image_panelLayout.setHorizontalGroup(
-            information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(information_image_panelLayout.createSequentialGroup()
+        javax.swing.GroupLayout panel_information_imageLayout = new javax.swing.GroupLayout(panel_information_image);
+        panel_information_image.setLayout(panel_information_imageLayout);
+        panel_information_imageLayout.setHorizontalGroup(
+            panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_information_imageLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(lb_room_number)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, information_image_panelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_information_imageLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel61)
                     .addComponent(jLabel63)
                     .addComponent(jLabel62)
                     .addComponent(jLabel60))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txt_price_kid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                         .addComponent(txt_price_adult, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txt_maximun_kids))
                     .addComponent(txt_maximun_adults, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(266, 266, 266))
         );
-        information_image_panelLayout.setVerticalGroup(
-            information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(information_image_panelLayout.createSequentialGroup()
+        panel_information_imageLayout.setVerticalGroup(
+            panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_information_imageLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(lb_room_number)
                 .addGap(63, 63, 63)
-                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_maximun_adults, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(73, 73, 73)
-                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_maximun_kids, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75)
-                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_price_adult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84)
-                .addGroup(information_image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel_information_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_price_kid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
-        win_reserve.getContentPane().add(information_image_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 290, 540));
-        win_reserve.getContentPane().add(lb_room_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 290, 320));
+        win_reserve.getContentPane().add(panel_information_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 290, 550));
+        win_reserve.getContentPane().add(lb_room_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 290, 310));
 
         image_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/room.jpg"))); // NOI18N
         win_reserve.getContentPane().add(image_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 880));
@@ -614,7 +622,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             .addComponent(lb_total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_reserve.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null},
@@ -624,7 +632,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 "reservation_id", "room_id", "discount_id", "staff_id", "customer_id", "way_to_pay", "adults_number", "kids_number", "current_date", "entry_date", "departure_date", "reserved_days"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table_reserve);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -669,7 +677,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_Check_inActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-
+        win_reserve.setTitle("Make reservation");
         win_reserve.setLocationRelativeTo(null);
         win_reserve.setVisible(true);
     }//GEN-LAST:event_btn_saveActionPerformed
@@ -680,38 +688,65 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
 
-//        if ((validate_signUp_data().isEmpty())) {
-//
-//            user.setId(Integer.parseInt(txtUser_id.getText()));
-//
-//            user.setName(txtName.getText());
-//
-//            user.setLast_name(txtlast_name.getText()); // cambiar el jtxt
-//
-//            user.setUserName(txtUsername.getText());
-//
-//            manaLogin.setPassword_logIN(user, Password_field.getPassword());
-//
-//            user.setWorkstation(cbxUser_job.getSelectedItem().toString());
-//
-//            int user_role_id = (cbxUser_type.getSelectedIndex() + 1);
-//
-//            roles_per_user.setUser_id(user.getId());
-//
-//            roles_per_user.setUser_role_id(user_role_id);
-//
-//            if ((manaLogin.register_staff(user)) && (manaLogin.register_roles_per_staff(roles_per_user))) {
-//
-//                JOptionPane.showMessageDialog(this, "Your accound was registered ", "Successfully logged up!", JOptionPane.INFORMATION_MESSAGE);
-//
-//                open_signIn();
-//            }
-//
-//        } else {
-//
-//            JOptionPane.showMessageDialog(this, "EMPTY FIELDS:" + validate_signUp_data(), "You must fill in all fields!", JOptionPane.ERROR_MESSAGE);
-//
-//        }
+        if ((validate_data().isEmpty())) {
+
+            reservation reserve = new reservation();
+            
+            int customer_id, room_id, discount;
+            
+            String temp_discount;
+            temp_discount  = cbo_discount.getSelectedItem().toString();
+            String departure_date;
+            String entry_date;
+            
+             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+             entry_date = (format.format(date_entry.getDate()));
+             departure_date = (format.format(date_departure.getDate()));
+
+            
+            customer_id = Integer.parseInt(cbo_customer_id.getSelectedItem().toString());
+            
+            room_id = Integer.parseInt(cbo_room_id.getSelectedItem().toString());
+            
+            discount = Integer.parseInt(temp_discount.substring(0, temp_discount.length() - 1));
+            
+            
+            reserve.setStaff_id(Integer.parseInt(txt_staff_id.getText()));
+            
+            reserve.setCustomer_id(customer_id);
+            
+            reserve.setRoom_id(room_id);
+            
+            reserve.setWay_to_pay(cbo_way_to_pay.getSelectedItem().toString());
+            
+            reserve.setAdults_number((int) spiner_adults_number.getValue());
+            
+            reserve.setKids_number((int) spiner_kids_number.getValue());
+            
+            reserve.setEntry_date(entry_date);
+            
+            reserve.setDeparture_date(departure_date);
+            
+            reserve.setReserved_days(Integer.parseInt(txt_reserved_days.getText()));
+            
+            reserve.setDiscount_id(discount);
+            
+
+            if (management.register_reserve_room(reserve)) {
+
+                JOptionPane.showMessageDialog(win_reserve, "Your reserve was registered ", "Reserved!!!", JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+                
+                JOptionPane.showMessageDialog(win_reserve, "The reservation can't be saved ", "Eror!!!", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(win_reserve, "EMPTY FIELDS:" + validate_data(), "You must fill in all fields!", JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_btn_SaveActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
@@ -734,6 +769,8 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             String customer_id = cbo_customer_id.getSelectedItem().toString();
 
             lb_customer_name.setText(management.search_customer_name(customer_id));
+            
+            lb_customer_name.setVisible(true);
         }
 
     }//GEN-LAST:event_cbo_customer_idItemStateChanged
@@ -747,8 +784,6 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
 
             int room_id = Integer.parseInt(cbo_room_id.getSelectedItem().toString());
-
-            System.out.println(room_id);
 
             room = management.search_room(room_id);
 
@@ -769,12 +804,14 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         fill_room_id();
         fill_discound();
         lb_room_image.setVisible(false);
-        information_image_panel.setVisible(false);
+        panel_information_image.setVisible(false);
         spiner_adults_number.setEnabled(false);
         spiner_kids_number.setEnabled(false);
         txt_subtotal.setEditable(false);
         txt_total.setEditable(false);
         txt_reserved_days.setEditable(false);
+        lb_customer_name.setVisible(false);
+        
     }//GEN-LAST:event_win_reserveWindowOpened
 
     private void btn_calculate_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calculate_priceActionPerformed
@@ -831,6 +868,10 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btn_calculate_daysActionPerformed
 
+    private void win_reserveWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_win_reserveWindowClosed
+        clean_fields();
+    }//GEN-LAST:event_win_reserveWindowClosed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Cancel;
@@ -851,7 +892,6 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser date_departure;
     private com.toedter.calendar.JDateChooser date_entry;
     private javax.swing.JLabel image_background;
-    private javax.swing.JPanel information_image_panel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
@@ -880,15 +920,16 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lb_customer_name;
     private javax.swing.JLabel lb_room_image;
     private javax.swing.JLabel lb_room_number;
     private javax.swing.JLabel lb_total;
+    private javax.swing.JPanel panel_information_image;
     private javax.swing.JSpinner spiner_adults_number;
     private javax.swing.JSpinner spiner_kids_number;
+    private javax.swing.JTable table_reserve;
     private javax.swing.JTextField txt_current_date;
     private javax.swing.JTextField txt_maximun_adults;
     private javax.swing.JTextField txt_maximun_kids;
@@ -954,7 +995,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             management.resize_image_room(dir, lb_room_image);
 
             lb_room_image.setVisible(true);
-            information_image_panel.setVisible(true);
+            panel_information_image.setVisible(true);
 
         } catch (IOException ex) {
 
@@ -1003,5 +1044,108 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         }
 
         return empty_fields;
+    }
+    
+    public String validate_data(){
+        String empty_fields = "";
+        
+        if (cbo_customer_id.getSelectedItem() == null) {
+            
+            cbo_customer_id.requestFocus();
+            
+            empty_fields += "\n Customer ID";
+            
+        }
+        
+        if (cbo_room_id.getSelectedItem() == null) {
+            
+            cbo_room_id.requestFocus();
+            
+            empty_fields += "\n Room ID";
+            
+        }
+        
+        if (cbo_way_to_pay.getSelectedItem() == null) {
+            
+            cbo_way_to_pay.requestFocus();
+            
+            empty_fields += "\nWay to pay";
+            
+        }
+        
+        if (spiner_adults_number.getValue().equals("1")) {
+            
+            spiner_adults_number.requestFocus();
+            
+            empty_fields += "\nAs least one adult";
+        }
+        
+        if (txt_reserved_days.getText().isEmpty()) {
+            
+            btn_calculate_days.requestFocus();
+            
+            empty_fields += "\nReserved days";
+            
+        }
+        
+        if (cbo_discount.getSelectedItem() == null) {
+            
+            cbo_discount.requestFocus();
+            
+            empty_fields += "\nDiscount";
+            
+        }
+        
+        if (txt_total.getText().isEmpty()) {
+            
+            btn_calculate_price.requestFocus();
+            
+            empty_fields  += "Price fields";
+            
+            
+        }
+        
+        
+        return empty_fields;
+    }
+    
+    public void clean_fields(){
+        txt_current_date.setText("");
+        
+        txt_staff_id.setText("");
+        
+        cbo_customer_id.setSelectedItem(null);
+        
+        cbo_room_id.setSelectedItem(null);
+        
+        cbo_way_to_pay.setSelectedItem(null);
+        
+        spiner_adults_number.setValue(1);
+        
+        spiner_kids_number.setValue(1);
+        
+        date_entry.setDate(null);
+        
+        date_departure.setDate(null);
+        
+        txt_reserved_days.setText("");
+        
+        cbo_discount.setSelectedItem(null);
+        
+        txt_subtotal.setText("");
+        
+        txt_total.setText("");
+        
+        lb_room_image.setVisible(false);
+        
+        panel_information_image.setVisible(false);
+        
+        lb_customer_name.setVisible(false);
+        
+        
+    }
+    
+    public void list_reservation(){
+        management.load_table(table_reserve, lb_total);
     }
 }

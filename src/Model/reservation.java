@@ -136,9 +136,5 @@ public class reservation {
         this.reserved_days = reserved_days;
     }
 
-    @Override
-    public String toString() {
-        return "reservation{" + "reservation_id=" + reservation_id + ", room_id=" + room_id + ", staff_id=" + staff_id + ", customer_id=" + customer_id + ", discount_id=" + discount_id + ", way_to_pay=" + way_to_pay + ", adults_number=" + adults_number + ", kids_number=" + kids_number + ", current_date=" + current_date + ", entry_date=" + entry_date + ", departure_date=" + departure_date + ", reserved_days=" + reserved_days + '}';
-    }
-
+    
 }
