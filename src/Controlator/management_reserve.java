@@ -7,9 +7,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,9 +27,10 @@ public class management_reserve extends Conexion {
      private ArrayList<Object> items_Call = new ArrayList<Object>();
 
     public void fill_combo_customer(JComboBox<String> combo) {
-        @SuppressWarnings("unchecked")
-
+    
+ @SuppressWarnings("unchecked")
         DefaultComboBoxModel<String> combo_model = new DefaultComboBoxModel();
+              
 
         String sql = "SELECT customer_id FROM customers";
 
@@ -59,7 +58,7 @@ public class management_reserve extends Conexion {
 
     public void fill_combo_discount(JComboBox<String> combo) {
        
-
+ @SuppressWarnings("unchecked")
         DefaultComboBoxModel<String> combo_model = new DefaultComboBoxModel();
 
         String sql = "SELECT discount_id FROM discounts";
@@ -91,7 +90,9 @@ public class management_reserve extends Conexion {
         @SuppressWarnings("unchecked")
         DefaultComboBoxModel<String> combo_model = new DefaultComboBoxModel();
 
-        String sql = "SELECT room_id FROM rooms WHERE reserved = false AND room_status = true";
+        //String sql = "SELECT room_id FROM rooms WHERE reserved = false AND room_status = true";
+        
+        String sql = "SELECT room_id FROM rooms";
 
         conectarBD();
 
@@ -162,6 +163,7 @@ public class management_reserve extends Conexion {
                 room.setMaximun_kids(rs.getInt(3));
                 room.setPrice_per_day_adults(rs.getDouble(4));
                 room.setPrice_per_day_kids(rs.getDouble(5));
+                room.setReserved(rs.getBoolean(6));
             }
 
             desconectarBD();
@@ -183,6 +185,8 @@ public class management_reserve extends Conexion {
         BufferedImage bufferedImage = ImageIO.read(new File(image_room_path));
 
         Image image = bufferedImage.getScaledInstance(lb_image_room.getWidth(), lb_image_room.getHeight(), Image.SCALE_DEFAULT);
+        
+//        Image image = bufferedImage.getScaledInstance(290, 310, Image.SCALE_DEFAULT);
 
         ImageIcon icon = new ImageIcon(image);
 
@@ -314,11 +318,112 @@ public class management_reserve extends Conexion {
             }   
     } catch (SQLException ex) {
         
-        Logger.getLogger(management_customers.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(management_reserve.class.getName()).log(Level.SEVERE, null, ex);
         desconectarBD();
     }
         
         desconectarBD();
     }
+     
+     public void search_reservation(reservation reserve){
+         
+          try {
+            conectarBD();
 
+            String call = "{CALL ps_search_reserve (?)}";
+
+            obj_Procedimiento = conexion.prepareCall(call);
+
+            obj_Procedimiento.setInt(1, reserve.getReservation_id());
+
+            rs = obj_Procedimiento.executeQuery();
+
+            if (rs.next()) {
+
+            
+            reserve.setRoom_id(rs.getInt(1));
+            reserve.setDiscount_id(rs.getInt(2));
+            reserve.setStaff_id(rs.getInt(3));
+            reserve.setCustomer_id(rs.getInt(4));
+            reserve.setWay_to_pay(rs.getString(5));
+            reserve.setAdults_number(rs.getInt(6));
+            reserve.setKids_number(rs.getInt(7));
+            reserve.setCurrent_date(rs.getString(8));
+            reserve.setEntry_date(rs.getString(9));
+            reserve.setDeparture_date(rs.getString(10));
+            reserve.setReserved_days(rs.getInt(11));
+               
+             
+            }
+            desconectarBD();
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            desconectarBD();
+        } catch (Exception ex) {
+            desconectarBD();
+            System.err.println(ex);
+
+        }
+     }
+     
+     public boolean edit_reservation(reservation reserve){
+            boolean edited = false;
+        try {
+            conectarBD();
+            
+            String call = "{CALL ps_reserve_edit(?,?,?,?,?,?,?,?,?,?)}";
+            
+            obj_Procedimiento = conexion.prepareCall(call);
+
+            obj_Procedimiento.setInt(1, reserve.getReservation_id());
+            obj_Procedimiento.setInt(2, reserve.getRoom_id());
+            obj_Procedimiento.setInt(3, reserve.getDiscount_id());
+            obj_Procedimiento.setInt(4, reserve.getCustomer_id());
+            obj_Procedimiento.setString(5, reserve.getWay_to_pay());
+            obj_Procedimiento.setInt(6, reserve.getAdults_number());
+            obj_Procedimiento.setInt(7, reserve.getKids_number());
+            obj_Procedimiento.setString(8, reserve.getEntry_date());
+            obj_Procedimiento.setString(9, reserve.getDeparture_date());
+            obj_Procedimiento.setInt(10, reserve.getReserved_days());
+
+            edited = obj_Procedimiento.executeUpdate() == 1;
+            
+          
+
+            desconectarBD();
+
+        } catch (SQLException ex) {
+            desconectarBD();
+            System.err.println(ex);
+        } catch (Exception ex) {
+            desconectarBD();
+            System.out.println(ex);
+        }
+        return edited;
+     }
+
+       public boolean delete_reservation(int reservation_id) {
+        boolean rpta = false;
+        try {
+            conectarBD();
+
+            String call = "{CALL ps_reserve_delete(?)}";
+
+            obj_Procedimiento = conexion.prepareCall(call);
+
+            obj_Procedimiento.setInt(1, reservation_id);
+
+            rpta = obj_Procedimiento.executeUpdate() == 1;
+
+            desconectarBD();
+
+        } catch (SQLException ex) {
+            desconectarBD();
+            System.err.println(ex);
+        } catch (Exception ex) {
+            desconectarBD();
+            System.err.println(ex);
+        }
+        return rpta;
+    }
 }
