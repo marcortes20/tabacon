@@ -5,7 +5,6 @@
 package View;
 
 import Controlator.management_reserve;
-import Model.customers;
 import Model.reservation;
 import Model.rooms;
 
@@ -56,6 +55,15 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         win_change_room = new javax.swing.JDialog();
+        cbo_new_room = new javax.swing.JComboBox<>();
+        cbo_current_room = new javax.swing.JComboBox<>();
+        btn_change = new javax.swing.JButton();
+        Cancel1 = new javax.swing.JButton();
+        txt_reserve_id_change_room = new javax.swing.JTextField();
+        lb_customer_name2 = new javax.swing.JLabel();
+        lb_customer_name1 = new javax.swing.JLabel();
+        lb_new_room = new javax.swing.JLabel();
+        lb_current_room = new javax.swing.JLabel();
         win_reserve = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -127,16 +135,73 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table_reserve = new javax.swing.JTable();
 
-        javax.swing.GroupLayout win_change_roomLayout = new javax.swing.GroupLayout(win_change_room.getContentPane());
-        win_change_room.getContentPane().setLayout(win_change_roomLayout);
-        win_change_roomLayout.setHorizontalGroup(
-            win_change_roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        win_change_roomLayout.setVerticalGroup(
-            win_change_roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        win_change_room.setPreferredSize(new java.awt.Dimension(800, 500));
+        win_change_room.setSize(new java.awt.Dimension(800, 500));
+        win_change_room.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cbo_new_room.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_new_roomItemStateChanged(evt);
+            }
+        });
+        win_change_room.getContentPane().add(cbo_new_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 150, 30));
+
+        win_change_room.getContentPane().add(cbo_current_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 150, 30));
+
+        btn_change.setBackground(new java.awt.Color(153, 153, 0));
+        btn_change.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btn_change.setForeground(new java.awt.Color(255, 255, 255));
+        btn_change.setText("Change room");
+        btn_change.setActionCommand("Sign up");
+        btn_change.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_change.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_changeActionPerformed(evt);
+            }
+        });
+        win_change_room.getContentPane().add(btn_change, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 370, 40));
+
+        Cancel1.setBackground(new java.awt.Color(153, 153, 0));
+        Cancel1.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        Cancel1.setForeground(new java.awt.Color(255, 255, 255));
+        Cancel1.setText("Cancel");
+        Cancel1.setActionCommand("Sign up");
+        Cancel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Cancel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cancel1ActionPerformed(evt);
+            }
+        });
+        win_change_room.getContentPane().add(Cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, 370, 40));
+
+        txt_reserve_id_change_room.setBackground(new java.awt.Color(0, 0, 0));
+        txt_reserve_id_change_room.setFont(new java.awt.Font("Arial Unicode MS", 0, 24)); // NOI18N
+        txt_reserve_id_change_room.setForeground(new java.awt.Color(153, 153, 0));
+        win_change_room.getContentPane().add(txt_reserve_id_change_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, -1));
+
+        lb_customer_name2.setBackground(new java.awt.Color(0, 0, 0));
+        lb_customer_name2.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        lb_customer_name2.setForeground(new java.awt.Color(153, 153, 0));
+        lb_customer_name2.setText("Current room");
+        lb_customer_name2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lb_customer_name2.setOpaque(true);
+        win_change_room.getContentPane().add(lb_customer_name2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 100, 20));
+
+        lb_customer_name1.setBackground(new java.awt.Color(0, 0, 0));
+        lb_customer_name1.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        lb_customer_name1.setForeground(new java.awt.Color(153, 153, 0));
+        lb_customer_name1.setText("New room:");
+        lb_customer_name1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lb_customer_name1.setOpaque(true);
+        win_change_room.getContentPane().add(lb_customer_name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 80, 20));
+
+        lb_new_room.setSize(new java.awt.Dimension(400, 400));
+        win_change_room.getContentPane().add(lb_new_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 400, 400));
+
+        lb_current_room.setPreferredSize(new java.awt.Dimension(400, 400));
+        lb_current_room.setSize(new java.awt.Dimension(400, 400));
+        win_change_room.getContentPane().add(lb_current_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 400));
+        lb_current_room.getAccessibleContext().setAccessibleDescription("");
 
         win_reserve.setMinimumSize(new java.awt.Dimension(942, 876));
         win_reserve.setSize(new java.awt.Dimension(942, 876));
@@ -740,7 +805,47 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_cerrarActionPerformed
 
     private void btn_change_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_change_roomActionPerformed
-        // TODO add your handling code here:
+
+        int fila = table_reserve.getSelectedRow();
+
+        if (fila != -1) {
+
+            int reserve_id = Integer.parseInt(table_reserve.getValueAt(fila, 0).toString());
+            int room_id = Integer.parseInt(table_reserve.getValueAt(fila, 1).toString());
+            int max_adults = Integer.parseInt(table_reserve.getValueAt(fila, 6).toString());
+            int max_kids = Integer.parseInt(table_reserve.getValueAt(fila, 7).toString());
+
+            int resp = JOptionPane.showConfirmDialog(win_change_room, "Are you sure to change reservation's room?" + "\nRoom number" + room_id,
+                    "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (resp == JOptionPane.YES_OPTION) {
+
+                charge_current_room_fields(room_id);
+
+                String sql = "SELECT room_id FROM rooms WHERE maximum_adults >= " + max_adults + " AND maximun_kids >=" + max_kids + " AND reserved = false AND room_status = true";
+
+                management.fill_combo_rooms(cbo_new_room, sql);
+
+                win_change_room.setTitle("Change room");
+
+                txt_reserve_id_change_room.setText(String.valueOf(reserve_id));
+
+                txt_reserve_id_change_room.setEditable(false);
+
+                win_change_room.setLocationRelativeTo(null);
+
+                cbo_current_room.setEnabled(false);
+
+                cbo_new_room.setSelectedItem(null);
+
+                win_change_room.setVisible(true);
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(win_change_room, "Select reservation to change it's room", "Change", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }//GEN-LAST:event_btn_change_roomActionPerformed
 
     private void btn_Check_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Check_inActionPerformed
@@ -749,9 +854,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         win_reserve.setTitle("Make reservation");
-       buttons_save();
+        buttons_save();
         win_reserve.setVisible(true);
-        
+
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -761,7 +866,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
 
         if ((validate_data().isEmpty())) {
-            
+
             btn_calculate_daysActionPerformed(evt);
             btn_calculate_priceActionPerformed(evt);
 
@@ -783,7 +888,6 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             room_id = Integer.parseInt(cbo_room_id.getSelectedItem().toString());
             discount = Integer.parseInt(temp_discount.substring(0, temp_discount.length() - 1)); // se convierte el temp_discount a int y se elimina el ultimo caracter el cual es %
 
-            
             reserve.setStaff_id(Integer.parseInt(txt_staff_id.getText()));
 
             reserve.setCustomer_id(customer_id);
@@ -826,21 +930,21 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             if (win_reserve.getTitle().equals(("Edit reservation"))) {
 
                 reserve.setReservation_id(Integer.parseInt(txt_reserve_id.getText()));
-                
+
                 if (management.edit_reservation(reserve)) {
-                    
-                   JOptionPane.showMessageDialog(win_reserve, "Your reserve was edited ", "Edited!!!", JOptionPane.INFORMATION_MESSAGE);
+
+                    JOptionPane.showMessageDialog(win_reserve, "Your reserve was edited ", "Edited!!!", JOptionPane.INFORMATION_MESSAGE);
 
                     win_reserve.dispose();
 
                     list_reservation();
 
                     clean_fields();
-                    
-                }else{
-                      JOptionPane.showMessageDialog(win_reserve, "Your reserve wasn't edit ", "Error!!!", JOptionPane.INFORMATION_MESSAGE);
-                      
-                      win_reserve.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(win_reserve, "Your reserve wasn't edit ", "Error!!!", JOptionPane.INFORMATION_MESSAGE);
+
+                    win_reserve.dispose();
                 }
             }
 
@@ -882,16 +986,14 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbo_customer_idActionPerformed
 
     private void cbo_room_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_room_idItemStateChanged
-       
-        
+
         if (evt.getStateChange() == ItemEvent.SELECTED) {
 
             int room_id = Integer.parseInt(cbo_room_id.getSelectedItem().toString());
 
             room = management.search_room(room_id);
-          
+
             fill_room_panel_fields(room);
-            
 
             set_spiner(spiner_adults_number, room.getMaximun_adults());
             set_spiner(spiner_kids_number, room.getMaximun_kids());
@@ -903,7 +1005,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbo_room_idItemStateChanged
 
     private void win_reserveWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_win_reserveWindowOpened
-       
+
 //        if (win_reserve.getTitle().equals("Make reservation")) {
 //        
 //        initialize_default_fields();
@@ -931,9 +1033,8 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 //           
 //        }
 
-
     }//GEN-LAST:event_win_reserveWindowOpened
-         public void buttons_save(){
+    public void buttons_save() {
         initialize_default_fields();
         lb_room_image.setVisible(false);
         panel_information_image.setVisible(false);
@@ -943,21 +1044,21 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         txt_total.setEditable(false);
         txt_reserved_days.setEditable(false);
         lb_customer_name.setVisible(false);
-                lb_reservation_id.setVisible(false);
-            txt_reserve_id.setVisible(false);
-        }
-         
-                 public void buttons_edit(){
-         cbo_room_id.setEnabled(false);
-            lb_reservation_id.setVisible(true);
-            txt_reserve_id.setVisible(true);
-            txt_reserve_id.setEditable(false);
-            txt_total.setEditable(false);
-            txt_reserved_days.setEditable(false);
-            txt_subtotal.setEditable(false);
-            txt_total.setEditable(false);
-        }
-        
+        lb_reservation_id.setVisible(false);
+        txt_reserve_id.setVisible(false);
+    }
+
+    public void buttons_edit() {
+        cbo_room_id.setEnabled(false);
+        lb_reservation_id.setVisible(true);
+        txt_reserve_id.setVisible(true);
+        txt_reserve_id.setEditable(false);
+        txt_total.setEditable(false);
+        txt_reserved_days.setEditable(false);
+        txt_subtotal.setEditable(false);
+        txt_total.setEditable(false);
+    }
+
     private void btn_calculate_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calculate_priceActionPerformed
 
         if (validate_data_price().isEmpty()) {
@@ -1021,108 +1122,140 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         buttons_edit();
         txt_current_date.setEditable(false);
-        
+
         txt_staff_id.setEditable(false);
-        
 
         int fila = table_reserve.getSelectedRow();
 
         if (fila != -1) {
 
-             win_reserve.setTitle("Edit reservation");
+            win_reserve.setTitle("Edit reservation");
 
             reservation reserve = new reservation();
 
-           reserve.setReservation_id(Integer.parseInt(table_reserve.getValueAt(fila, 0).toString()));
-           
+            reserve.setReservation_id(Integer.parseInt(table_reserve.getValueAt(fila, 0).toString()));
+
             management.search_reservation(reserve);
-            
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-                
+
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
             try {
-                
+
                 Date entry_date = formato.parse(reserve.getEntry_date()); // Se cambia el formato de la fecha de la reserva y se convierte a DATE, ya que se obtuvo como string
-                                                                                        //Para poder setear la fecha de los datechooser
+                //Para poder setear la fecha de los datechooser
                 Date departure_date = formato.parse(reserve.getDeparture_date());
-                
-            lb_reservation_id.setText("Reservation number: ");
-            
-            txt_reserve_id.setText(String.valueOf(reserve.getReservation_id()));
-            
-            txt_current_date.setText(reserve.getCurrent_date());
-            
-            txt_staff_id.setText(String.valueOf(reserve.getStaff_id()));
-            
-            
-            cbo_customer_id.setSelectedItem(String.valueOf(reserve.getCustomer_id()));
-            
-            cbo_room_id.setSelectedItem(String.valueOf(reserve.getRoom_id()));
-            
-            cbo_way_to_pay.setSelectedItem(reserve.getWay_to_pay());
-            
-            spiner_adults_number.setValue(reserve.getAdults_number());
-            
-            spiner_kids_number.setValue(reserve.getKids_number());
-            
-            date_entry.setDate(entry_date);
-            
-            date_departure.setDate(departure_date);
-            
-            btn_calculate_daysActionPerformed(evt);
-            
-            cbo_discount.setSelectedItem(String.valueOf(reserve.getDiscount_id() + "%"));
-            
-            btn_calculate_priceActionPerformed(evt);
-            
-            
+
+                lb_reservation_id.setText("Reservation number: ");
+
+                txt_reserve_id.setText(String.valueOf(reserve.getReservation_id()));
+
+                txt_current_date.setText(reserve.getCurrent_date());
+
+                txt_staff_id.setText(String.valueOf(reserve.getStaff_id()));
+
+                cbo_customer_id.setSelectedItem(String.valueOf(reserve.getCustomer_id()));
+
+                cbo_room_id.setSelectedItem(String.valueOf(reserve.getRoom_id()));
+
+                cbo_way_to_pay.setSelectedItem(reserve.getWay_to_pay());
+
+                spiner_adults_number.setValue(reserve.getAdults_number());
+
+                spiner_kids_number.setValue(reserve.getKids_number());
+
+                date_entry.setDate(entry_date);
+
+                date_departure.setDate(departure_date);
+
+                btn_calculate_daysActionPerformed(evt);
+
+                cbo_discount.setSelectedItem(String.valueOf(reserve.getDiscount_id() + "%"));
+
+                btn_calculate_priceActionPerformed(evt);
+
             } catch (ParseException ex) {
-                
+
                 Logger.getLogger(ifrm_reserve.class.getName()).log(Level.SEVERE, null, ex);
             }
-       
-
 
             win_reserve.setVisible(true);
         } else {
 
             JOptionPane.showMessageDialog(this, "Select customer to edit", "Edit", JOptionPane.ERROR_MESSAGE);
-    }
-        
+        }
+
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-       int fila = table_reserve.getSelectedRow();
+        int fila = table_reserve.getSelectedRow();
 
         if (fila != -1) {
 
-            int room_id = Integer.parseInt(table_reserve.getValueAt(fila, 0).toString());
+            int reserve_id = Integer.parseInt(table_reserve.getValueAt(fila, 0).toString());
 
-            int resp = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete this reservation? " + room_id,
+            int resp = JOptionPane.showConfirmDialog(win_reserve, "Are you sure to delete this reservation" + reserve_id,
                     "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if (resp == JOptionPane.YES_OPTION) {
-             
-                
-             
-                
-             
 
-                if (management.delete_reservation(room_id)) {
+                if (management.delete_reservation(reserve_id)) {
 
-                    JOptionPane.showMessageDialog(rootPane, "Reservation has been removed", "Delete", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(win_reserve, "Reservation has been removed", "Delete", JOptionPane.INFORMATION_MESSAGE);
 
                     list_reservation();
 
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Error to delete Reservation", "Delete", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(win_reserve, "Error to delete Reservation", "Delete", JOptionPane.ERROR_MESSAGE);
                 }
 
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Select reservation to delete", "Delete", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(win_reserve, "Select reservation to delete", "Delete", JOptionPane.INFORMATION_MESSAGE);
             }
 
         }
     }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void cbo_new_roomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_new_roomItemStateChanged
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            int room_id = Integer.parseInt(cbo_new_room.getSelectedItem().toString());
+
+            charge_new_room_fields(room_id);
+
+        }
+    }//GEN-LAST:event_cbo_new_roomItemStateChanged
+
+    private void btn_changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeActionPerformed
+
+        if (cbo_new_room.getSelectedItem() == null) {
+
+            JOptionPane.showMessageDialog(win_change_room, "You must select the new room before change it  ", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+
+            int reserve_id = Integer.parseInt(txt_reserve_id_change_room.getText());
+            int curret_room = Integer.parseInt(cbo_current_room.getSelectedItem().toString());
+            int new_room = Integer.parseInt(cbo_new_room.getSelectedItem().toString());
+
+            if (management.change_reserve_room(curret_room, new_room, reserve_id)) {
+
+                JOptionPane.showMessageDialog(win_change_room, "Reservation has been updated", "Updated", JOptionPane.INFORMATION_MESSAGE);
+
+                list_reservation();
+
+            } else {
+                JOptionPane.showMessageDialog(win_change_room, "Error to update reservation number  " + reserve_id, "Update", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+
+
+    }//GEN-LAST:event_btn_changeActionPerformed
+
+    private void Cancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel1ActionPerformed
+        win_change_room.dispose();
+    }//GEN-LAST:event_Cancel1ActionPerformed
 
 // Variables declaration - do not modify                     
     public void initialize_default_fields() {
@@ -1148,7 +1281,10 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }
 
     public void fill_room_id() {
-        management.fill_combo_rooms(cbo_room_id);
+
+        String sql = "SELECT room_id FROM rooms WHERE reserved = false AND room_status = true";
+
+        management.fill_combo_rooms(cbo_room_id, sql);
 
         cbo_room_id.setSelectedItem(null);
     }
@@ -1169,7 +1305,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             String price_kids = String.valueOf(temp_room.getPrice_per_day_kids());
             String dir = System.getProperty("user.dir") + "/src/rooms_img/" + temp_room.getImage();
             Boolean reserved = temp_room.isReserved();
-            
+
             lb_room_number.setText("Room number " + room_id);
             txt_maximun_adults.setText(maximun_adults);
             txt_maximun_kids.setText(maximun_kids);
@@ -1177,7 +1313,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             txt_price_kid.setText(price_kids);
             if (reserved) {
                 check_reserved.setSelected(true);
-            }else{
+            } else {
                 check_reserved.setSelected(false);
             }
 
@@ -1291,7 +1427,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
             empty_fields += "Price fields";
 
-    }//if (check_reserved.isSelected()) {
+        }//if (check_reserved.isSelected()) {
 //            
 //              JOptionPane.showMessageDialog(this, "This room is reserved right now, select other ", "Error", JOptionPane.ERROR_MESSAGE);
 //        }
@@ -1339,23 +1475,59 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify                     
-    ;
-                
+    public void charge_current_room_fields(int room_id) {
+
+        try {
+            String img = management.search_room_img(room_id);
+
+            String dir = System.getProperty("user.dir") + "/src/rooms_img/" + img;
+
+            cbo_current_room.addItem(String.valueOf(room_id));
+
+            management.resize_image_room(dir, lb_current_room);
+
+        } catch (IOException ex) {
+
+            Logger.getLogger(ifrm_reserve.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void charge_new_room_fields(int room_id) {
+
+        try {
+            String img = management.search_room_img(room_id);
+
+            String dir = System.getProperty("user.dir") + "/src/rooms_img/" + img;
+
+            management.resize_image_room(dir, lb_new_room);
+
+        } catch (IOException ex) {
+
+            Logger.getLogger(ifrm_reserve.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Cancel;
+    public javax.swing.JButton Cancel1;
     private javax.swing.JButton btn_Check_in;
     public javax.swing.JButton btn_Save;
     public javax.swing.JButton btn_calculate_days;
     public javax.swing.JButton btn_calculate_price;
     private javax.swing.JButton btn_cerrar;
+    public javax.swing.JButton btn_change;
     private javax.swing.JButton btn_change_room;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_print;
     private javax.swing.JButton btn_save;
+    private javax.swing.JComboBox<String> cbo_current_room;
     private javax.swing.JComboBox<String> cbo_customer_id;
     private javax.swing.JComboBox<String> cbo_discount;
+    private javax.swing.JComboBox<String> cbo_new_room;
     private javax.swing.JComboBox<String> cbo_room_id;
     private javax.swing.JComboBox<String> cbo_way_to_pay;
     private javax.swing.JCheckBox check_reserved;
@@ -1393,7 +1565,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel lb_current_room;
     private javax.swing.JLabel lb_customer_name;
+    private javax.swing.JLabel lb_customer_name1;
+    private javax.swing.JLabel lb_customer_name2;
+    private javax.swing.JLabel lb_new_room;
     private javax.swing.JLabel lb_reservation_id;
     private javax.swing.JLabel lb_room_image;
     private javax.swing.JLabel lb_room_number;
@@ -1408,6 +1584,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_price_adult;
     private javax.swing.JTextField txt_price_kid;
     private javax.swing.JTextField txt_reserve_id;
+    private javax.swing.JTextField txt_reserve_id_change_room;
     private javax.swing.JTextField txt_reserved_days;
     private javax.swing.JTextField txt_staff_id;
     private javax.swing.JTextField txt_subtotal;

@@ -85,14 +85,14 @@ public class management_reserve extends Conexion {
 
     }
 
-    public void fill_combo_rooms(JComboBox<String> combo) {
+    public void fill_combo_rooms(JComboBox<String> combo, String sql) {
 
         @SuppressWarnings("unchecked")
         DefaultComboBoxModel<String> combo_model = new DefaultComboBoxModel();
 
         //String sql = "SELECT room_id FROM rooms WHERE reserved = false AND room_status = true";
         
-        String sql = "SELECT room_id FROM rooms";
+       // String sql = "SELECT room_id FROM rooms";
 
         conectarBD();
 
@@ -194,19 +194,22 @@ public class management_reserve extends Conexion {
 
     }
 
-    public boolean update_room(int room_id) {
+    public boolean update_room(String sql) {
 
+        conectarBD();
+        
         boolean updated = false;
-
-        String sql = "UPDATE rooms as R set R.reserved = true WHERE room_id = " + room_id;
 
         try {
 
             updated = ejecutar(sql);
+            System.out.println(sql);
+           
 
         } catch (SQLException ex) {
 
             Logger.getLogger(management_reserve.class.getName()).log(Level.SEVERE, null, ex);
+           
         }
 
         return updated;
@@ -261,8 +264,10 @@ public class management_reserve extends Conexion {
             
             
             reserve_saved = reserve_register(reserve);
+            
+             String sql = "UPDATE rooms as R set R.reserved = true WHERE room_id = " + reserve.getRoom_id();
 
-            room_updated = update_room(reserve.getRoom_id());
+            room_updated = update_room(sql);
 
             if (reserve_saved && room_updated) {
                 
@@ -426,4 +431,118 @@ public class management_reserve extends Conexion {
         }
         return rpta;
     }
+       
+         public String search_room_img(int room_id) {
+
+        String sql = "SELECT image FROM rooms WHERE room_id = " + room_id;
+        
+        String img = null;
+        
+        conectarBD();
+
+        rs = seleccionar(sql);
+
+        try {
+
+            if (rs.next()) {
+
+                img = rs.getString("image");
+
+            }
+
+            desconectarBD();
+
+        } catch (SQLException ex) {
+
+            desconectarBD();
+        }
+        return img;
+    }
+         
+         public boolean change_reserve_room(int curren_room_id, int new_room_id, int reserve_id) {
+        
+        boolean done = false;
+        
+        boolean current_room_updated = false, new_room_updated = false , reservation_updated = false;
+
+        try {
+            //Obtenemos la conexion
+            conectarBD();
+            //Decimos que vamos a crear una transaccion
+            getConexion().setAutoCommit(false);
+
+             String sql_current_room = "UPDATE rooms as R set R.reserved = false WHERE room_id = " + curren_room_id;
+             String sql_new_room = "UPDATE rooms as R set R.reserved = true WHERE room_id = " + new_room_id;
+             
+            current_room_updated = update_room(sql_current_room); // se pasa la habitacion actual a un estado de no reservada
+           
+            reservation_updated = edit_reservation_room(reserve_id, new_room_id);// se edita la reserva para que tenga la nueva habitacion
+           
+            new_room_updated = update_room(sql_new_room);    // se pasa la habitacion actual a un estado de reservada
+             
+
+            
+            
+            if (current_room_updated  && new_room_updated && reservation_updated) {
+               
+                done = true;
+                getConexion().commit();
+                
+                
+                
+                
+                
+            } else {
+                //Negamos la transaccion
+                getConexion().rollback();
+            }
+            desconectarBD();
+            
+        } catch (SQLException e) {
+            
+            System.out.println(e);
+            
+            try {
+                
+                getConexion().rollback();
+                
+            } catch (SQLException ex) {
+                
+                System.out.println(ex);
+            }
+            
+            desconectarBD();
+        }
+
+        return done;
+
+    }
+         
+          public boolean edit_reservation_room(int reservation_id, int room_id){
+            boolean edited = false;
+        try {
+           
+            
+            String call = "{CALL ps_update_reserve_room(?,?)}";
+            
+            obj_Procedimiento = conexion.prepareCall(call);
+
+            obj_Procedimiento.setInt(1, reservation_id);
+            obj_Procedimiento.setInt(2, room_id);
+          
+            edited = obj_Procedimiento.executeUpdate() == 1;
+            
+          
+
+            desconectarBD();
+
+        } catch (SQLException ex) {
+            
+            System.err.println(ex);
+        } catch (Exception ex) {
+            
+            System.out.println(ex);
+        }
+        return edited;
+     }
 }
