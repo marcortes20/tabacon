@@ -20,6 +20,7 @@ public class PoolConexionMySql {
             ds_con.setUser("root");
             ds_con.setPassword("1234");
             pool = ds_con.getPooledConnection();
+            
         } catch (SQLException ex) {
             Logger.getLogger(PoolConexionMySql.class.getName()).log(Level.SEVERE, null, ex);
         }

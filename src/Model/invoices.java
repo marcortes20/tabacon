@@ -11,15 +11,15 @@ public class invoices {
    
    private int invoice_id;
    private int reservation_id;
-   private Date date;
+   private String date;
 
     public invoices() {
     }
 
-    public invoices(int invoice_id, int reservation_id, Date date) {
+    public invoices(int invoice_id, int reservation_id) {
         this.invoice_id = invoice_id;
         this.reservation_id = reservation_id;
-        this.date = date;
+        this.date = null;
     }
 
     public int getInvoice_id() {
@@ -38,13 +38,15 @@ public class invoices {
         this.reservation_id = reservation_id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
+
+    
 
     @Override
     public String toString() {

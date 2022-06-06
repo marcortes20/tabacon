@@ -15,15 +15,17 @@ import javax.swing.SpinnerNumberModel;
 import Model.rooms;
 import Controlator.management_rooms;
 import java.sql.ResultSet;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author mcortes19
  */
-public class ifrm_rooms extends javax.swing.JInternalFrame {
+public class ifrm_rooms extends javax.swing.JInternalFrame   {
 
     private management_rooms mana_rooms = new management_rooms();
 
@@ -365,6 +367,11 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         btn_imprimir.setFocusable(false);
         btn_imprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_imprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_imprimirActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btn_imprimir);
         jToolBar1.add(jSeparator3);
 
@@ -675,6 +682,11 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
         set_spiner(spiner_adutls);
     }//GEN-LAST:event_win_roomsWindowOpened
 
+    private void btn_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_imprimirActionPerformed
+        
+//mana_rooms.report();
+    }//GEN-LAST:event_btn_imprimirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_SignUp;
@@ -914,5 +926,6 @@ public class ifrm_rooms extends javax.swing.JInternalFrame {
 //            
 
     }
+
 
 }

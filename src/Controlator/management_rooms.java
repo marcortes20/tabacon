@@ -7,8 +7,11 @@ package Controlator;
 
 import Model.conexions.Conexion;
 import Model.rooms;
+import View.ifrm_rooms;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 
 public class management_rooms  extends Conexion{
@@ -291,7 +294,33 @@ public class management_rooms  extends Conexion{
         
     }
     
+    public void report(){
+//          
+//            
+//        
+//        try {
+//            //report = (JasperReport) JRLoader.loadObject(getClass().getResource("/reports/Rooms.jasper"));
+//            File file = new File("/Users/mcortes19/NetBeansProjects/tabacon_Hotel /src/reports/Rooms.jasper");
+// System.out.println(file.isFile());
+// 
+//            JasperReport report = (JasperReport) JRLoader.loadObject(file);
+//             System.out.println(file.isFile());
+//            
+//           // JasperPrint jprint = JasperFillManager.fillReport(report, null, mana_rooms.getConexion());
+//            JasperPrint jprint = JasperFillManager.fillReport(report, null, getConexion());
+//
+//            JasperViewer view = new JasperViewer(jprint, true);
+//            
+//            view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+//            
+//            view.setVisible(true);
+//            
+//        } catch (JRException ex) {
+//            Logger.getLogger(ifrm_rooms.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
+}
 }
     
     

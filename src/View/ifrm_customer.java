@@ -602,6 +602,8 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
         txt_email.setText("");
 
         txt_email.setText("");
+        
+        txt_phone_number.setText("");
     }
 
     public String validate_data() {
@@ -622,14 +624,17 @@ public class ifrm_customer extends javax.swing.JInternalFrame {
 
             empty_fields += "\ncustomer ID:";
 
-        } else if (management.validate_customer_id(Integer.parseInt(txt_customer_id.getText()))) {
+        } if (win_customer.getTitle().equals("Save customer")) {
 
-            JOptionPane.showMessageDialog(win_customer, "this customer id is already exist! try again:", "Error!", JOptionPane.ERROR_MESSAGE);
+            if (management.validate_customer_id(Integer.parseInt(txt_customer_id.getText()))) {
 
-            txt_customer_id.setText("");
+                JOptionPane.showMessageDialog(win_customer, "this customer id is already exist! try again:", "Error!", JOptionPane.ERROR_MESSAGE);
 
-            empty_fields += "\ncustomer ID:";
+                txt_customer_id.setText("");
 
+                empty_fields += "\ncustomer ID:";
+
+            }
         }
 
         if (txt_name.getText().trim().isEmpty()) {

@@ -10,6 +10,7 @@ import View.login.frm_SignIn;
 import java.awt.Desktop;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,6 +19,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 
 public class Menu extends javax.swing.JFrame {
     
@@ -282,6 +284,11 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconfinder-sitecloning-4263532_117842.png"))); // NOI18N
         jMenuItem7.setText("Parallel windows");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
         jMenu3.add(jSeparator9);
 
@@ -290,6 +297,11 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3499783-adult-browser-window-content-internet-online-website-xxx_107626.png"))); // NOI18N
         jMenuItem8.setText("Current window");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
         jMenu2.add(jSeparator10);
 
@@ -458,13 +470,35 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_sub_pop_log_outActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-      
+    int x = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+        int y = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+        
+        JInternalFrame objetos[] = desk.getAllFrames();
+        
+        if (objetos.length > 0) {
+            int ancho = x / objetos.length;
+            int largo =  x /  objetos.length ;
+            x = y = 0;
+            
+            for (JInternalFrame v : objetos) {
+                
+                v.setLocation(x, y);
+                v.setSize(ancho, largo);
+                x += 30;
+                y += 30;
+            }
+        }        
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
        
-        desk.getAllFrames();
+         JInternalFrame objetos[] = desk.getAllFrames();
         
+          for (JInternalFrame v : objetos) {
+               v.dispose();
+            }
+        
+
        
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
@@ -528,6 +562,42 @@ public class Menu extends javax.swing.JFrame {
                                             
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+         int x = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+        int y = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+        
+        JInternalFrame objetos[] = desk.getAllFrames();
+        
+        if (objetos.length > 0) {
+            int ancho = x / objetos.length;
+            int largo = desk.getHeight() ;
+            x = y = 0;
+            
+            for (JInternalFrame v : objetos) {
+                v.setSize(ancho, largo);
+                v.setLocation(x, y);
+                x += ancho;
+            }
+        }  
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+//
+//          JInternalFrame objetos[] = desk.getAllFrames();
+//          
+//
+//          
+//          for (JInternalFrame v : objetos) {
+//              
+//               if (v.isVisible()) {
+//                   System.out.println("entra2");
+//                   v.dispose();
+//              }
+//            }
+//          
+//        //EN PROCESO//////////////////////////
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
