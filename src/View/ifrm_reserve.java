@@ -57,6 +57,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         list_reservation();
         fill_customers_id();
         fill_discound();
+        room = new rooms();
     }
 
     /**
@@ -1552,9 +1553,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             int room_id = Integer.parseInt(cbo_room_id.getSelectedItem().toString());
             
             room.setRoom_id(room_id);
-
-            room = management.search_room(room_id);
-
+            
+            room = management.search_room(room.getRoom_id());
+            
             fill_room_panel_fields(room);
 
             set_spiner(spiner_adults_number, room.getMaximun_adults());
