@@ -326,6 +326,11 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file_type_pdf_icon_130274.png"))); // NOI18N
         jMenuItem10.setText("Content");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem10);
         jMenu4.add(jSeparator11);
 
@@ -598,6 +603,10 @@ public class Menu extends javax.swing.JFrame {
 //          
 //        //EN PROCESO//////////////////////////
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        management.show_manual();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments

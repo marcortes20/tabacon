@@ -5,28 +5,64 @@
 package Controlator;
 
 import Model.conexions.Conexion;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
  * @author mcortes19
  */
-public class management_Menu  extends Conexion {
+public class management_Menu extends Conexion {
 
-   
     public static void main(String[] args) {
-        
+
     }
 
     public management_Menu() {
     }
-    
+
     Conexion con = new Conexion();
-    
-    
-    public void exel(){
+
+    public void exel() {
         String sql = "SELECT * FROM  staff";
-   
+
+    }
+
+    public void show_manual() {
+        
+
+        String dir = System.getProperty("user.dir") + "/user manual.pdf";
+
+         try {
+             
+        File user_manual = new File(dir);
+        
+        Desktop.getDesktop().open(user_manual);
+        
+    } catch (IOException ex) {
+        
        
     }
-    
+
+//        if (operative_sistem.contains("Windows")) {
+//
+//            try {
+//                Runtime.getRuntime().exec("cmd /c start " + dir);
+//            } catch (IOException ex) {
+//                System.out.println(ex);
+//            }
+//
+//        } else if (operative_sistem.contains("Mac")) {
+//
+//            try {
+//                Runtime.getRuntime().exec("open " + dir);
+//                
+//            } catch (IOException ex) {
+//                System.out.println(ex);
+//            }
+//
+//        }
+
+    }
 }
