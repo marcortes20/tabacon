@@ -125,14 +125,10 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         btn_change = new javax.swing.JButton();
         Cancel1 = new javax.swing.JButton();
         txt_reserve_id_change_room = new javax.swing.JTextField();
-        lb_customer_name2 = new javax.swing.JLabel();
         lb_customer_name1 = new javax.swing.JLabel();
         lb_new_room = new javax.swing.JLabel();
         lb_current_room = new javax.swing.JLabel();
         lb_customer_name3 = new javax.swing.JLabel();
-        lb_customer_name4 = new javax.swing.JLabel();
-        new_price = new javax.swing.JTextField();
-        current_price = new javax.swing.JTextField();
         win_invoice = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         invoice_title = new javax.swing.JLabel();
@@ -631,6 +627,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         });
         win_change_room.getContentPane().add(cbo_new_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 440, 150, 30));
 
+        cbo_current_room.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_current_roomItemStateChanged(evt);
+            }
+        });
         win_change_room.getContentPane().add(cbo_current_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 150, 30));
 
         btn_change.setBackground(new java.awt.Color(153, 153, 0));
@@ -644,7 +645,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 btn_changeActionPerformed(evt);
             }
         });
-        win_change_room.getContentPane().add(btn_change, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 370, 40));
+        win_change_room.getContentPane().add(btn_change, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 370, 40));
 
         Cancel1.setBackground(new java.awt.Color(153, 153, 0));
         Cancel1.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
@@ -657,20 +658,12 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 Cancel1ActionPerformed(evt);
             }
         });
-        win_change_room.getContentPane().add(Cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 370, 40));
+        win_change_room.getContentPane().add(Cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 370, 40));
 
         txt_reserve_id_change_room.setBackground(new java.awt.Color(0, 0, 0));
         txt_reserve_id_change_room.setFont(new java.awt.Font("Arial Unicode MS", 0, 24)); // NOI18N
         txt_reserve_id_change_room.setForeground(new java.awt.Color(153, 153, 0));
         win_change_room.getContentPane().add(txt_reserve_id_change_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, -1));
-
-        lb_customer_name2.setBackground(new java.awt.Color(0, 0, 0));
-        lb_customer_name2.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        lb_customer_name2.setForeground(new java.awt.Color(153, 153, 0));
-        lb_customer_name2.setText("Total price:");
-        lb_customer_name2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lb_customer_name2.setOpaque(true);
-        win_change_room.getContentPane().add(lb_customer_name2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 80, 20));
 
         lb_customer_name1.setBackground(new java.awt.Color(0, 0, 0));
         lb_customer_name1.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
@@ -681,11 +674,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         win_change_room.getContentPane().add(lb_customer_name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 150, 20));
 
         lb_new_room.setPreferredSize(new java.awt.Dimension(400, 400));
-        lb_new_room.setSize(new java.awt.Dimension(400, 400));
         win_change_room.getContentPane().add(lb_new_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 400, 400));
 
         lb_current_room.setPreferredSize(new java.awt.Dimension(400, 400));
-        lb_current_room.setSize(new java.awt.Dimension(400, 400));
         win_change_room.getContentPane().add(lb_current_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 400));
         lb_current_room.getAccessibleContext().setAccessibleDescription("");
 
@@ -696,22 +687,6 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         lb_customer_name3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lb_customer_name3.setOpaque(true);
         win_change_room.getContentPane().add(lb_customer_name3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 150, 20));
-
-        lb_customer_name4.setBackground(new java.awt.Color(0, 0, 0));
-        lb_customer_name4.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        lb_customer_name4.setForeground(new java.awt.Color(153, 153, 0));
-        lb_customer_name4.setText("Total price:");
-        lb_customer_name4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lb_customer_name4.setOpaque(true);
-        win_change_room.getContentPane().add(lb_customer_name4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, 80, 20));
-
-        new_price.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        new_price.setForeground(new java.awt.Color(153, 153, 0));
-        win_change_room.getContentPane().add(new_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 500, 80, -1));
-
-        current_price.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        current_price.setForeground(new java.awt.Color(153, 153, 0));
-        win_change_room.getContentPane().add(current_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 80, -1));
 
         win_invoice.setMinimumSize(new java.awt.Dimension(660, 745));
         win_invoice.setSize(new java.awt.Dimension(660, 745));
@@ -1329,7 +1304,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             int max_kids = Integer.parseInt(table_reserve.getValueAt(fila, 7).toString());
 
             int resp = JOptionPane.showConfirmDialog(win_change_room, "Are you sure to change reservation's room?" + "\nRoom number" + room_id,
-                    "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    "Edit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if (resp == JOptionPane.YES_OPTION) {
 
@@ -1843,6 +1818,9 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(win_change_room, "Reservation has been updated", "Updated", JOptionPane.INFORMATION_MESSAGE);
 
                 list_reservation();
+                
+                win_change_room.dispose();
+                
 
             } else {
                 JOptionPane.showMessageDialog(win_change_room, "Error to update reservation number  " + reserve_id, "Update", JOptionPane.ERROR_MESSAGE);
@@ -1879,7 +1857,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
     private void btn_check_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_check_inActionPerformed
       
-            int resp = JOptionPane.showConfirmDialog(win_reserve, "Are you sure to invoice this reservation: ",
+            int resp = JOptionPane.showConfirmDialog(win_invoice, "Are you sure to invoice this reservation: ",
                     "Invoice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if (resp == JOptionPane.YES_OPTION) {
@@ -1908,6 +1886,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 Double total_price = sub_total_price - (sub_total_price * discount);
 
                 invoices invoice = new invoices(invoice_id, reserve_id);
+                
                 invoice_detail detail = new invoice_detail();
                 detail.setInvoice_id(invoice_id);
                 detail.setDiscount(discunt_detail);
@@ -1962,6 +1941,10 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private void btn_cerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_cerrar1ActionPerformed
+
+    private void cbo_current_roomItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_current_roomItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbo_current_roomItemStateChanged
 
 // Variables declaration - do not modify                     
     public void initialize_default_fields() {
@@ -2182,11 +2165,14 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     public void charge_current_room_fields(int room_id) {
 
         try {
+            
             String img = management.search_room_img(room_id);
 
             String dir = System.getProperty("user.dir") + "/src/rooms_img/" + img;
-
+            cbo_current_room.removeAll();
             cbo_current_room.addItem(String.valueOf(room_id));
+            
+            cbo_current_room.setSelectedItem(String.valueOf(room_id));
 
             management.resize_image_room(dir, lb_current_room);
 
@@ -2258,7 +2244,6 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbo_room_id;
     private javax.swing.JComboBox<String> cbo_way_to_pay;
     private javax.swing.JCheckBox check_reserved;
-    private javax.swing.JTextField current_price;
     private com.toedter.calendar.JDateChooser date_departure;
     private com.toedter.calendar.JDateChooser date_entry;
     private javax.swing.JLabel image_background;
@@ -2327,16 +2312,13 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb_current_room;
     private javax.swing.JLabel lb_customer_name;
     private javax.swing.JLabel lb_customer_name1;
-    private javax.swing.JLabel lb_customer_name2;
     private javax.swing.JLabel lb_customer_name3;
-    private javax.swing.JLabel lb_customer_name4;
     private javax.swing.JLabel lb_new_room;
     private javax.swing.JLabel lb_reservation_id;
     private javax.swing.JLabel lb_room_image;
     private javax.swing.JLabel lb_room_number;
     private javax.swing.JLabel lb_total;
     private javax.swing.JLabel lb_total1;
-    private javax.swing.JTextField new_price;
     private javax.swing.JPanel panel_information_image;
     private javax.swing.JSpinner spiner_adults_number;
     private javax.swing.JSpinner spiner_kids_number;

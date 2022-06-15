@@ -108,6 +108,9 @@ public class management_invoice extends Conexion {
         
         boolean registered = false;
         
+            System.out.println(detail.getInvoice_id());
+           
+        
             conectarBD();
 
         try {
@@ -136,6 +139,7 @@ public class management_invoice extends Conexion {
          public boolean register_invoice_and_invoice_detail(invoices invoice, invoice_detail detail) {
         
         boolean done = false;
+        
         boolean invoice_saved = false, invoice_detail_saved = false;
 
         try {
