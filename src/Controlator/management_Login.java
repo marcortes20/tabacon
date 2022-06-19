@@ -148,6 +148,8 @@ public class management_Login extends Conexion {
             
             rs = selectProcedure(call_name, items_Call);
             
+            
+            
             items_Call.clear();
 
             if (rs.next()) {
@@ -167,6 +169,43 @@ public class management_Login extends Conexion {
         }
 
         return registered;
+    }
+    
+    
+       public int search_role(int user_id) {
+
+        int role = 0;
+
+        try {
+
+            conectarBD();
+
+            String call_name = "ps_search_role(?)";
+
+            
+            items_Call.add(user_id);
+
+            rs = selectProcedure(call_name, items_Call);
+            
+            items_Call.clear();
+
+            if (rs.next()) {
+                
+                user_id = rs.getInt(1);
+                
+                desconectarBD();
+            }
+
+            desconectarBD();
+
+        } catch (Exception e) {
+
+            desconectarBD();
+
+            System.out.println(e);
+        }
+
+        return user_id;
     }
    
 //    public boolean validate_Password(staff User, char[] passArray) { //USAR PARA VALIDAR SI LAS CONTRASE˜NAS NO CONTIENEN CARACTERES ESPECIALES __________NO TOMADO EN CUENTA______

@@ -63,17 +63,16 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
         txt_room_id = new javax.swing.JTextField();
         txt_kids_price = new javax.swing.JTextField();
         txt_adults_price = new javax.swing.JTextField();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        txt_description = new javax.swing.JTextArea();
         jLabel59 = new javax.swing.JLabel();
         check_reserved = new javax.swing.JCheckBox();
-        cbxUser_type = new javax.swing.JComboBox<>();
+        cbo_status = new javax.swing.JComboBox<>();
         spiner_adutls = new javax.swing.JSpinner();
         spiner_kids = new javax.swing.JSpinner();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         btn_save_room = new javax.swing.JButton();
         btn_SignUp = new javax.swing.JButton();
+        cbo_category = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         btn_guardar = new javax.swing.JButton();
@@ -122,18 +121,18 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(room_photo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
 
         room_photo.getAccessibleContext().setAccessibleDescription("");
 
-        win_rooms.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 120, 600));
+        win_rooms.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 120, 490));
 
         jPanel10.setBackground(new java.awt.Color(153, 153, 153,80));
         jPanel10.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel56.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        jLabel56.setText("Description:");
+        jLabel56.setText("Category");
 
         jLabel57.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel57.setText("Room id:");
@@ -162,18 +161,12 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
         txt_adults_price.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
         txt_adults_price.setForeground(new java.awt.Color(0, 0, 0));
 
-        txt_description.setColumns(20);
-        txt_description.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
-        txt_description.setForeground(new java.awt.Color(0, 0, 0));
-        txt_description.setRows(5);
-        jScrollPane8.setViewportView(txt_description);
-
         jLabel59.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel59.setText("Maximum. kids:");
 
-        cbxUser_type.setBackground(new java.awt.Color(0, 0, 0));
-        cbxUser_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active.", "Not active." }));
-        cbxUser_type.setSelectedItem(null);
+        cbo_status.setBackground(new java.awt.Color(0, 0, 0));
+        cbo_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active.", "Not active." }));
+        cbo_status.setSelectedItem(null);
 
         spiner_adutls.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
 
@@ -209,51 +202,57 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
             }
         });
 
+        cbo_category.setBackground(new java.awt.Color(0, 0, 0));
+        cbo_category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple.", "Double", "Triple.", "Quad.", " " }));
+        cbo_category.setSelectedItem(null);
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel57)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_room_id, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_save_room, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel58)
-                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel59)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel62)
-                                    .addComponent(jLabel60)
-                                    .addComponent(jLabel61)
-                                    .addComponent(jLabel63))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel57)
+                                    .addComponent(jLabel56))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbo_category, 0, 207, Short.MAX_VALUE)
+                                    .addComponent(txt_room_id))
+                                .addGap(29, 29, 29))
                             .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(txt_adults_price)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(txt_kids_price)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(check_reserved)
-                            .addComponent(cbxUser_type, 0, 230, Short.MAX_VALUE)
-                            .addComponent(spiner_adutls)
-                            .addComponent(spiner_kids))))
-                .addGap(551, 551, 551))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btn_save_room, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel58)
+                                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel59)
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel62)
+                                            .addComponent(jLabel60)
+                                            .addComponent(jLabel61)
+                                            .addComponent(jLabel63))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(check_reserved)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(cbo_status, javax.swing.GroupLayout.Alignment.LEADING, 0, 207, Short.MAX_VALUE)
+                                            .addComponent(spiner_adutls, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(spiner_kids, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txt_adults_price, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txt_kids_price, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(29, 29, 29)))))
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -261,50 +260,53 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txt_room_id, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(277, 277, 277)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_room_id, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbo_category, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spiner_adutls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spiner_kids, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_adults_price, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_kids_price, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbo_status, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(check_reserved))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spiner_adutls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spiner_kids, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_adults_price, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_kids_price, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxUser_type, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(check_reserved))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(btn_save_room)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_SignUp)
-                .addGap(39, 39, 39))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        win_rooms.getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 360, 600));
+        win_rooms.getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 360, 490));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/room_background.jpg"))); // NOI18N
         win_rooms.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 0, 690, 650));
@@ -500,7 +502,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
 
             txt_room_id.setEditable(false);
 
-            txt_description.setText(room.getDescription());
+            cbo_category.setSelectedIndex(room.getCategory() - 1);
 
             spiner_adutls.setValue((room.getMaximun_adults()));
 
@@ -512,11 +514,11 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
 
             if (room.isRoom_status()) {
 
-                cbxUser_type.setSelectedIndex(0);
+                cbo_status.setSelectedIndex(0);
 
             } else {
 
-                cbxUser_type.setSelectedIndex(1);
+                cbo_status.setSelectedIndex(1);
 
             }
 
@@ -561,7 +563,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
 
             room.setRoom_id(Integer.parseInt(txt_room_id.getText()));
 
-            room.setDescription(txt_description.getText());
+            room.setCategory(cbo_category.getSelectedIndex()+1);
 
             room.setMaximun_adults((int) spiner_adutls.getValue());
 
@@ -571,7 +573,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
 
             room.setPrice_per_day_kids(Double.parseDouble(txt_kids_price.getText()));
 
-            if (cbxUser_type.getSelectedIndex() == 0) {
+            if (cbo_status.getSelectedIndex() == 0) {
 
                 room.setRoom_status(true);
 
@@ -696,7 +698,8 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_imprimir;
     public javax.swing.JButton btn_save_room;
-    public javax.swing.JComboBox<String> cbxUser_type;
+    public javax.swing.JComboBox<String> cbo_category;
+    public javax.swing.JComboBox<String> cbo_status;
     private javax.swing.JCheckBox check_reserved;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
@@ -712,7 +715,6 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -728,7 +730,6 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
     private javax.swing.JSpinner spiner_kids;
     private javax.swing.JTable table_rooms;
     private javax.swing.JTextField txt_adults_price;
-    private javax.swing.JTextArea txt_description;
     private javax.swing.JTextField txt_kids_price;
     private javax.swing.JTextField txt_room_id;
     private javax.swing.JDialog win_rooms;
@@ -753,11 +754,11 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
             empty_fields += "\nRoom id.";
 
         }
-        if (txt_description.getText().trim().isEmpty()) {
+        if (cbo_category.getSelectedItem() == null) {
 
-            txt_description.requestFocus();
+            cbo_category.requestFocus();
 
-            empty_fields += "\nDescription";
+            empty_fields += "\nCategory";
         }
 
         if (spiner_adutls.getValue() == "0") {
@@ -806,12 +807,14 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
             empty_fields += "\nPrice per kids:";
         }
 
-        if (cbxUser_type.getSelectedItem() == null) {
+        if (cbo_status.getSelectedItem() == null) {
 
-            cbxUser_type.requestFocus();
+            cbo_status.requestFocus();
 
             empty_fields += "\nStatus";
         }
+        
+        
 
         if (room_photo.getPathFoto() == null) {
 
@@ -903,7 +906,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
 
         txt_room_id.setText("");
 
-        txt_description.setText("");
+        cbo_category.setSelectedItem(null);
 
         spiner_adutls.setValue(1);
 
@@ -913,7 +916,7 @@ public class ifrm_rooms extends javax.swing.JInternalFrame   {
 
         txt_kids_price.setText("");
 
-        cbxUser_type.setSelectedItem(null);
+        cbo_status.setSelectedItem(null);
 
         check_reserved.setSelected(false);
 

@@ -7,6 +7,7 @@ package View;
 import Controlator.management_Menu;
 import Model.staff;
 import View.login.frm_SignIn;
+import View.login.frm_SignUp;
 import java.awt.Desktop;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -29,7 +30,7 @@ public class Menu extends javax.swing.JFrame {
    
    
 
-    public Menu(staff user_loged) {
+    public Menu(staff user_loged, int role) {
         
       User = user_loged;
       
@@ -38,6 +39,13 @@ public class Menu extends javax.swing.JFrame {
          this.setExtendedState(MAXIMIZED_BOTH);
          
          set_user_acount(User);
+         
+         if (role == 1) {
+             sub_pop_register.setVisible(false);
+            
+        }else{
+             sub_pop_register.setVisible(true);
+         }
          
          
          
@@ -57,7 +65,7 @@ public class Menu extends javax.swing.JFrame {
 
         pop_menu_user = new javax.swing.JPopupMenu();
         jSeparator13 = new javax.swing.JPopupMenu.Separator();
-        sub_pop_update = new javax.swing.JMenuItem();
+        sub_pop_register = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
         sub_pop_log_out = new javax.swing.JMenuItem();
         ImageIcon icon = new ImageIcon(getClass().getResource("/img/tabacon.jpg"));
@@ -111,8 +119,13 @@ public class Menu extends javax.swing.JFrame {
         pop_menu_user.setLabel("User configuration");
         pop_menu_user.add(jSeparator13);
 
-        sub_pop_update.setText("Update your personal information");
-        pop_menu_user.add(sub_pop_update);
+        sub_pop_register.setText("Register a new user");
+        sub_pop_register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sub_pop_registerActionPerformed(evt);
+            }
+        });
+        pop_menu_user.add(sub_pop_register);
         pop_menu_user.add(jSeparator12);
 
         sub_pop_log_out.setText("Log out");
@@ -588,25 +601,25 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-//
-//          JInternalFrame objetos[] = desk.getAllFrames();
-//          
-//
-//          
-//          for (JInternalFrame v : objetos) {
-//              
-//               if (v.isVisible()) {
-//                   System.out.println("entra2");
-//                   v.dispose();
-//              }
-//            }
-//          
-//        //EN PROCESO//////////////////////////
+
+          JInternalFrame current = desk.getSelectedFrame();
+          
+          current.dispose();
+          
+
+          
+         
+          
+        //EN PROCESO//////////////////////////
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         management.show_manual();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void sub_pop_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sub_pop_registerActionPerformed
+        open_signUp();
+    }//GEN-LAST:event_sub_pop_registerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -684,7 +697,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu sub_menu_reserve;
     private javax.swing.JMenuItem sub_menu_room;
     private javax.swing.JMenuItem sub_pop_log_out;
-    private javax.swing.JMenuItem sub_pop_update;
+    private javax.swing.JMenuItem sub_pop_register;
     // End of variables declaration//GEN-END:variables
 
 public void set_user_acount(staff user){
@@ -700,5 +713,14 @@ public void set_user_acount(staff user){
         frm_SignIn signIn = new frm_SignIn();
 
         signIn.setVisible(true);
+    }
+   
+   public void open_signUp() {
+
+        //this.dispose();
+
+        frm_SignUp singup = new frm_SignUp();
+
+        singup.setVisible(true);
     }
 }

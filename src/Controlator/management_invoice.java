@@ -55,7 +55,7 @@ public class management_invoice extends Conexion {
 
         int invoice_number = 0;
 
-        String sql = "SELECT count(*)+1 FROM invoices";
+        String sql = "SELECT max(invoice_id)+1 FROM invoices;";
 
         conectarBD();
 
@@ -183,5 +183,6 @@ public class management_invoice extends Conexion {
         return done;
 
     }
-    
+         
+        
 }

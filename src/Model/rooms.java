@@ -9,7 +9,7 @@ package Model;
 
 public class rooms {
     private int room_id;
-    private String description;
+    private int category;
     private String image;
     private int maximun_adults;
     private int maximun_kids;
@@ -21,9 +21,9 @@ public class rooms {
     public rooms() {
     }
 
-    public rooms(int room_id, String description, String image, int maximun_adults, int maximun_kids, double price_per_day_adults, double price_per_day_kids, boolean room_status, boolean reserved) {
+    public rooms(int room_id, int category, String image, int maximun_adults, int maximun_kids, double price_per_day_adults, double price_per_day_kids, boolean room_status, boolean reserved) {
         this.room_id = room_id;
-        this.description = description;
+        this.category = category;
         this.image = image;
         this.maximun_adults = maximun_adults;
         this.maximun_kids = maximun_kids;
@@ -41,12 +41,12 @@ public class rooms {
         this.room_id = room_id;
     }
 
-    public String getDescription() {
-        return description;
+    public int getCategory() {
+        return category;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategory(int category) {
+        this.category = category;
     }
 
     public String getImage() {
@@ -105,12 +105,5 @@ public class rooms {
         this.reserved = reserved;
     }
 
-    @Override
-    public String toString() {
-        return "room{" + "room_id=" + room_id + ", description=" + description + ", maximun_adults=" + maximun_adults + ", maximun_kids=" + maximun_kids + ", price_per_day_adults=" + price_per_day_adults + ", price_per_day_kids=" + price_per_day_kids + ", room_status=" + room_status + ", reserved=" + reserved + '}';
-    }
-    
-    
-    
     
 }

@@ -35,7 +35,7 @@ public class management_rooms  extends Conexion{
 
             obj_Procedimiento.setInt(1, room.getRoom_id());
 
-            obj_Procedimiento.setString(2, room.getDescription());
+            obj_Procedimiento.setInt(2, room.getCategory());
 
             obj_Procedimiento.setString(3, room.getImage());
 
@@ -84,7 +84,7 @@ public class management_rooms  extends Conexion{
              
              if (rs.next()) {
                 
-                room.setDescription(rs.getString(1));
+                room.setCategory(rs.getInt(1));
                 room.setMaximun_adults(rs.getInt(2));
                 room.setMaximun_kids(rs.getInt(3));
                 room.setPrice_per_day_adults(rs.getDouble(4));
@@ -149,7 +149,7 @@ public class management_rooms  extends Conexion{
 
             obj_Procedimiento.setInt(1, room.getRoom_id());
 
-            obj_Procedimiento.setString(2, room.getDescription());
+            obj_Procedimiento.setInt(2, room.getCategory());
 
             obj_Procedimiento.setString(3, room.getImage());
 

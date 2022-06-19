@@ -1344,44 +1344,51 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
 
             int reserve_id = Integer.parseInt(table_reserve.getValueAt(fila, 0).toString());
 
-            int customer_id = Integer.parseInt(table_reserve.getValueAt(fila, 4).toString());
+            if (management.validate_invoice(reserve_id)) {
 
-            int resp = JOptionPane.showConfirmDialog(win_reserve, "Are you sure to you want to invoice reservation number: " + reserve_id,
-                    "Invoice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.showMessageDialog(win_reserve, "This reservation is already invoiced ", "Eror!!!", JOptionPane.ERROR_MESSAGE);
 
-            if (resp == JOptionPane.YES_OPTION) {
+            } else {
 
-                management_invoice.load_table(invoince_table, reserve_id);
+                int customer_id = Integer.parseInt(table_reserve.getValueAt(fila, 4).toString());
 
-                // se setean estas variables estaticas de la tabal de FACTURA para calcular el total y subtotal
-                adults_number = Integer.parseInt(invoince_table.getValueAt(0, 2).toString());
+                int resp = JOptionPane.showConfirmDialog(win_reserve, "Are you sure to you want to invoice reservation number: " + reserve_id,
+                        "Invoice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-                kids_number = Integer.parseInt(invoince_table.getValueAt(0, 3).toString());
+                if (resp == JOptionPane.YES_OPTION) {
 
-                discount = Double.parseDouble(invoince_table.getValueAt(0, 4).toString()) / 100;
+                    management_invoice.load_table(invoince_table, reserve_id);
 
-                days = Integer.parseInt(invoince_table.getValueAt(0, 5).toString());
+                    // se setean estas variables estaticas de la tabal de FACTURA para calcular el total y subtotal
+                    adults_number = Integer.parseInt(invoince_table.getValueAt(0, 2).toString());
 
-                price_adults = Double.parseDouble(invoince_table.getValueAt(0, 6).toString());
+                    kids_number = Integer.parseInt(invoince_table.getValueAt(0, 3).toString());
 
-                price_kids = Double.parseDouble(invoince_table.getValueAt(0, 7).toString());
+                    discount = Double.parseDouble(invoince_table.getValueAt(0, 4).toString()) / 100;
 
-                charge_invoice_fields();
+                    days = Integer.parseInt(invoince_table.getValueAt(0, 5).toString());
 
-                txt_customer.setText(String.valueOf(customer_id));
+                    price_adults = Double.parseDouble(invoince_table.getValueAt(0, 6).toString());
 
-                txt_invoice_id.setText(String.valueOf(management_invoice.load_invoice_number()));
+                    price_kids = Double.parseDouble(invoince_table.getValueAt(0, 7).toString());
 
-                win_invoice.setLocationRelativeTo(null);
+                    charge_invoice_fields();
 
-                invoice_title.setHorizontalAlignment(JLabel.CENTER);
+                    txt_customer.setText(String.valueOf(customer_id));
 
-                win_invoice.setVisible(true);
+                    txt_invoice_id.setText(String.valueOf(management_invoice.load_invoice_number()));
 
+                    win_invoice.setLocationRelativeTo(null);
+
+                    invoice_title.setHorizontalAlignment(JLabel.CENTER);
+
+                    win_invoice.setVisible(true);
+
+                } else {
+                    JOptionPane.showMessageDialog(win_reserve, "Select reservation to invoice it", "Invoice", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
 
-        } else {
-            JOptionPane.showMessageDialog(win_reserve, "Select reservation to invoice it", "Invoice", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btn_Check_inActionPerformed
 
@@ -1442,8 +1449,7 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             reserve.setReserved_days(Integer.parseInt(txt_reserved_days.getText()));
 
             reserve.setDiscount_id(discount);
-            
-            
+
             if (win_reserve.getTitle().equals(("Make reservation"))) {
 
                 if (management.register_reserve_room(reserve)) {
@@ -1526,11 +1532,11 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
 
             int room_id = Integer.parseInt(cbo_room_id.getSelectedItem().toString());
-            
+
             room.setRoom_id(room_id);
-            
+
             room = management.search_room(room.getRoom_id());
-            
+
             fill_room_panel_fields(room);
 
             set_spiner(spiner_adults_number, room.getMaximun_adults());
@@ -1608,10 +1614,10 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
             String discount = (String) cbo_discount.getSelectedItem();
 
             if (win_reserve.getTitle().equals("Make reservation")) {
-                
-                Double total_price_kids = (price_kid * days_reserved) * (int)spiner_kids_number.getValue() ;
 
-                Double total_price_adults = (price_adult * days_reserved) * (int)spiner_adults_number.getValue() ;
+                Double total_price_kids = (price_kid * days_reserved) * (int) spiner_kids_number.getValue();
+
+                Double total_price_adults = (price_adult * days_reserved) * (int) spiner_adults_number.getValue();
 
                 Double total_discount = (Double.parseDouble(discount.substring(0, discount.length() - 1)) / 100); // elimina el ultimo charr del descuanto   (%) y lo convierte a entero
 
@@ -1770,8 +1776,8 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                     "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if (resp == JOptionPane.YES_OPTION) {
-                
-                 String sql = "UPDATE rooms as R set R.reserved = false WHERE room_id = " + room_id;
+
+                String sql = "UPDATE rooms as R set R.reserved = false WHERE room_id = " + room_id;
 
                 if (management.delete_reservation(reserve_id) && management.update_room(sql)) {
 
@@ -1818,9 +1824,8 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(win_change_room, "Reservation has been updated", "Updated", JOptionPane.INFORMATION_MESSAGE);
 
                 list_reservation();
-                
+
                 win_change_room.dispose();
-                
 
             } else {
                 JOptionPane.showMessageDialog(win_change_room, "Error to update reservation number  " + reserve_id, "Update", JOptionPane.ERROR_MESSAGE);
@@ -1856,62 +1861,53 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btn_check_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_check_inActionPerformed
-      
-            int resp = JOptionPane.showConfirmDialog(win_invoice, "Are you sure to invoice this reservation: ",
-                    "Invoice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-            if (resp == JOptionPane.YES_OPTION) {
+        int reserve_id = Integer.parseInt(invoince_table.getValueAt(0, 0).toString());
 
-                int reserve_id = Integer.parseInt(invoince_table.getValueAt(0, 0).toString());
-                
-                int invoice_id = Integer.parseInt(txt_invoice_id.getText());
-                
-                int discunt_detail = Integer.parseInt(invoince_table.getValueAt(0, 4).toString());
-                
-                discount = Double.parseDouble(invoince_table.getValueAt(0, 4).toString()) / 100;
-                
-               days = Integer.parseInt(invoince_table.getValueAt(0, 5).toString());
-               
-               price_adults =  Double.parseDouble(invoince_table.getValueAt(0, 6).toString());
-                
-               price_kids =  Double.parseDouble(invoince_table.getValueAt(0, 7).toString());
-               
-               
-                Double total_price_kids = (price_kids * days) * kids_number;
+        int invoice_id = Integer.parseInt(txt_invoice_id.getText());
 
-                Double total_price_adults = (price_adults * days) * adults_number;
+        int discunt_detail = Integer.parseInt(invoince_table.getValueAt(0, 4).toString());
 
-                Double sub_total_price = (total_price_adults + total_price_kids);
+        discount = Double.parseDouble(invoince_table.getValueAt(0, 4).toString()) / 100;
 
-                Double total_price = sub_total_price - (sub_total_price * discount);
+        days = Integer.parseInt(invoince_table.getValueAt(0, 5).toString());
 
-                invoices invoice = new invoices(invoice_id, reserve_id);
-                
-                invoice_detail detail = new invoice_detail();
-                detail.setInvoice_id(invoice_id);
-                detail.setDiscount(discunt_detail);
-                detail.setSubtotal(sub_total_price);
-                detail.setTotal(total_price);
-                
-                
-                if (management_invoice.register_invoice_and_invoice_detail(invoice, detail)) {
-                    
-                     JOptionPane.showMessageDialog(win_invoice, "Reservation has been  invoiced", " invoiced", JOptionPane.INFORMATION_MESSAGE);
-                    
-                }else{
-                    
-                    JOptionPane.showMessageDialog(win_invoice, "Error to invoice reservation " + reserve_id, "ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-                
-                
+        price_adults = Double.parseDouble(invoince_table.getValueAt(0, 6).toString());
 
-                
-                
-                
+        price_kids = Double.parseDouble(invoince_table.getValueAt(0, 7).toString());
+
+        Double total_price_kids = (price_kids * days) * kids_number;
+
+        Double total_price_adults = (price_adults * days) * adults_number;
+
+        Double sub_total_price = (total_price_adults + total_price_kids);
+
+        Double total_price = sub_total_price - (sub_total_price * discount);
+
+        invoices invoice = new invoices(invoice_id, reserve_id);
+
+        invoice_detail detail = new invoice_detail();
+        detail.setInvoice_id(invoice_id);
+        detail.setDiscount(discunt_detail);
+        detail.setSubtotal(sub_total_price);
+        detail.setTotal(total_price);
+
+        if (management_invoice.register_invoice_and_invoice_detail(invoice, detail)) {
+
+            JOptionPane.showMessageDialog(win_invoice, "Reservation has been  invoiced", " invoiced", JOptionPane.INFORMATION_MESSAGE);
+            win_invoice.dispose();
+
+        } else {
+
+            JOptionPane.showMessageDialog(win_invoice, "Error to invoice reservation " + reserve_id, "ERROR", JOptionPane.ERROR_MESSAGE);
+            win_invoice.dispose();
+        }
+
+
     }//GEN-LAST:event_btn_check_inActionPerformed
-    }
+
     private void btn_cancel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancel2ActionPerformed
-       win_invoice.dispose();
+        win_invoice.dispose();
     }//GEN-LAST:event_btn_cancel2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -2165,13 +2161,13 @@ public class ifrm_reserve extends javax.swing.JInternalFrame {
     public void charge_current_room_fields(int room_id) {
 
         try {
-            
+
             String img = management.search_room_img(room_id);
 
             String dir = System.getProperty("user.dir") + "/src/rooms_img/" + img;
             cbo_current_room.removeAll();
             cbo_current_room.addItem(String.valueOf(room_id));
-            
+
             cbo_current_room.setSelectedItem(String.valueOf(room_id));
 
             management.resize_image_room(dir, lb_current_room);

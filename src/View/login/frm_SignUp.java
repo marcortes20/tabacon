@@ -285,7 +285,7 @@ public class frm_SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_Password_fieldActionPerformed
 
     private void btn_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelActionPerformed
-        open_signIn();
+        this.dispose();
     }//GEN-LAST:event_btn_CancelActionPerformed
 
     private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
@@ -313,8 +313,9 @@ public class frm_SignUp extends javax.swing.JFrame {
             if ((manaLogin.register_staff(user)) && (manaLogin.register_roles_per_staff(roles_per_user))) {
 
                 JOptionPane.showMessageDialog(this, "Your accound was registered ", "Successfully logged up!", JOptionPane.INFORMATION_MESSAGE);
+                
+                this.dispose();
 
-                open_signIn();
             }
 
         } else {

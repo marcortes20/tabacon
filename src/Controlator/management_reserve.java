@@ -525,6 +525,37 @@ public class management_reserve extends Conexion {
         }
         return edited;
     }
+    
+     public boolean validate_invoice(int reservation_id){
+             
+             boolean registered = false;
+             
+             
+        String sql = "SELECT invoice_id FROM invoices WHERE reservation_id = " + reservation_id +";";
+
+        conectarBD();
+
+        rs = seleccionar(sql);
+
+        try {
+
+            if (rs.next()) {
+
+                registered = true;
+            }
+
+            desconectarBD();
+
+        } catch (SQLException ex) {
+
+            desconectarBD();
+        }
+
+             
+             
+             return registered;
+         }
+    
 
 //    public Double calculate_price(int reservation_id, JTextField price) {
 //

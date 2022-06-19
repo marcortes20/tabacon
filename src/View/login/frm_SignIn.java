@@ -35,12 +35,10 @@ public class frm_SignIn extends javax.swing.JFrame {
         btn_close = new javax.swing.JButton();
         panel_Loging = new javax.swing.JPanel();
         txt_userName = new javax.swing.JTextField();
-        btn_SignUp_go = new javax.swing.JButton();
         btn_SignIn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         lb_intentosFallidos = new javax.swing.JLabel();
         Password_field = new javax.swing.JPasswordField();
         Background = new javax.swing.JLabel();
@@ -73,18 +71,6 @@ public class frm_SignIn extends javax.swing.JFrame {
             }
         });
 
-        btn_SignUp_go.setBackground(new java.awt.Color(153, 153, 0));
-        btn_SignUp_go.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
-        btn_SignUp_go.setForeground(new java.awt.Color(255, 255, 255));
-        btn_SignUp_go.setText("sign up");
-        btn_SignUp_go.setActionCommand("Sign up");
-        btn_SignUp_go.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_SignUp_go.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SignUp_goActionPerformed(evt);
-            }
-        });
-
         btn_SignIn.setBackground(new java.awt.Color(153, 153, 0));
         btn_SignIn.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         btn_SignIn.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,10 +97,6 @@ public class frm_SignIn extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Tabacon Thermal Resort & Spa");
         jLabel2.setOpaque(true);
-
-        jLabel5.setFont(new java.awt.Font("Arial Unicode MS", 0, 10)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("You are not registered yet? ");
 
         lb_intentosFallidos.setBackground(new java.awt.Color(0, 0, 0, 100));
         lb_intentosFallidos.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
@@ -146,10 +128,7 @@ public class frm_SignIn extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panel_LogingLayout.createSequentialGroup()
                 .addGap(159, 159, 159)
-                .addGroup(panel_LogingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_SignUp_go, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(141, 141, 141))
         );
         panel_LogingLayout.setVerticalGroup(
@@ -166,16 +145,12 @@ public class frm_SignIn extends javax.swing.JFrame {
                     .addComponent(Password_field, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_SignUp_go)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(63, 63, 63)
                 .addComponent(lb_intentosFallidos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panel_Loging, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 430, 370));
+        getContentPane().add(panel_Loging, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 430, 320));
 
         Background.setForeground(new java.awt.Color(255, 255, 255));
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo.jpg"))); // NOI18N
@@ -195,16 +170,19 @@ public class frm_SignIn extends javax.swing.JFrame {
             user.setUserName(txt_userName.getText());
 
             manaLogin.setPassword_logIN(user, Password_field.getPassword());
+            
 
             if (manaLogin.validate_accound(user)) {
                 
                 manaLogin.getUser(user);
 
+            int user_role = manaLogin.search_role(user.getId());
+            
                 contador = 0;
 
                 JOptionPane.showMessageDialog(this, "welcome to Tabacon Thermal Resort & Spa", "Successfully logged in!", JOptionPane.INFORMATION_MESSAGE);
                 
-                Menu menu = new Menu(user);
+                Menu menu = new Menu(user, user_role);
                 
                 this.setVisible(false);
                 
@@ -242,10 +220,6 @@ public class frm_SignIn extends javax.swing.JFrame {
 
         }
     }
-    private void btn_SignUp_goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUp_goActionPerformed
-        open_signUp();
-    }//GEN-LAST:event_btn_SignUp_goActionPerformed
-
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btn_closeActionPerformed
@@ -295,12 +269,10 @@ public class frm_SignIn extends javax.swing.JFrame {
     private javax.swing.JLabel Background;
     public javax.swing.JPasswordField Password_field;
     public javax.swing.JButton btn_SignIn;
-    public javax.swing.JButton btn_SignUp_go;
     public javax.swing.JButton btn_close;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     public javax.swing.JLabel lb_intentosFallidos;
     private javax.swing.JPanel panel_Loging;
     public javax.swing.JTextField txt_userName;
